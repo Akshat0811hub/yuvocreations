@@ -1,0 +1,165 @@
+/* Header.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+/* Logo Section */
+.logo-section {
+  flex: 1;
+}
+
+.logo h2 {
+  color: #2563eb;
+  font-size: 1.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.logo h2:hover {
+  color: #ffa83d;
+}
+
+.logo img{
+    height: 25%;
+    cursor: pointer;
+    width: 25%;
+    align-self: left;
+}
+
+/* Navigation Menu */
+.nav-menu {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-list li a {
+  text-decoration: none;
+  color: #374151;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-list li a:hover {
+  color: #ffa83d;
+  background-color: #f3f4f6;
+}
+
+.nav-list li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #ffa83d;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-list li a:hover::after {
+  width: 80%;
+}
+
+/* Button Section */
+.button-section {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.consultation-btn {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+}
+
+.consultation-btn:hover {
+  background-color: #ffa83d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+}
+
+.consultation-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .logo-section,
+  .nav-menu,
+  .button-section {
+    flex: none;
+  }
+  
+  .nav-list {
+    gap: 1rem;
+  }
+  
+  .nav-list li a {
+    font-size: 0.9rem;
+    padding: 0.25rem 0.75rem;
+  }
+  
+  .consultation-btn {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-list {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .nav-list li a {
+    font-size: 0.85rem;
+  }
+}
