@@ -10,8 +10,7 @@
   border-radius: 16px;
   box-shadow: 0 10px 40px rgba(254, 158, 42, 0.08);
   margin-top: -80px;
-  position: relative;  /* 👈 yeh add karo */
-  z-index: -1;         /* ab element peeche चला जाएगा */
+  position: relative;  
 }
 
 .services-heading {
@@ -23,10 +22,10 @@
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   z-index: -1;
   position: relative;
-  opacity: 0.3; /* yahan value 0.1 se 1 tak de sakte ho */
+  opacity: 0.3; 
 }
 
-/* tab buttons row */
+
 .tabs {
   display: flex;
   gap: 8px;
