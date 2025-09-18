@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import Tabs from '../components/Tabs'
 import Contact from '../components/Contact'
 import About from '../components/About'
+import ImgCarousel from '../components/ImgCarousel'
 
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
       <Tabs/>
       <About/>
       <Contact/>
+      <ImgCarousel/>
     </div>
   )
 }
