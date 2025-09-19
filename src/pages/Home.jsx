@@ -14,8 +14,8 @@ const Home = () => {
       <ParallaxMouseEffect/>
       <Tabs/>
       <About/>
-      <Contact/>
       <ImgCarousel/>
+      <Contact/>
     </div>
   )
 }
