@@ -124,7 +124,7 @@ const ParallaxMouseEffect = () => {
       {/* Main title */}
       <div className="main-title">
         <h1 className="title-text">
-          Yuvosolutions & Services
+          YuvoCreations & Services
         </h1>
       </div>
 
