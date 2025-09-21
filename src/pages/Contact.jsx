@@ -1,13 +1,11 @@
 // src/pages/Contact.jsx
 import React from "react";
+import Contact from "../components/Contact";
 
-const Contact = () => {
+const ContactPage = () => {   // renamed page component
   return (
-    <div style={{ padding: "80px 20px" }}>
-      <h1>Contact Us</h1>
-      <p>Get in touch through this page.</p>
-    </div>
+    <Contact />               // keep imported component as is
   );
 };
 
-export default Contact;
+export default ContactPage;   // export the renamed page component
