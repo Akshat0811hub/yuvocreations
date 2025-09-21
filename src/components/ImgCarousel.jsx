@@ -5,6 +5,7 @@ import car2 from "../assets/car2.png";
 import car3 from "../assets/car3.png";
 import car4 from "../assets/car4.png";
 import car5 from "../assets/car5.png";
+import Workflow from "../components/WorkFlow";
 
 const ImgCarousel = () => {
   const [isPaused] = useState(false);
@@ -55,6 +56,7 @@ const ImgCarousel = () => {
   const angleIncrement = 360 / images.length;
 
   return (
+    <>
     <div
       style={{
         width: "100vw",
@@ -292,7 +294,7 @@ const ImgCarousel = () => {
         </div>
 
         {/* Center decoration */}
-        <div
+        {/* <div
           style={{
             position: "absolute",
             top: "50%",
@@ -314,7 +316,7 @@ const ImgCarousel = () => {
               border: "2px solid rgba(255, 255, 255, 0.8)",
             }}
           />
-        </div>
+        </div> */}
       </div>
 
       <div
@@ -387,6 +389,9 @@ const ImgCarousel = () => {
         }
       `}</style>
     </div>
+    <Workflow/>
+    </>
+    
   );
 };
 

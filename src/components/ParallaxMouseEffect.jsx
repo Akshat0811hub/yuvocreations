@@ -136,9 +136,7 @@ const ParallaxMouseEffect = () => {
           right: '2.5rem', 
           width: '2rem', 
           height: '2rem',
-          transform: getTransform(15) 
-        }}
-      />
+          transform: getTransform(15)}}/>
       <div 
         className="decorative-elements decorative-circle dec-purple"
         style={{ 
