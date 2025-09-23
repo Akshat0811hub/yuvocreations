@@ -1,11 +1,6 @@
 
 
-.about-container {
-  min-height: 100vh;
-  background-color:#ff9f29;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  overflow-x: hidden;
-}
+
 
 .container {
   max-width: 1200px;
@@ -26,7 +21,7 @@
 }
 
 /* Hero Section */
-.hero-section {
+.hero-section-about {
   min-height: 100vh;
   display: flex;
   align-items: center;

@@ -121,7 +121,7 @@ const About = () => {
   return (
     <div className="about-container">
       {/* Hero Section */}
-      <section className="hero-section">
+      <section className="hero-section-about">
         <div className="hero-content">
           <div className="hero-text animate-on-scroll">
             <h1 className="hero-title">
