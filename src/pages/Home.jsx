@@ -4,6 +4,7 @@ import Tabs from '../components/Tabs'
 import Contact from '../components/Contact'
 import About from '../components/About'
 import ImgCarousel from '../components/ImgCarousel'
+import PremiumBezierCurve from '../components/beizercurve'
 
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
       <ParallaxMouseEffect/>
       <Tabs/>
       <About/>
+      <PremiumBezierCurve/>
       <ImgCarousel/>
       <Contact/>
     </div>

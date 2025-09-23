@@ -7,5 +7,4 @@ const ContactPage = () => {   // renamed page component
     <Contact />               // keep imported component as is
   );
 };
-
 export default ContactPage;   // export the renamed page component
