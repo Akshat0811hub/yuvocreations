@@ -148,15 +148,7 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* Floating Icon */}
-      <div className="floating-icon">
-        <div className="icon-grid">
-          <div className="grid-item"></div>
-          <div className="grid-item"></div>
-          <div className="grid-item"></div>
-          <div className="grid-item"></div>
-        </div>
-      </div>
+    
     </div>
   );
 };

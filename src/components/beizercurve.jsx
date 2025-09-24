@@ -7,6 +7,8 @@ const PremiumBezierCurve = () => {
   const pathRef = useRef(null);
   const glowRef = useRef(null);
   const [isHovering, setIsHovering] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [initialY, setInitialY] = useState(150); // Center Y position
   
   const initialPath = "M 50 150 Q 600 150 1150 150";
   const finalPath = "M 50 150 Q 600 150 1150 150";
@@ -46,6 +48,65 @@ const PremiumBezierCurve = () => {
     });
   }, []);
 
+  const smoothScrollTo = (targetPosition, duration = 1000) => {
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    let startTime = null;
+
+    const animation = (currentTime) => {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      
+      // Easing function for smooth animation
+      const easeInOutCubic = progress => progress < 0.5 
+        ? 4 * progress * progress * progress 
+        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+      
+      const currentPosition = startPosition + (distance * easeInOutCubic(progress));
+      window.scrollTo(0, currentPosition);
+      
+      if (progress < 1) {
+        requestAnimationFrame(animation);
+      }
+    };
+
+    requestAnimationFrame(animation);
+  };
+
+  const calculateScrollTarget = (stretchY) => {
+    const centerY = 150;
+    const maxStretch = 100; // Maximum stretch distance
+    const stretchDistance = stretchY - centerY;
+    
+    // Calculate stretch intensity (0 to 1)
+    const intensity = Math.min(Math.abs(stretchDistance) / maxStretch, 1);
+    
+    // Get page dimensions
+    const maxScroll = Math.max(
+      document.body.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.clientHeight,
+      document.documentElement.scrollHeight,
+      document.documentElement.offsetHeight
+    ) - window.innerHeight;
+    
+    let targetScroll;
+    
+    if (stretchDistance > 20) {
+      // Stretched down -> scroll to top
+      targetScroll = 0;
+    } else if (stretchDistance < -20) {
+      // Stretched up -> scroll to bottom
+      targetScroll = maxScroll;
+    } else {
+      // Small stretch -> no scroll
+      return null;
+    }
+    
+    return targetScroll;
+  };
+
   const handleMouseMove = (e) => {
     if (!stringRef.current || !pathRef.current) return;
     
@@ -70,6 +131,39 @@ const PremiumBezierCurve = () => {
       duration: 0.3,
       ease: "power3.out"
     });
+
+    // Store the Y position for scroll calculation
+    setInitialY(y);
+  };
+
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    const rect = stringRef.current.getBoundingClientRect();
+    const y = e.clientY - rect.top;
+    setInitialY(y);
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging) return;
+    
+    setIsDragging(false);
+    
+    // Calculate scroll target based on rope stretch
+    const scrollTarget = calculateScrollTarget(initialY);
+    
+    // Animate rope back to center
+    gsap.to(pathRef.current, {
+      attr: { d: finalPath },
+      duration: 1.5,
+      ease: "elastic.out(1,0.2)"
+    });
+
+    // Perform scroll if stretch was significant
+    if (scrollTarget !== null) {
+      setTimeout(() => {
+        smoothScrollTo(scrollTarget, 1200);
+      }, 300); // Delay to let rope animation start
+    }
   };
 
   const handleMouseEnter = () => {
@@ -94,16 +188,31 @@ const PremiumBezierCurve = () => {
       });
     }
     
-    gsap.to(pathRef.current, {
-      attr: { d: finalPath },
-      duration: 1.5,
-      ease: "elastic.out(1,0.2)"
-    });
+    // Only animate back if not dragging
+    if (!isDragging) {
+      gsap.to(pathRef.current, {
+        attr: { d: finalPath },
+        duration: 1.5,
+        ease: "elastic.out(1,0.2)"
+      });
+    }
   };
+
+  // Add global mouse up listener for better UX
+  useEffect(() => {
+    const handleGlobalMouseUp = () => {
+      if (isDragging) {
+        handleMouseUp();
+      }
+    };
+
+    document.addEventListener('mouseup', handleGlobalMouseUp);
+    return () => document.removeEventListener('mouseup', handleGlobalMouseUp);
+  }, [isDragging, initialY]);
 
   return (
     <div className="bezier-container">
-      <p>Do not Hover</p>
+      <p>{isDragging ? 'Release to scroll!' : 'Stretch the rope to scroll'}</p>
       {/* Background glow effect */}
       <div className="bg-glow" />
       
@@ -124,16 +233,15 @@ const PremiumBezierCurve = () => {
       </div>
       
       <div className="main-content">
-        {/* Header */}
-        
-
         {/* Main curve container */}
         <div 
           ref={stringRef}
           className="curve-container"
           onMouseMove={handleMouseMove}
+          onMouseDown={handleMouseDown}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
         >
           {/* Shimmer effect */}
           <div className="shimmer" />
@@ -209,9 +317,6 @@ const PremiumBezierCurve = () => {
             <circle cx="1150" cy="150" r="6" className="control-point" />
           </svg>
         </div>
-
-        {/* Instructions */}
-        
       </div>
     </div>
   );
