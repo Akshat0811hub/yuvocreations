@@ -631,7 +631,7 @@ const Footer = () => {
                 <div className="logo-main">
                   <div className="logo-icon"></div>
                   <div className="logo-text">
-                    <h3>TechSolutions<span>Pro</span></h3>
+                    <h3>Yuvo<span>Creations</span></h3>
                   </div>
                 </div>
                 <div className="logo-tagline">Innovating Tomorrow's Technology Today</div>
@@ -704,15 +704,15 @@ const Footer = () => {
               <div className="contact-info">
                 <div className="contact-item">
                   <span className="contact-label">Address:</span>
-                  <span>123 Tech Street, Digital City, TC 12345</span>
+                  <span></span>
                 </div>
                 <div className="contact-item">
                   <span className="contact-label">Phone:</span>
-                  <span>+1 (555) 123-4567</span>
+                  <span>+91 7889487784</span>
                 </div>
                 <div className="contact-item">
                   <span className="contact-label">Email:</span>
-                  <span>info@techsolutions.pro</span>
+                  <span>Yuvocreations</span>
                 </div>
               </div>
             </div>
