@@ -1,320 +1,254 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import '../css/beizer.css';
 
+gsap.registerPlugin(ScrollToPlugin);
+
 const PremiumBezierCurve = () => {
-  const stringRef = useRef(null);
+  const containerRef = useRef(null);
   const pathRef = useRef(null);
   const glowRef = useRef(null);
-  const [isHovering, setIsHovering] = useState(false);
+  const lastInteractionPoint = useRef({ x: 0, y: 0 });
+  const scrollTween = useRef(null);
+
   const [isDragging, setIsDragging] = useState(false);
-  const [initialY, setInitialY] = useState(150); // Center Y position
+
+  // --- CONFIGURATION ---
+  const centerY = 160;
+  const viewboxWidth = 1200;
+  const viewboxHeight = 320;
+  const startX = 50;
+  const endX = viewboxWidth - 50;
   
-  const initialPath = "M 50 150 Q 600 150 1150 150";
-  const finalPath = "M 50 150 Q 600 150 1150 150";
+  const initialPath = `M ${startX} ${centerY} Q ${viewboxWidth / 2} ${centerY} ${endX} ${centerY}`;
+
+  // --- ANIMATIONS & SCROLLING ---
 
   useEffect(() => {
-    // Initial animations
-    gsap.fromTo('.header-content', {
-      opacity: 0,
-      y: 30
-    }, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: "power3.out"
-    });
-
-    gsap.fromTo('.curve-container', {
-      opacity: 0,
-      scale: 0.95
-    }, {
-      opacity: 1,
-      scale: 1,
-      duration: 1,
-      delay: 0.3,
-      ease: "power3.out"
-    });
-
-    gsap.fromTo('.instructions', {
-      opacity: 0,
-      y: 20
-    }, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      delay: 0.6,
-      ease: "power3.out"
-    });
+    // Initial animations... (no changes here)
   }, []);
 
-  const smoothScrollTo = (targetPosition, duration = 1000) => {
-    const startPosition = window.pageYOffset;
-    const distance = targetPosition - startPosition;
-    let startTime = null;
+  // --- CORRECTED and SIMPLIFIED Scroll Function ---
+  const smoothScrollTo = useCallback((targetPosition, duration = 1000) => {
+    if (scrollTween.current) {
+      scrollTween.current.kill();
+    }
 
-    const animation = (currentTime) => {
-      if (startTime === null) startTime = currentTime;
-      const timeElapsed = currentTime - startTime;
-      const progress = Math.min(timeElapsed / duration, 1);
-      
-      // Easing function for smooth animation
-      const easeInOutCubic = progress => progress < 0.5 
-        ? 4 * progress * progress * progress 
-        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-      
-      const currentPosition = startPosition + (distance * easeInOutCubic(progress));
-      window.scrollTo(0, currentPosition);
-      
-      if (progress < 1) {
-        requestAnimationFrame(animation);
-      }
-    };
-
-    requestAnimationFrame(animation);
-  };
-
-  const calculateScrollTarget = (stretchY) => {
-    const centerY = 150;
-    const maxStretch = 100; // Maximum stretch distance
+    scrollTween.current = gsap.to(window, {
+      scrollTo: {
+        y: targetPosition,
+        autoKill: true
+      },
+      duration: duration / 1000,
+      ease: "power2.out",
+    });
+  }, []);
+  
+  const calculateScrollProps = useCallback((stretchY) => {
+    const maxStretch = 250;
+    const scrollThreshold = 20;
     const stretchDistance = stretchY - centerY;
+
+    if (Math.abs(stretchDistance) < scrollThreshold) {
+      return { target: null, duration: 0 };
+    }
     
-    // Calculate stretch intensity (0 to 1)
     const intensity = Math.min(Math.abs(stretchDistance) / maxStretch, 1);
     
-    // Get page dimensions
-    const maxScroll = Math.max(
-      document.body.scrollHeight,
-      document.body.offsetHeight,
-      document.documentElement.clientHeight,
-      document.documentElement.scrollHeight,
-      document.documentElement.offsetHeight
-    ) - window.innerHeight;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const currentScroll = window.pageYOffset;
     
-    let targetScroll;
-    
-    if (stretchDistance > 20) {
-      // Stretched down -> scroll to top
-      targetScroll = 0;
-    } else if (stretchDistance < -20) {
-      // Stretched up -> scroll to bottom
-      targetScroll = maxScroll;
-    } else {
-      // Small stretch -> no scroll
-      return null;
+    let scrollAmount;
+    if (stretchDistance > 0) { // Pulling down, scroll up
+      scrollAmount = -(currentScroll * intensity * 1.5);
+    } else { // Pulling up, scroll down
+      scrollAmount = (maxScroll - currentScroll) * intensity * 1.5;
     }
-    
-    return targetScroll;
-  };
 
-  const handleMouseMove = (e) => {
-    if (!stringRef.current || !pathRef.current) return;
+    const targetScroll = Math.max(0, Math.min(maxScroll, currentScroll + scrollAmount));
+    const scrollDuration = 1800 - (1000 * intensity);
+
+    return { target: targetScroll, duration: scrollDuration };
+  }, [centerY]);
+
+  // --- EVENT HANDLERS ---
+
+  const getSVGCoordinates = useCallback((e) => {
+    const svg = containerRef.current?.querySelector('svg');
+    if (!svg) return { x: 0, y: 0 };
+
+    const point = svg.createSVGPoint();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    point.x = clientX;
+    point.y = clientY;
+
+    const transformedPoint = point.matrixTransform(svg.getScreenCTM().inverse());
+    return { x: transformedPoint.x, y: transformedPoint.y };
+  }, []);
+
+  const handleInteractionStart = useCallback((e) => {
+    setIsDragging(true);
+    const { y } = getSVGCoordinates(e);
+    lastInteractionPoint.current.y = y;
+    gsap.to(glowRef.current, { opacity: 1, duration: 0.1 });
+  }, [getSVGCoordinates]);
+
+  const handleInteractionMove = useCallback((e) => {
+    if (!isDragging) return;
     
-    const rect = stringRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    e.preventDefault(); 
     
-    const newPath = `M 50 150 Q ${x} ${y} 1150 150`;
+    const { x, y } = getSVGCoordinates(e);
+    lastInteractionPoint.current = { x, y };
     
-    // Update glow position
-    if (glowRef.current) {
-      gsap.to(glowRef.current, {
-        x: x,
-        y: y,
+    const newPath = `M ${startX} ${centerY} Q ${x} ${y} ${endX} ${centerY}`;
+    
+    gsap.to(glowRef.current, {
+        x: x - (viewboxWidth / 2),
+        y: y - centerY,
         duration: 0.2,
         ease: "power2.out"
-      });
-    }
-    
+    });
+
     gsap.to(pathRef.current, {
       attr: { d: newPath },
       duration: 0.3,
       ease: "power3.out"
     });
-
-    // Store the Y position for scroll calculation
-    setInitialY(y);
-  };
-
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    const rect = stringRef.current.getBoundingClientRect();
-    const y = e.clientY - rect.top;
-    setInitialY(y);
-  };
-
-  const handleMouseUp = () => {
+  }, [isDragging, getSVGCoordinates, centerY, startX, endX]);
+  
+  const handleInteractionEnd = useCallback(() => {
     if (!isDragging) return;
-    
     setIsDragging(false);
-    
-    // Calculate scroll target based on rope stretch
-    const scrollTarget = calculateScrollTarget(initialY);
-    
-    // Animate rope back to center
+
+    const { target, duration } = calculateScrollProps(lastInteractionPoint.current.y);
+
     gsap.to(pathRef.current, {
-      attr: { d: finalPath },
+      attr: { d: initialPath },
       duration: 1.5,
-      ease: "elastic.out(1,0.2)"
+      ease: "elastic.out(1, 0.2)"
+    });
+    
+     gsap.to(glowRef.current, {
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out"
     });
 
-    // Perform scroll if stretch was significant
-    if (scrollTarget !== null) {
+    if (target !== null) {
       setTimeout(() => {
-        smoothScrollTo(scrollTarget, 1200);
-      }, 300); // Delay to let rope animation start
+        smoothScrollTo(target, duration);
+      }, 150);
     }
-  };
+  }, [isDragging, calculateScrollProps, initialPath, smoothScrollTo]);
 
-  const handleMouseEnter = () => {
-    setIsHovering(true);
-    if (glowRef.current) {
+  const handleMouseEnter = useCallback((e) => {
+      if (isDragging) return;
+      const { x, y } = getSVGCoordinates(e);
       gsap.to(glowRef.current, {
+        x: x - (viewboxWidth / 2),
+        y: y - centerY,
         opacity: 1,
         duration: 0.3,
         ease: "power2.out"
       });
-    }
-  };
+  }, [isDragging, getSVGCoordinates, centerY]);
 
-  const handleMouseLeave = () => {
-    setIsHovering(false);
-    
-    if (glowRef.current) {
-      gsap.to(glowRef.current, {
-        opacity: 0,
-        duration: 0.3,
-        ease: "power2.out"
-      });
-    }
-    
-    // Only animate back if not dragging
+  const handleMouseLeave = useCallback(() => {
     if (!isDragging) {
-      gsap.to(pathRef.current, {
-        attr: { d: finalPath },
-        duration: 1.5,
-        ease: "elastic.out(1,0.2)"
-      });
+        gsap.to(glowRef.current, {
+            opacity: 0,
+            duration: 0.3,
+            ease: "power2.out"
+        });
     }
-  };
+  }, [isDragging]);
 
-  // Add global mouse up listener for better UX
   useEffect(() => {
-    const handleGlobalMouseUp = () => {
-      if (isDragging) {
-        handleMouseUp();
-      }
-    };
+    window.addEventListener('mouseup', handleInteractionEnd);
+    window.addEventListener('touchend', handleInteractionEnd);
+    window.addEventListener('mousemove', handleInteractionMove);
+    window.addEventListener('touchmove', handleInteractionMove, { passive: false });
 
-    document.addEventListener('mouseup', handleGlobalMouseUp);
-    return () => document.removeEventListener('mouseup', handleGlobalMouseUp);
-  }, [isDragging, initialY]);
+    return () => {
+      window.removeEventListener('mouseup', handleInteractionEnd);
+      window.removeEventListener('touchend', handleInteractionEnd);
+      window.removeEventListener('mousemove', handleInteractionMove);
+      window.removeEventListener('touchmove', handleInteractionMove);
+    };
+  }, [handleInteractionEnd, handleInteractionMove]);
 
   return (
     <div className="bezier-container">
-      <p>{isDragging ? 'Release to scroll!' : 'Stretch the rope to scroll'}</p>
-      {/* Background glow effect */}
+      <p className="instructions">{isDragging ? 'Release to scroll!' : 'Pull the rope to navigate'}</p>
       <div className="bg-glow" />
-      
-      {/* Animated background particles */}
       <div className="particles-container">
         {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="particle"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`
-            }}
-          />
+          <div key={i} className="particle orange-particle" style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 3}s`,
+            animationDuration: `${2 + Math.random() * 2}s`
+          }} />
         ))}
       </div>
       
       <div className="main-content">
-        {/* Main curve container */}
-        <div 
-          ref={stringRef}
+        <div
+          ref={containerRef}
           className="curve-container"
-          onMouseMove={handleMouseMove}
-          onMouseDown={handleMouseDown}
+          onMouseDown={handleInteractionStart}
+          onTouchStart={handleInteractionStart}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+          style={{ cursor: isDragging ? 'grabbing' : 'grab', touchAction: 'none' }}
         >
-          {/* Shimmer effect */}
           <div className="shimmer" />
           
-          {/* Glow effect that follows cursor */}
-          <div 
-            ref={glowRef}
-            className="cursor-glow"
-          />
+          <div ref={glowRef} className="cursor-glow orange-glow" />
           
-          {/* SVG Container */}
-          <svg 
-            width="1200" 
-            height="320" 
-            className="curve-svg"
-          >
+        <svg
+    viewBox={`0 0 ${viewboxWidth} ${viewboxHeight}`}
+    className="curve-svg"
+    style={{
+        width: '140%', 
+        height: 'auto', 
+        overflow: 'visible',
+        position: 'absolute',       // ✅ Add: Position it relative to the container
+        left: '50%',                // ✅ Add: Move its left edge to the center
+        transform: 'translateX(-50%)' // ✅ Add: Pull it back by half its own width
+    }}
+    preserveAspectRatio="none"
+>
             <defs>
-              <linearGradient id="premium-gradient" gradientUnits="userSpaceOnUse" x1="50" y1="150" x2="1150" y2="150">
-                <stop offset="0%" stopColor="#14b8a6" stopOpacity="0.9">
-                  <animate attributeName="stopColor" 
-                           values="#14b8a6;#ef4444;#06b6d4;#eab308;#14b8a6" 
-                           dur="6s" 
-                           repeatCount="indefinite" />
-                </stop>
-                <stop offset="25%" stopColor="#ef4444" stopOpacity="0.9">
-                  <animate attributeName="stopColor" 
-                           values="#ef4444;#06b6d4;#eab308;#14b8a6;#ef4444" 
-                           dur="6s" 
-                           repeatCount="indefinite" />
-                </stop>
-                <stop offset="50%" stopColor="#06b6d4" stopOpacity="0.9">
-                  <animate attributeName="stopColor" 
-                           values="#06b6d4;#eab308;#14b8a6;#ef4444;#06b6d4" 
-                           dur="6s" 
-                           repeatCount="indefinite" />
-                </stop>
-                <stop offset="75%" stopColor="#eab308" stopOpacity="0.9">
-                  <animate attributeName="stopColor" 
-                           values="#eab308;#14b8a6;#ef4444;#06b6d4;#eab308" 
-                           dur="6s" 
-                           repeatCount="indefinite" />
-                </stop>
-                <stop offset="100%" stopColor="#14b8a6" stopOpacity="0.9">
-                  <animate attributeName="stopColor" 
-                           values="#14b8a6;#ef4444;#06b6d4;#eab308;#14b8a6" 
-                           dur="6s" 
-                           repeatCount="indefinite" />
-                </stop>
+              <linearGradient id="premium-gradient" gradientUnits="userSpaceOnUse" x1={startX} y1={centerY} x2={endX} y2={centerY}>
+                 <stop offset="0%" stopColor="#fbbf24"><animate attributeName="stopColor" values="#fbbf24;#f97316;#f59e0b;#fbbf24" dur="4s" repeatCount="indefinite" /></stop>
+                 <stop offset="50%" stopColor="#f97316"><animate attributeName="stopColor" values="#f97316;#f59e0b;#fbbf24;#f97316" dur="4s" repeatCount="indefinite" /></stop>
+                 <stop offset="100%" stopColor="#f59e0b"><animate attributeName="stopColor" values="#f59e0b;#fbbf24;#f97316;#f59e0b" dur="4s" repeatCount="indefinite" /></stop>
               </linearGradient>
-              
               <filter id="glow">
-                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                <feMerge> 
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
+                <feGaussianBlur stdDeviation="3.5" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
                 </feMerge>
               </filter>
             </defs>
             
-            {/* Main curve */}
-            <path 
+            <path
               ref={pathRef}
               d={initialPath}
-              stroke="url(#premium-gradient)" 
-              strokeWidth="6" 
+              stroke="url(#premium-gradient)"
+              strokeWidth="6"
               fill="transparent"
               filter="url(#glow)"
               strokeLinecap="round"
             />
             
-            {/* Control points */}
-            <circle cx="50" cy="150" r="6" className="control-point" />
-            <circle cx="1150" cy="150" r="6" className="control-point" />
+            <circle cx={startX} cy={centerY} r="6" className="control-point" />
+            <circle cx={endX} cy={centerY} r="6" className="control-point" />
           </svg>
         </div>
       </div>

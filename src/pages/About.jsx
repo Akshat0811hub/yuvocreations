@@ -29,40 +29,40 @@ const About = () => {
   }, []);
 
   const stats = [
-    { number: '500+', label: 'Projects Completed', icon: '🚀' },
-    { number: '200+', label: 'Happy Clients', icon: '😊' },
-    { number: '5+', label: 'Years Experience', icon: '⭐' },
-    { number: '50+', label: 'Team Members', icon: '👥' }
+    { number: '500+', label: 'Projects Completed', icon: '' },
+    { number: '200+', label: 'Happy Clients', icon: '' },
+    { number: '5+', label: 'Years Experience', icon: '' },
+    { number: '50+', label: 'Team Members', icon: '' }
   ];
 
   const services = [
     {
-      icon: '🌐',
+      icon: '',
       title: 'Web Development',
       description: 'Custom websites and web applications built with latest technologies'
     },
     {
-      icon: '📱',
+      icon: '',
       title: 'Mobile Apps',
       description: 'Native and cross-platform mobile applications for iOS and Android'
     },
     {
-      icon: '🎨',
+      icon: '',
       title: 'UI/UX Design',
       description: 'Beautiful and user-friendly designs that convert visitors to customers'
     },
     {
-      icon: '🔍',
+      icon: '',
       title: 'SEO & Marketing',
       description: 'Digital marketing strategies to boost your online presence'
     },
     {
-      icon: '☁️',
+      icon: '',
       title: 'Cloud Solutions',
       description: 'Scalable cloud infrastructure and deployment solutions'
     },
     {
-      icon: '🛡️',
+      icon: '',
       title: 'Cybersecurity',
       description: 'Comprehensive security solutions to protect your digital assets'
     }
@@ -70,22 +70,22 @@ const About = () => {
 
   const values = [
     {
-      icon: '💡',
+      icon: '',
       title: 'Innovation',
       description: 'We stay ahead of technology trends and implement cutting-edge solutions'
     },
     {
-      icon: '🎯',
+      icon: '',
       title: 'Quality',
       description: 'We deliver high-quality products that exceed client expectations'
     },
     {
-      icon: '🤝',
+      icon: '',
       title: 'Collaboration',
       description: 'We work closely with clients to understand their unique requirements'
     },
     {
-      icon: '⚡',
+      icon: '',
       title: 'Efficiency',
       description: 'We deliver projects on time without compromising on quality'
     }
@@ -141,7 +141,7 @@ const About = () => {
           </div>
           <div className="hero-image animate-on-scroll">
             <div className="floating-card">
-              <div className="card-icon">💻</div>
+              <div className="card-icon"></div>
               <h3>IT Excellence</h3>
               <p>Delivering world-class technology solutions</p>
             </div>

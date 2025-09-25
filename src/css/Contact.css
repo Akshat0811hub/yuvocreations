@@ -1,67 +1,104 @@
-/* Contact Section Styles */
+/* -- Root Variables for Easy Color Management -- */
+:root {
+  --primary-orange: #F97316; /* A vibrant orange */
+  --primary-orange-dark: #EA580C; /* A darker orange for hover */
+  --light-background: #ffffff; /* A very light grey for the main background */
+  --dark-text: #1E1E1E;
+  --medium-text: #555555;
+  --border-color: #E0E0E0;
+  --white-card-bg: #ffffff;
+}
+
+/* -- General Section Styles -- */
 .contact-section {
   min-height: 100vh;
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #1e40af 100%);
+  background-color: var(--light-background);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden; /* Important for containing pseudo-elements */
+  position: relative;
 }
 
 .contact-container {
   max-width: 1200px;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
   align-items: center;
+  z-index: 2; /* Ensure content is above any section backgrounds */
+  position: relative; /* For z-index to work */
 }
 
-/* Services Section */
+/* -- Left Side: Services / Info -- */
 .services-section {
-  color: white;
+  color: var(--dark-text);
+  padding-right: 2rem;
 }
 
 .services-header {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .main-title {
   font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
+  font-weight: 700;
   line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--dark-text);
+}
+
+.main-title .highlight-text {
+  color: var(--primary-orange);
 }
 
 .main-description {
-  color: #bfdbfe;
-  font-size: 1.125rem;
+  color: var(--medium-text);
+  font-size: 1.1rem;
   line-height: 1.6;
 }
 
 .services-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .service-item {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
+}
+
+.service-icon {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(249, 115, 22, 0.1); /* Light orange background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.3s ease;
 }
-
-.service-item:hover .service-icon {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-
 
 .service-icon .icon {
   width: 1.5rem;
   height: 1.5rem;
+  color: var(--primary-orange);
+  transition: all 0.3s ease;
+}
+
+.service-item:hover .service-icon {
+  background-color: var(--primary-orange);
+}
+
+.service-item:hover .icon {
   color: white;
+  transform: scale(1.1);
 }
 
 .service-content {
@@ -72,71 +109,147 @@
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
+  color: var(--dark-text);
 }
 
 .service-desc {
-  color: #bfdbfe;
+  color: var(--medium-text);
   line-height: 1.6;
 }
 
-/* Form Section */
+/* -- Right Side: Form Section (The "Crazy" Part) -- */
+.form-card-wrapper {
+  position: relative;
+  border-radius: 1.5rem; /* More rounded corners for the wrapper */
+  padding: 1.5rem; /* Space between wrapper edge and actual form */
+  overflow: hidden; /* Contain pseudo-elements */
+  background: linear-gradient(145deg, rgba(255,255,255,0.7), rgba(255,255,255,0.9)),
+              linear-gradient(45deg, rgba(249, 115, 22, 0.1), rgba(255, 255, 255, 0.05)); /* Subtle gradient */
+  box-shadow: 0 15px 40px -15px rgba(0, 0, 0, 0.15);
+  transition: all 0.5s ease;
+  backdrop-filter: blur(5px); /* Optional: gives a frosted glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Abstract shapes for background animation */
+.form-card-wrapper::before,
+.form-card-wrapper::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: var(--primary-orange);
+  opacity: 0.1;
+  filter: blur(60px); /* Heavily blurred for an ethereal effect */
+  z-index: 0;
+  animation: blob-move 15s infinite alternate ease-in-out;
+}
+
+.form-card-wrapper::before {
+  width: 150px;
+  height: 150px;
+  top: -30px;
+  left: -30px;
+  background: var(--primary-orange);
+}
+
+.form-card-wrapper::after {
+  width: 200px;
+  height: 200px;
+  bottom: -50px;
+  right: -50px;
+  background: var(--primary-orange);
+  animation-delay: 2s;
+}
+
+@keyframes blob-move {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.1); }
+  66% { transform: translate(-20px, 40px) scale(0.9); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
 .form-section {
-  background: white;
-  border-radius: 1.5rem;
-  padding: 2rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  background: var(--white-card-bg); /* The actual form content is white */
+  border-radius: 1rem; /* Slightly less rounded than the wrapper */
+  padding: 2.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Lighter shadow for the inner card */
+  position: relative; /* For z-index */
+  z-index: 1; /* Ensure form content is above blobs */
 }
 
 .form-header {
   margin-bottom: 2rem;
-}
-
-.form-subtitle {
-  color: #6b7280;
-  font-size: 0.875rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  text-align: center;
 }
 
 .form-title {
-  font-size: 2.25rem;
-  font-weight: bold;
-  color: #111827;
-  line-height: 1.2;
+  font-size: 2.5rem; /* Slightly larger title */
+  font-weight: 800; /* Extra bold */
+  color: var(--dark-text);
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block; /* To make underline effect work */
 }
 
-/* Form Styles */
+/* Creative underline for title */
+.form-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+    width: 60px; /* Shorter, focused underline */
+    height: 4px;
+    background-color: var(--primary-orange);
+    border-radius: 2px;
+}
+
+
+.form-subtitle {
+  color: var(--medium-text);
+  font-size: 1rem;
+  margin-top: 1.5rem; /* More space after title */
+}
+
+/* -- Form Element Styles -- */
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.5rem; /* Increased gap */
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  gap: 1.5rem; /* Increased gap */
 }
 
 .form-input,
 .form-select,
 .form-textarea {
   width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.5rem;
+  padding: 0.95rem 1.1rem; /* Slightly more padding */
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem; /* More rounded inputs */
   font-size: 1rem;
+  color: var(--dark-text);
+  background-color: #fcfcfc; /* Very light background for inputs */
   transition: all 0.3s ease;
   outline: none;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Subtle inner shadow */
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #a0a0a0;
 }
 
 .form-input:focus,
 .form-select:focus,
 .form-textarea:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: var(--primary-orange);
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.2); /* Stronger glow effect */
+  background-color: white;
 }
 
 .select-wrapper {
@@ -145,103 +258,112 @@
 
 .form-select {
   appearance: none;
-  background-color: white;
   cursor: pointer;
+  padding-right: 2.5rem; /* Make space for arrow */
 }
 
 .select-arrow {
   position: absolute;
-  right: 0.75rem;
+  right: 1.2rem;
   top: 50%;
   transform: translateY(-50%);
-  width: 1.25rem;
-  height: 1.25rem;
-  color: #9ca3af;
+  width: 1.3rem;
+  height: 1.3rem;
+  color: #666; /* Darker arrow */
   pointer-events: none;
 }
 
 .form-textarea {
-  resize: none;
-  min-height: 100px;
+  resize: vertical;
+  min-height: 150px; /* Taller textarea */
 }
 
 .submit-btn {
-  background-color: #2563eb;
+  background-color: var(--primary-orange);
   color: white;
-  padding: 0.75rem 2rem;
-  border-radius: 9999px;
-  font-weight: 600;
+  padding: 1rem 2.5rem; /* More padding */
+  border-radius: 0.75rem; /* More rounded button */
+  font-weight: 700; /* Bolder text */
+  font-size: 1.1rem; /* Slightly larger text */
+  text-transform: uppercase;
+  letter-spacing: 0.08em; /* More letter spacing */
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  align-self: flex-start;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px rgba(249, 115, 22, 0.2); /* Stronger initial shadow */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Submit button hover effect - 'crazy' glow */
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3); /* Lighter glow */
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+  z-index: 0;
+}
+
+.submit-btn:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .submit-btn:hover {
-  background-color: #1d4ed8;
-  transform: scale(1.05);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  background-color: var(--primary-orange-dark);
+  transform: translateY(-5px); /* More pronounced lift */
+  box-shadow: 0 15px 30px rgba(249, 115, 22, 0.35); /* Even stronger shadow */
 }
 
-/* Floating Icon */
-.floating-icon {
-  position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 0.75rem;
-  border-radius: 50%;
+/* Ensure button text is above the glow effect */
+.submit-btn span {
+    position: relative;
+    z-index: 1;
 }
 
-.icon-grid {
-  width: 1.5rem;
-  height: 1.5rem;
-  background-color: white;
-  border-radius: 0.25rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px;
-}
-
-.grid-item {
-  background-color: #2563eb;
-  border-radius: 2px;
-}
-
-/* Responsive Design */
+/* -- Responsive Design -- */
 @media (max-width: 1024px) {
   .contact-container {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 3rem;
   }
-  
+  .services-section {
+    padding-right: 0;
+    text-align: center;
+  }
+  .service-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
   .main-title {
     font-size: 2.5rem;
-  }
-  
-  .form-title {
-    font-size: 2rem;
   }
 }
 
 @media (max-width: 768px) {
   .contact-section {
-    padding: 1rem;
+    padding: 1.5rem;
   }
-  
   .form-row {
     grid-template-columns: 1fr;
+    gap: 1rem; /* Reduced gap for smaller screens */
   }
-  
   .main-title {
     font-size: 2rem;
   }
-  
   .form-title {
-    font-size: 1.75rem;
+    font-size: 2rem; /* Adjusted for consistency */
   }
-  
+  .form-card-wrapper {
+      padding: 1rem;
+  }
   .form-section {
     padding: 1.5rem;
   }
