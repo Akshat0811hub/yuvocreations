@@ -631,7 +631,7 @@ const Footer = () => {
                 <div className="logo-main">
                   <div className="logo-icon"></div>
                   <div className="logo-text">
-                    <h3>Yuvo<span>Creations</span></h3>
+                    <h3>Yuvocreations Private Limited</h3>
                   </div>
                 </div>
                 <div className="logo-tagline">Innovating Tomorrow's Technology Today</div>
