@@ -242,8 +242,8 @@ const ITParallaxEffect = () => {
               <div className="logo-inner"></div>
             </div>
           </div>
-          <h1 className="company-name">TechSolutions Pro</h1>
-          <p className="company-tagline">Innovative IT Solutions for Tomorrow</p>
+          <h1 className="company-name">Yuvocreations Private Limited</h1>
+          <p className="company-tagline">Innovate, Integrate, Elevate</p>
         </div>
       </div>
 
@@ -281,8 +281,8 @@ const ITParallaxEffect = () => {
         <svg className="connection-svg" style={{ transform: getParallaxTransform(8) }}>
           <defs>
             <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#00d4ff" stopOpacity="0.8"/>
-              <stop offset="100%" stopColor="#0099cc" stopOpacity="0.3"/>
+              <stop offset="0%" stopColor="#fd9800ff" stopOpacity="0.8"/>
+              <stop offset="100%" stopColor="#ffb01cff" stopOpacity="0.3"/>
             </linearGradient>
           </defs>
           <path 
