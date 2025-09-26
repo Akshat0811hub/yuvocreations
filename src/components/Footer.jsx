@@ -1,14 +1,43 @@
 import React, { useState } from 'react';
+import logoImage from '../assets/logobg.png'; 
+
+// Functional Icons (using SVG inline for no external dependencies)
+const ArrowRightIcon = ({ color }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="icon" viewBox="0 0 20 20" fill={color || "currentColor"}>
+    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+  </svg>
+);
+
+const CheckIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="icon" viewBox="0 0 20 20" fill="currentColor">
+    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+  </svg>
+);
+
+// Social Media Icons (SVGs)
+const FacebookIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="social-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 6.016 4.432 10.984 10.246 11.852V15.01H7.5v-3.008h2.746V9.61c0-2.73 1.67-4.225 4.102-4.225s3.791.298 3.791.298V7.81h-2.146c-1.066 0-1.402.662-1.402 1.34V12h3.008l-.482 3.008h-2.526v6.842C19.56 22.95 24 18.016 24 12c0-6.627-5.373-12-12-12z"/></svg>
+);
+const InstagramIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="social-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.013 4.85.07c3.252.145 4.772 1.663 4.916 4.915.058 1.266.07 1.646.07 4.85s-.013 3.584-.07 4.85c-.145 3.252-1.663 4.772-4.915 4.916-1.266.058-1.646.07-4.85.07s-3.584-.013-4.85-.07c-3.252-.145-4.772-1.663-4.916-4.915-.058-1.266-.07-1.646-.07-4.85s.013-3.584.07-4.85c.145-3.252 1.663-4.772 4.915-4.916 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.262 0-3.679.014-4.945.071C2.695.232.231 2.694.072 4.945c-.058 1.266-.07 1.683-.07 4.945s.014 3.679.071 4.945c.159 2.251 2.621 4.715 4.872 4.872 1.266.057 1.683.07 4.945.07s3.679-.014 4.945-.071c2.251-.159 4.715-2.621 4.872-4.872.057-1.266.07-1.683.07-4.945s-.014-3.679-.071-4.945C21.306 2.694 18.842.232 16.59.072 15.324.014 14.907 0 12 0zm0 5.838c-3.414 0-6.17 2.756-6.17 6.17s2.756 6.17 6.17 6.17 6.17-2.756 6.17-6.17-2.756-6.17-6.17-6.17zm0 10.17c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4zm6.471-11.471c-.703 0-1.272.57-1.272 1.271 0 .701.57 1.271 1.272 1.271.702 0 1.271-.57 1.271-1.271s-.569-1.271-1.271-1.271z"/></svg>
+);
+const XIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="social-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.914 5.253l-3.321 3.321L20.812 13l-1.393 1.393-5.22-5.22-3.321 3.321 1.393 1.393-2.771 2.771-1.393-1.393 5.22-5.22-3.321-3.321-1.393 1.393L3 13.914l1.393 1.393L9.61 9.098l3.321-3.321L14.324 7l-5.22 5.22 3.321 3.321 1.393-1.393 2.771 2.771 1.393 1.393-5.22 5.22-3.321-3.321L9.61 24l-1.393-1.393-5.22 5.22-1.393-1.393L.914 18.914 7.086 12 1.766 6.68z"/></svg>
+);
+const LinkedInIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="social-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M22.234 0H1.766C.79 0 0 .79 0 1.766v20.468C0 23.21.79 24 1.766 24h20.468c.976 0 1.766-.79 1.766-1.766V1.766C24 .79 23.21 0 22.234 0zM7.05 20.435H3.635V9.453h3.415v10.982zM5.342 8.35c-1.12 0-2.028-.908-2.028-2.028 0-1.12.908-2.028 2.028-2.028s2.028.908 2.028 2.028c0 1.12-.908 2.028-2.028 2.028zM20.365 20.435h-3.415v-5.23c0-1.246-.948-2.195-2.195-2.195-1.246 0-2.195.949-2.195 2.195v5.23h-3.415V9.453h3.415v1.73c.473-.895 1.55-2.074 3.12-2.074 2.72 0 4.793 1.77 4.793 5.567v5.759z"/></svg>
+);
 
 const Footer = () => {
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
 
-  const handleSubscribe = () => {
+  const handleSubscribe = (e) => {
+    e.preventDefault();
     if (email.trim()) {
       setIsSubscribed(true);
       setEmail('');
-      setTimeout(() => setIsSubscribed(false), 3000);
+      setTimeout(() => setIsSubscribed(false), 3000); 
     }
   };
 
@@ -16,29 +45,65 @@ const Footer = () => {
 
   return (
     <>
-      {/* CSS Styles */}
+      {/* ======================================================
+        CSS STYLES for DARK THEME with Particle Effects
+        ======================================================
+      */}
       <style jsx>{`
-        .footer {
-          position: relative;
-          background: linear-gradient(135deg, #0a0a0a 0%, #1a0f0a 20%, #2d1b10 40%, #1a0f0a 70%, #0a0a0a 100%);
-          color: #ffffff;
-          overflow: hidden;
-          margin-top: 6rem;
+        /* --- Color Variables --- */
+        :root {
+          --color-black: #000000;
+          --color-dark-gray: #1a1a1a;
+          --color-pure-white: #ffffff;
+          --color-text-light: #cccccc;
+          --color-primary-blue: #ffa93f; /* Updated to new color */
+          --color-light-blue: #ffc98a; /* Adjusted for contrast */
+          --color-border: #2d2d2d;
         }
 
+        .icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            vertical-align: middle;
+            margin-right: 0.5rem;
+        }
+        
+        .social-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            transition: all 0.3s ease;
+            color: var(--color-light-blue);
+        }
+        
+        .social-icon:hover {
+            color: var(--color-primary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* --- Base Footer Style --- */
+        .footer {
+          position: relative;
+          background-color: var(--color-black); 
+          color: var(--color-pure-white);
+          overflow: hidden;
+          margin-top: 6rem;
+          border-top: 5px solid var(--color-primary-blue); 
+        }
+
+        /* --- Decorative Background (Particle Dust) --- */
         .footer-background {
           position: absolute;
           inset: 0;
           pointer-events: none;
+          z-index: 1; 
         }
 
         .footer-gradient {
-          position: absolute;
-          inset: 0;
-          background: 
-            radial-gradient(circle at 25% 25%, rgba(249, 115, 22, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 75% 75%, rgba(251, 146, 60, 0.12) 0%, transparent 50%),
-            radial-gradient(circle at 50% 50%, rgba(254, 215, 170, 0.08) 0%, transparent 70%);
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 10% 80%, rgba(255, 169, 63, 0.1) 0%, transparent 40%), /* Updated gradient */
+                radial-gradient(circle at 90% 20%, rgba(255, 201, 138, 0.08) 0%, transparent 50%); /* Updated gradient */
         }
 
         .footer-particles {
@@ -48,17 +113,17 @@ const Footer = () => {
 
         .footer-particle {
           position: absolute;
-          width: 4px;
-          height: 4px;
-          background: linear-gradient(45deg, #f97316, #fb923c);
+          width: 3px; 
+          height: 3px;
+          background-color: var(--color-light-blue);
           border-radius: 50%;
           animation: particle-float linear infinite;
-          box-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
+          box-shadow: 0 0 8px rgba(255, 169, 63, 0.6); /* Updated shadow */
         }
 
         @keyframes particle-float {
           0% {
-            bottom: -20px;
+            bottom: -10px;
             opacity: 0;
             transform: translateX(0) rotate(0deg);
           }
@@ -66,17 +131,19 @@ const Footer = () => {
             opacity: 1;
           }
           90% {
-            opacity: 0.8;
+            opacity: 0.7; 
           }
           100% {
             bottom: 100vh;
             opacity: 0;
-            transform: translateX(20px) rotate(360deg);
+            transform: translateX(50px) rotate(360deg);
           }
         }
 
+        /* --- Layout Container --- */
         .footer-container {
           position: relative;
+          z-index: 2; 
           max-width: 1400px;
           margin: 0 auto;
           padding: 5rem 2rem 2rem;
@@ -95,178 +162,94 @@ const Footer = () => {
           gap: 1.5rem;
         }
 
+        /* --- Logo Section --- */
         .footer-logo {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
-          margin-bottom: 1.5rem;
+          align-items: center; /* Center aligned */
+          gap: 1.5rem;
         }
-
+        
         .logo-main {
           display: flex;
-          align-items: center;
-          gap: 1rem;
+          flex-direction: column; 
+          align-items: center; /* Center aligned */
+          gap: 0.5rem; 
         }
-
-        .logo-icon {
-          width: 60px;
-          height: 60px;
-          background: linear-gradient(135deg, #f97316 0%, #fb923c 50%, #fed7aa 100%);
-          border-radius: 16px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: relative;
-          overflow: hidden;
-          box-shadow: 
-            0 0 0 3px rgba(249, 115, 22, 0.2),
-            0 8px 32px rgba(249, 115, 22, 0.4),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        }
-
-        .logo-icon::before {
-          content: '';
-          position: absolute;
-          top: -50%;
-          left: -50%;
-          width: 200%;
-          height: 200%;
-          background: conic-gradient(
-            transparent,
-            rgba(255, 255, 255, 0.3),
-            transparent
-          );
-          animation: logo-rotate 4s linear infinite;
-        }
-
-        .logo-icon::after {
-          content: 'TS';
-          position: relative;
-          z-index: 2;
-          font-size: 24px;
-          font-weight: 900;
-          color: white;
-          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        @keyframes logo-rotate {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
+        
+        .logo-main img {
+            width: 120px; /* Increased logo size */
+            height: 120px;
+            object-fit: contain;
         }
 
         .logo-text h3 {
-          font-size: 2rem;
-          font-weight: 800;
+          font-size: 2.2rem;
+          font-weight: 900;
           margin: 0;
-          background: linear-gradient(135deg, #f97316 0%, #fb923c 50%, #fed7aa 100%);
+          color: var(--color-pure-white); 
+          background: linear-gradient(90deg, var(--color-primary-blue), var(--color-light-blue));
           background-clip: text;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          text-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+          text-shadow: 0 0 15px rgba(255, 169, 63, 0.4); 
         }
-
-        .logo-text span {
-          font-size: 1rem;
-          color: #fb923c;
-          font-weight: 300;
-          margin-left: 8px;
-        }
-
         .logo-tagline {
-          color: #fed7aa;
-          font-size: 0.9rem;
-          font-style: italic;
-          opacity: 0.9;
+          color: var(--color-text-light); 
+          font-size: 0.95rem;
         }
 
         .company-description {
-          color: #d1d5db;
+          color: var(--color-text-light);
           line-height: 1.7;
           font-size: 1rem;
-          background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, transparent 100%);
+          background-color: var(--color-dark-gray); 
           padding: 1.5rem;
           border-radius: 12px;
-          border-left: 4px solid #f97316;
+          border-left: 5px solid var(--color-primary-blue); 
         }
 
+        /* --- Social Links --- */
         .social-links {
           display: flex;
-          gap: 1rem;
-          flex-wrap: wrap;
+          gap: 1.5rem;
+          align-items: center;
+          justify-content: center; /* Centered */
         }
-
         .social-link {
-          padding: 12px 20px;
-          background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(251, 146, 60, 0.05) 100%);
-          backdrop-filter: blur(20px);
-          border: 2px solid rgba(249, 115, 22, 0.3);
-          border-radius: 12px;
-          color: #fed7aa;
-          text-decoration: none;
-          font-weight: 600;
-          font-size: 0.9rem;
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-          position: relative;
-          overflow: hidden;
+          color: var(--color-light-blue);
+          transition: all 0.3s ease;
         }
-
-        .social-link::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(135deg, #f97316, #fb923c);
-          opacity: 0;
-          transition: opacity 0.4s ease;
-        }
-
-        .social-link span {
-          position: relative;
-          z-index: 2;
-        }
-
         .social-link:hover {
-          transform: translateY(-4px) scale(1.05);
-          box-shadow: 0 12px 40px rgba(249, 115, 22, 0.4);
-          border-color: #f97316;
-          color: white;
+          color: var(--color-primary-blue);
+          transform: translateY(-2px);
         }
 
-        .social-link:hover::before {
-          opacity: 1;
-        }
-
+        /* --- Section Titles --- */
         .section-title {
-          color: #ffffff;
-          font-size: 1.3rem;
-          font-weight: 700;
-          margin: 0 0 1.5rem 0;
+          color: var(--color-pure-white);
+          font-size: 1.4rem; 
+          font-weight: 800;
+          margin: 0 0 1.2rem 0;
           position: relative;
           padding-bottom: 12px;
         }
-
         .section-title::after {
           content: '';
           position: absolute;
           bottom: 0;
           left: 0;
-          width: 40px;
-          height: 3px;
-          background: linear-gradient(90deg, #f97316, #fb923c, #fed7aa);
+          width: 50px; 
+          height: 4px; 
+          background: var(--color-primary-blue); 
           border-radius: 2px;
-          box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);
+          box-shadow: 0 2px 8px rgba(255, 169, 63, 0.1); 
         }
 
-        .footer-links {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-        }
-
+        /* --- Footer Links --- */
+        .footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
         .footer-links a {
-          color: #d1d5db;
+          color: var(--color-text-light);
           text-decoration: none;
           font-size: 1rem;
           font-weight: 500;
@@ -274,346 +257,162 @@ const Footer = () => {
           position: relative;
           padding: 8px 0;
           border-radius: 6px;
+          display: flex;
+          align-items: center;
         }
-
-        .footer-links a::before {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 0;
-          height: 2px;
-          background: linear-gradient(90deg, #f97316, #fb923c);
-          transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-          border-radius: 1px;
-        }
-
         .footer-links a:hover {
-          color: #fed7aa;
-          padding-left: 20px;
-          background: rgba(249, 115, 22, 0.05);
+          color: var(--color-primary-blue); 
+          padding-left: 10px; 
+          background: var(--color-dark-gray); 
+        }
+        .footer-links a .icon {
+            opacity: 0;
+            width: 0;
+            transition: all 0.3s ease;
+            color: var(--color-primary-blue);
+        }
+        .footer-links a:hover .icon {
+            opacity: 1;
+            margin-right: 0.5rem;
+            width: 1.25rem;
         }
 
-        .footer-links a:hover::before {
-          width: 15px;
-        }
-
+        /* --- Newsletter Section --- */
         .newsletter-section {
-          background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(251, 146, 60, 0.05) 100%);
-          backdrop-filter: blur(20px);
-          border: 1px solid rgba(249, 115, 22, 0.2);
-          border-radius: 20px;
-          padding: 2rem;
-          gap: 1.5rem;
-        }
-
-        .newsletter-description {
-          color: #d1d5db;
-          font-size: 1rem;
-          line-height: 1.6;
-          margin: 0;
-        }
-
-        .newsletter-form {
-          width: 100%;
-        }
-
-        .input-group {
+          background-color: var(--color-dark-gray); 
+          border: 1px solid var(--color-border); 
+          border-radius: 16px;
+          padding: 2.5rem; 
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 1.5rem;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
         }
-
+        .newsletter-description { color: var(--color-text-light); line-height: 1.6; }
+        .newsletter-form {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem; 
+        }
         .newsletter-input {
-          padding: 16px 20px;
-          background: rgba(0, 0, 0, 0.3);
-          backdrop-filter: blur(10px);
-          border: 2px solid rgba(249, 115, 22, 0.3);
-          border-radius: 12px;
-          color: #ffffff;
-          font-size: 1rem;
+          padding: 14px 18px; 
+          background-color: var(--color-black); 
+          border: 1px solid var(--color-border);
+          border-radius: 8px; 
+          color: var(--color-pure-white);
+          width: 100%;
           transition: all 0.3s ease;
         }
-
-        .newsletter-input::placeholder {
-          color: #9ca3af;
-        }
-
-        .newsletter-input:focus {
-          outline: none;
-          border-color: #f97316;
-          box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.2);
-          background: rgba(0, 0, 0, 0.4);
-        }
-
+        .newsletter-input:focus { outline: none; border-color: var(--color-primary-blue); box-shadow: 0 0 0 4px rgba(255, 169, 63, 0.2); } 
         .newsletter-button {
-          padding: 16px 24px;
-          background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+          padding: 14px 24px;
+          background: var(--color-primary-blue); 
           border: none;
-          border-radius: 12px;
-          color: white;
+          border-radius: 8px;
+          color: var(--color-pure-white);
           font-weight: 700;
-          font-size: 1rem;
           cursor: pointer;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           position: relative;
           overflow: hidden;
-          box-shadow: 0 4px 20px rgba(249, 115, 22, 0.3);
+          box-shadow: 0 4px 15px rgba(255, 169, 63, 0.4); 
         }
+        .newsletter-button:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255, 169, 63, 0.6); } 
+        .newsletter-button.subscribed { background: #10b981; cursor: default; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); }
+        .newsletter-button.subscribed:hover { transform: none; box-shadow: 0 8px 30px rgba(16, 185, 129, 0.6); }
 
-        .newsletter-button::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        }
-
-        .newsletter-button:hover::before {
-          opacity: 1;
-        }
-
-        .newsletter-button:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 12px 40px rgba(249, 115, 22, 0.5);
-        }
-
-        .newsletter-button.subscribed {
-          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-          cursor: default;
-        }
-
-        .newsletter-button.subscribed:hover {
-          transform: none;
-        }
-
+        /* --- Contact Info --- */
         .contact-info {
+          background-color: var(--color-black); 
+          border: 1px solid var(--color-border);
+          border-radius: 12px;
+          padding: 1.5rem;
           display: flex;
           flex-direction: column;
           gap: 1rem;
-          background: rgba(249, 115, 22, 0.05);
-          padding: 1.5rem;
-          border-radius: 12px;
-          border: 1px solid rgba(249, 115, 22, 0.1);
         }
+        .contact-item { display: flex; align-items: flex-start; gap: 1rem; color: var(--color-text-light); font-size: 0.95rem; line-height: 1.5; }
+        .contact-label { font-weight: 600; color: var(--color-primary-blue); min-width: 60px; }
 
-        .contact-item {
-          display: flex;
-          align-items: flex-start;
-          gap: 1rem;
-          color: #d1d5db;
-          font-size: 0.95rem;
-          line-height: 1.5;
-        }
-
-        .contact-label {
-          font-weight: 600;
-          color: #fed7aa;
-          min-width: 60px;
-        }
-
+        /* --- Divider --- */
         .footer-divider {
           width: 100%;
-          height: 1px;
-          background: linear-gradient(90deg, transparent, #f97316, #fb923c, #f97316, transparent);
+          height: 1px; 
+          background: linear-gradient(90deg, transparent, var(--color-primary-blue), transparent);
           margin: 3rem 0;
-          box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+          box-shadow: 0 0 15px rgba(255, 169, 63, 0.5); 
         }
 
+        /* --- Footer Bottom Section --- */
         .footer-bottom {
           display: flex;
-          justify-content: space-between;
+          flex-direction: column;
+          justify-content: center;
           align-items: center;
-          flex-wrap: wrap;
           gap: 2rem;
           padding-top: 2rem;
-          border-top: 1px solid rgba(249, 115, 22, 0.1);
+          border-top: 1px solid var(--color-border);
         }
-
-        .footer-bottom-left {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-        }
-
-        .copyright {
-          color: #9ca3af;
-          font-size: 0.95rem;
-          margin: 0;
-          font-weight: 500;
-        }
-
-        .legal-links {
-          display: flex;
-          align-items: center;
-          gap: 1.5rem;
-          flex-wrap: wrap;
-        }
-
-        .legal-links a {
-          color: #d1d5db;
-          text-decoration: none;
-          font-size: 0.9rem;
-          font-weight: 500;
-          transition: color 0.3s ease;
-          padding: 4px 0;
-        }
-
-        .legal-links a:hover {
-          color: #fed7aa;
-        }
-
-        .separator {
-          color: #6b7280;
-          font-size: 1rem;
-        }
-
-        .footer-bottom-right {
-          display: flex;
-          align-items: center;
-        }
-
-        .tech-stack {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          background: rgba(249, 115, 22, 0.05);
-          padding: 12px 20px;
-          border-radius: 12px;
-          border: 1px solid rgba(249, 115, 22, 0.2);
-        }
-
-        .tech-label {
-          color: #fed7aa;
-          font-size: 0.9rem;
-          font-weight: 600;
-        }
-
-        .tech-items {
-          display: flex;
-          gap: 1rem;
-        }
-
-        .tech-item {
-          color: #d1d5db;
-          font-size: 0.85rem;
-          font-weight: 500;
-          opacity: 0.8;
-          transition: all 0.3s ease;
-          cursor: default;
-        }
-
-        .tech-item:hover {
-          opacity: 1;
-          color: #fed7aa;
-        }
-
+        .copyright { color: var(--color-text-light); font-size: 0.95rem; margin: 0; text-align: center; }
+        .legal-links { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+        .legal-links a { color: var(--color-text-light); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease; }
+        .legal-links a:hover { color: var(--color-primary-blue); }
+        .separator { color: var(--color-border); font-size: 1rem; }
+        
+        /* --- Back to Top Button --- */
         .back-to-top {
           position: fixed;
           bottom: 2rem;
           right: 2rem;
-          width: 60px;
-          height: 60px;
-          background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+          width: 55px; 
+          height: 55px;
+          background: var(--color-primary-blue);
           border: none;
           border-radius: 50%;
-          color: white;
+          color: var(--color-pure-white);
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 8px 32px rgba(249, 115, 22, 0.4);
+          box-shadow: 0 6px 25px rgba(255, 169, 63, 0.5); 
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           z-index: 1000;
-          font-size: 24px;
-          font-weight: 900;
+          font-size: 20px;
         }
+        .back-to-top:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 10px 40px rgba(255, 169, 63, 0.7); } 
 
-        .back-to-top:hover {
-          transform: translateY(-4px) scale(1.1);
-          box-shadow: 0 12px 48px rgba(249, 115, 22, 0.6);
-        }
-
+        /* --- Media Queries --- */
         @media (max-width: 1024px) {
-          .footer-main {
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-          }
-          
-          .footer-section:first-child {
-            grid-column: 1 / -1;
-          }
-          
-          .newsletter-section {
-            grid-column: 1 / -1;
-          }
+          .footer-main { grid-template-columns: 1fr 1fr; gap: 3rem; }
+          .footer-section:first-child, .newsletter-section { grid-column: 1 / -1; }
         }
-
         @media (max-width: 768px) {
-          .footer-container {
-            padding: 4rem 1.5rem 2rem;
-          }
-          
-          .footer-main {
-            grid-template-columns: 1fr;
-            gap: 2.5rem;
-          }
-          
-          .footer-bottom {
-            flex-direction: column;
-            text-align: center;
-            gap: 1.5rem;
-          }
-          
-          .legal-links {
-            justify-content: center;
-          }
-          
-          .social-links {
-            justify-content: center;
-          }
+          .footer-container { padding: 4rem 1.5rem 2rem; }
+          .footer-main { grid-template-columns: 1fr; }
+          .footer-bottom { flex-direction: column; text-align: center; gap: 1.5rem; }
+          .social-links { justify-content: center; } 
         }
-
         @media (max-width: 480px) {
-          .back-to-top {
-            bottom: 1rem;
-            right: 1rem;
-            width: 50px;
-            height: 50px;
-            font-size: 20px;
-          }
-          
-          .tech-stack {
-            flex-direction: column;
-            gap: 0.5rem;
-            text-align: center;
-          }
-          
-          .newsletter-section {
-            padding: 1.5rem;
-          }
-          
-          .input-group {
-            gap: 1rem;
-          }
+          .back-to-top { bottom: 1rem; right: 1rem; width: 50px; height: 50px; font-size: 18px; }
         }
       `}</style>
 
-      {/* JSX Structure */}
+      {/* ======================================================
+        JSX STRUCTURE
+        ======================================================
+      */}
       <footer className="footer">
         <div className="footer-background">
           <div className="footer-gradient"></div>
           <div className="footer-particles">
-            {[...Array(30)].map((_, i) => (
+            {[...Array(50)].map((_, i) => (
               <div
                 key={i}
                 className="footer-particle"
                 style={{
                   left: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 6}s`,
-                  animationDuration: `${4 + Math.random() * 6}s`
+                  animationDelay: `${Math.random() * 8}s`,
+                  animationDuration: `${8 + Math.random() * 8}s`
                 }}
               />
             ))}
@@ -622,111 +421,102 @@ const Footer = () => {
 
         <div className="footer-container">
           
-          {/* Main Footer Content */}
           <div className="footer-main">
             
-            {/* Company Section */}
             <div className="footer-section">
               <div className="footer-logo">
                 <div className="logo-main">
-                  <div className="logo-icon"></div>
+                  <img src={logoImage} alt="Logo" />
                   <div className="logo-text">
-                    <h3>Yuvocreations Private Limited</h3>
+                    <h3>Yuvocreations</h3>
                   </div>
                 </div>
                 <div className="logo-tagline">Innovating Tomorrow's Technology Today</div>
               </div>
               <div className="company-description">
-                Transforming businesses through innovative technology solutions. 
-                We deliver cutting-edge IT services that drive growth, efficiency, and digital transformation for companies worldwide.
+                **Yuvocreations** delivers innovative, tailored IT solutions that drive growth and efficiency for modern enterprises. We specialize in full-stack development and cloud architecture.
               </div>
               <div className="social-links">
-                <a href="#" className="social-link"><span>Facebook</span></a>
-                <a href="#" className="social-link"><span>Twitter</span></a>
-                <a href="#" className="social-link"><span>LinkedIn</span></a>
-                <a href="#" className="social-link"><span>Instagram</span></a>
-                <a href="#" className="social-link"><span>GitHub</span></a>
+                <a href="https://www.facebook.com/profile.php?id=61565786861921" className="social-link" aria-label="Find us on Facebook"><FacebookIcon /></a>
+                <a href="https://www.instagram.com/yuvocreations/" className="social-link" aria-label="Follow us on Instagram"><InstagramIcon /></a>
+                <a href="https://www.linkedin.com/company/yuvocreations/" className="social-link" aria-label="Connect with us on LinkedIn"><LinkedInIcon /></a>
+                <a href="https://twitter.com/yuvocreations" className="social-link" aria-label="Follow us on X"><XIcon /></a>
               </div>
             </div>
 
-            {/* Services Section */}
             <div className="footer-section">
-              <h4 className="section-title">Services</h4>
+              <h4 className="section-title">Key Services</h4>
               <ul className="footer-links">
-                <li><a href="#web-development">Web Development</a></li>
-                <li><a href="#mobile-apps">Mobile Applications</a></li>
-                <li><a href="#cloud-solutions">Cloud Solutions</a></li>
-                <li><a href="#ai-ml">AI & Machine Learning</a></li>
-                <li><a href="#cybersecurity">Cybersecurity</a></li>
-                <li><a href="#data-analytics">Data Analytics</a></li>
+                <li><a href="#web-development"><ArrowRightIcon />Web Development</a></li>
+                <li><a href="#mobile-apps"><ArrowRightIcon />Mobile Apps</a></li>
+                <li><a href="#cloud-solutions"><ArrowRightIcon />Cloud & DevOps</a></li>
+                <li><a href="#ai-ml"><ArrowRightIcon />AI & Data Science</a></li>
+                <li><a href="#cybersecurity"><ArrowRightIcon />Cybersecurity</a></li>
+                <li><a href="#data-analytics"><ArrowRightIcon />Digital Marketing</a></li>
               </ul>
             </div>
 
-            {/* Company Section */}
             <div className="footer-section">
-              <h4 className="section-title">Company</h4>
+              <h4 className="section-title">About Us</h4>
               <ul className="footer-links">
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#team">Our Team</a></li>
-                <li><a href="#careers">Careers</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#testimonials">Testimonials</a></li>
-                <li><a href="#blog">Blog</a></li>
+                <li><a href="#about"><ArrowRightIcon />Company Mission</a></li>
+                <li><a href="#team"><ArrowRightIcon />Our Expert Team</a></li>
+                <li><a href="#careers"><ArrowRightIcon />Careers & Culture</a></li>
+                <li><a href="#portfolio"><ArrowRightIcon />Client Portfolio</a></li>
+                <li><a href="#testimonials"><ArrowRightIcon />Success Stories</a></li>
+                <li><a href="#blog"><ArrowRightIcon />Insights Blog</a></li>
               </ul>
             </div>
 
-            {/* Newsletter Section */}
             <div className="footer-section newsletter-section">
-              <h4 className="section-title">Stay Connected</h4>
+              <h4 className="section-title">Get In Touch</h4>
               <p className="newsletter-description">
-                Subscribe to our newsletter for the latest updates on technology trends, industry insights, and our premium services.
+                Join our newsletter to receive the latest tech trends and exclusive updates from Yuvocreations.
               </p>
-              <div className="newsletter-form">
-                <div className="input-group">
-                  <input
-                    type="email"
-                    placeholder="Enter your email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="newsletter-input"
-                  />
-                  <button 
-                    onClick={handleSubscribe}
-                    className={`newsletter-button ${isSubscribed ? 'subscribed' : ''}`}
-                    disabled={isSubscribed}
-                  >
-                    {isSubscribed ? 'Successfully Subscribed!' : 'Subscribe Now'}
-                  </button>
-                </div>
-              </div>
               
-              {/* Contact Info */}
+              <form onSubmit={handleSubscribe} className="newsletter-form">
+                <input
+                  type="email"
+                  placeholder="Enter your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="newsletter-input"
+                  aria-label="Email address for newsletter subscription"
+                  required
+                />
+                <button 
+                  type="submit"
+                  className={`newsletter-button ${isSubscribed ? 'subscribed' : ''}`}
+                  disabled={isSubscribed}
+                >
+                  {isSubscribed ? (
+                    <>
+                      <CheckIcon />Subscribed!
+                    </>
+                  ) : 'Subscribe Now'}
+                </button>
+              </form>
+              
               <div className="contact-info">
                 <div className="contact-item">
-                  <span className="contact-label">Address:</span>
-                  <span></span>
-                </div>
-                <div className="contact-item">
                   <span className="contact-label">Phone:</span>
-                  <span>+91 7889487784</span>
+                  <a href="tel:+917889487784" style={{ color: 'var(--color-text-light)', textDecoration: 'none' }}>+91 7889487784</a>
                 </div>
                 <div className="contact-item">
                   <span className="contact-label">Email:</span>
-                  <span>Yuvocreations</span>
+                  <a href="mailto:contact@yuvocreations.com" style={{ color: 'var(--color-text-light)', textDecoration: 'none' }}>contact@yuvocreations.com</a>
                 </div>
               </div>
             </div>
 
           </div>
 
-          {/* Divider */}
           <div className="footer-divider"></div>
 
-          {/* Bottom Section */}
           <div className="footer-bottom">
             <div className="footer-bottom-left">
               <p className="copyright">
-                © {currentYear} TechSolutions Pro. All rights reserved. Built with passion and innovation.
+                &copy; {currentYear} Yuvocreations Private Limited | All Rights Reserved.
               </p>
               <div className="legal-links">
                 <a href="#privacy">Privacy Policy</a>
@@ -734,33 +524,18 @@ const Footer = () => {
                 <a href="#terms">Terms of Service</a>
                 <span className="separator">•</span>
                 <a href="#cookies">Cookie Policy</a>
-                <span className="separator">•</span>
-                <a href="#security">Security</a>
-              </div>
-            </div>
-            
-            <div className="footer-bottom-right">
-              <div className="tech-stack">
-                <span className="tech-label">Powered by:</span>
-                <div className="tech-items">
-                  <span className="tech-item">React</span>
-                  <span className="tech-item">Node.js</span>
-                  <span className="tech-item">AWS</span>
-                  <span className="tech-item">Docker</span>
-                </div>
               </div>
             </div>
           </div>
 
         </div>
 
-        {/* Back to Top Button */}
         <button 
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="back-to-top"
           aria-label="Back to top"
         >
-          ↑
+          &uarr;
         </button>
 
       </footer>
