@@ -1,7 +1,7 @@
 /* -- Root Variables for Easy Color Management -- */
 :root {
-  --primary-orange: #F97316; /* A vibrant orange */
-  --primary-orange-dark: #EA580C; /* A darker orange for hover */
+  --primary-orange: #ffa93f; /* A vibrant orange */
+  --primary-orange-dark: #ec993b; /* A darker orange for hover */
   --light-background: #ffffff; /* A very light grey for the main background */
   --dark-text: #1E1E1E;
   --medium-text: #555555;
