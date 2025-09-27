@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../css/Tabs.css";
-import Carousel from "./Carousel";
+
 
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -64,7 +64,7 @@ const Tabs = () => {
         </div>
       </div>
     </div>
-    <Carousel/>
+    
     </>
   );
 };
