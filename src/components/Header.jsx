@@ -1,99 +1,49 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "../css/Header.css";
-import logoImage from "../assets/logo.png";
+import React, { useState, useEffect } from 'react';
+import '../css/Header.css';
+import logo from '../assets/logo.png';
 
-const Header = () => {
-  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
 
-  const handleServicesMouseEnter = () => {
-    setIsServicesDropdownOpen(true);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScroll = window.pageYOffset;
+      if (currentScroll > 30) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
 
-  const handleServicesMouseLeave = () => {
-    setIsServicesDropdownOpen(false);
-  };
-
-  const servicesItems = [
-    { name: "Web Designing", path: "/services/website" },
-    { name: "SEO", path: "/services/seo" },
-    { name: "Digital Marketing", path: "/services/digital-marketing" },
-    {
-      name: "Social Media Marketing",
-      path: "/services/social-media-marketing",
-    },
-    { name: "Content Writing", path: "/services/content-writing" },
-    { name: "Graphic Designing", path: "/services/graphic-designing" },
-    { name: "Mobile App Development", path: "/services/app-development" },
-    { name: "E-commerce Solutions", path: "/services/ecommerce" },
-  ];
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className="header">
-      <div className="header-container">
-        {/* Logo Section */}
-        <div className="logo-section">
-          <div className="logo">
-            <Link to="/">
-              <img src={logoImage} alt="Logo" />
-            </Link>
-          </div>
-        </div>
-
-        {/* Navigation Menu */}
-        <nav className="nav-menu">
-          <ul className="nav-list">
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-
-            {/* Services with Dropdown */}
-            <li
-              className="dropdown-item"
-              onMouseEnter={handleServicesMouseEnter}
-              onMouseLeave={handleServicesMouseLeave}
-            >
-              <Link to="/services" className="dropdown-trigger">
-                Services
-                <span
-                  className={`dropdown-arrow ${
-                    isServicesDropdownOpen ? "open" : ""
-                  }`}
-                >
-                  ▼
-                </span>
-              </Link>
-
-              {/* Dropdown Menu */}
-              <div
-                className={`dropdown-menu ${
-                  isServicesDropdownOpen ? "active" : ""
-                }`}
-              >
-                {servicesItems.map((service, index) => (
-                  <Link key={index} to={service.path} className="dropdown-link">
-                    {service.name}
-                  </Link>
-                ))}
-              </div>
-            </li>
-
-            <li>
-              <Link to="/about">About Us</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact Us</Link>
-            </li>
+    <>
+      <div className={`navbar-wrapper ${scrolled ? 'scrolled' : ''}`}>
+        <nav className="navbar">
+          <a href="#" className="logo">
+            <div className="logo-icon">
+              <img src={logo} alt="" />
+            </div>
+          </a>
+          
+          <ul className="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#solution">Solution</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#about">About</a></li>
           </ul>
+          
+          <div className="nav-buttons">
+            <button className="btn btn-login">Login</button>
+            <button className="btn btn-signup">Sign Up</button>
+          </div>
         </nav>
-
-        {/* Consultation Button */}
-        <div className="button-section">
-          <button className="consultation-btn">Consultation</button>
-        </div>
       </div>
-    </header>
+    </>
   );
 };
 
-export default Header;
+export default Navbar;

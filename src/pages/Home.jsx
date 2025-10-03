@@ -6,12 +6,14 @@ import Contact from '../components/Contact'
 import ImgCarousel from '../components/ImgCarousel'
 import PremiumBezierCurve from '../components/beizercurve'
 import FluidCanvas from '../components/FluidCanvas'
+import SciFiHUD from '../components/SciFiHud'
 
 
 const Home = () => {
   return (
     <div className='hero-section'>
       <FluidCanvas/>
+      <SciFiHUD/>
       {/* <Header/> */}
       {/* <ParallaxMouseEffect/> */}
       <Tabs/>
