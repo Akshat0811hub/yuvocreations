@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* Header + Navigation */
+header {
+  position: absolute;
+  
+  left: 50px;
+  right: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+nav {
+  display: flex;
+  gap: 40px;
+  font-size: 16px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 400;
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 22px;
+}
+
+/* Big headline */
+.headline {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+}
+
+svg {
+  width: 100%;
+  height: auto;
+}
+
+.cyan {
+  fill: #ff9f29;
+}
+
+.black {
+  fill: #000;
+}
+
+/* Side texts */
+.vertical-left {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: rotate(-90deg) translateX(-50%);
+  transform-origin: left top;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+.vertical-right {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: rotate(90deg) translateX(-50%);
+  transform-origin: right top;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+/* Pagination */
+.pagination {
+  position: absolute;
+  bottom: 40px;
+  left: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Social links */
+.social {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  display: flex;
+  gap: 15px;
+  font-size: 16px;
+}
+
+.social a {
+  color: #000;
+  text-decoration: none;
+}

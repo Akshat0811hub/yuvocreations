@@ -9,7 +9,7 @@
   background: linear-gradient(135deg, #fff5f0 0%, #ffffff 100%);
   border-radius: 16px;
   box-shadow: 0 10px 40px rgba(254, 158, 42, 0.08);
-  margin-top: -80px;
+  margin-top: 20px;
   position: relative;  
 }
 
@@ -23,6 +23,7 @@
   z-index: -1;
   position: relative;
   opacity: 0.3; 
+    margin-top: 630px;
 }
 
 

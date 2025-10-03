@@ -8,11 +8,13 @@ import PremiumBezierCurve from '../components/beizercurve'
 import FluidCanvas from '../components/FluidCanvas'
 import SciFiHUD from '../components/SciFiHud'
 import Hero from '../components/mouse'
+import Banner from '../components/Banner'
 
 
 const Home = () => {
   return (
     <div className='hero-section'>
+      <Banner/>
       <Hero/>
       {/* <Header/> */}
       {/* <ParallaxMouseEffect/> */}
