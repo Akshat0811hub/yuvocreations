@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Services from "./pages/Services";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Website from "./pages/Website";   // 🔥 Website page import
+import Website from "./services/Website";   // 🔥 Website page import
 import Footer from "./components/Footer";
 
 function App() {
