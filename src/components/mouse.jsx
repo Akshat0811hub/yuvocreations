@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import '../css/hero.css';
+import '../css/mouse.css';
 
 export default function TactusHeader() {
   const cursorRef = useRef(null);

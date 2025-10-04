@@ -18,7 +18,7 @@ const Navbar = () => {
   }, []);
 
   const services = [
-    { name: 'Web Development', path: '/web-development' },
+    { name: 'Web Development', path: '/services/website' },
     { name: 'Mobile App Development', path: '/mobile-apps' },
     { name: 'Cloud Solutions', path: '/cloud-services' },
     { name: 'Cybersecurity', path: '/cybersecurity' },

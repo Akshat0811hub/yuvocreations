@@ -5,13 +5,15 @@ import Home from "./pages/Home";
 import Services from "./pages/Services";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Website from "./services/Website";   // 🔥 Website page import
+import Website from "./services/Website";  
 import Footer from "./components/Footer";
+import TactusHeader from "./components/mouse";
 
 function App() {
   return (
     <Router>
       <Header />
+      <TactusHeader/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
