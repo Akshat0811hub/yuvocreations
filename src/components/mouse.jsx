@@ -57,7 +57,7 @@ export default function TactusHeader() {
     <>
       <div className="custom-cursor" ref={cursorRef}></div>
 
-      <div className="swoosh"></div>
+      
 
       <nav className="sticky-nav">
         <div className="logo"></div>

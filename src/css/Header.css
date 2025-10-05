@@ -20,14 +20,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: max-width 0.4s ease;
 }
 
 .navbar-wrapper.scrolled .navbar {
-  max-width: 1200px;
+  max-width: 900px;
   padding: 16px 32px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   background: rgba(255, 255, 255, 0.85);
