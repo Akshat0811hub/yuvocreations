@@ -37,7 +37,7 @@ export default function HeadlineSection() {
             clipPath="url(#left)"
             transform="skewY(-8) translate(0,85)"
           >
-            PRODUCT FROM
+            PRODUCT FROM A
           </text>
           <text
             x="50"
@@ -49,7 +49,7 @@ export default function HeadlineSection() {
             clipPath="url(#left)"
             transform="skewY(-8) translate(0,85)"
           >
-            A DIFFERENT ANGLE
+            DIFFERENT  ANGLE
           </text>
 
           <text
@@ -74,7 +74,7 @@ export default function HeadlineSection() {
             clipPath="url(#right)"
             transform="skewY(8) translate(0,-84)"
           >
-            PRODUCT FROM
+            PRODUCT FROM A
           </text>
           <text
             x="50"
@@ -86,7 +86,7 @@ export default function HeadlineSection() {
             clipPath="url(#right)"
             transform="skewY(8) translate(0,-84)"
           >
-            A DIFFERENT ANGLE
+           D I F F E R E N T   A N G L E
           </text>
         </svg>
       </div>

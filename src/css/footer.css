@@ -94,14 +94,15 @@
           z-index: 2; 
           max-width: 1400px;
           margin: 0 auto;
-          padding: 5rem 2rem 2rem;
+          padding: 3rem 2rem 1.5rem;
+          height: 500px;
         }
 
         .footer-main {
           display: grid;
           grid-template-columns: 2fr 1fr 1fr 1.5fr;
-          gap: 6rem; /* Increased spacing between sections */
-          margin-bottom: 4rem;
+          gap: 3rem; /* Increased spacing between sections */
+          margin-bottom: 2rem;
         }
 
         .footer-section {
