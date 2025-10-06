@@ -15,6 +15,7 @@ export default function HeadlineSection() {
             </clipPath>
           </defs>
 
+          {/* Cyan Text - Clipped to Left Half, Skewed Down/Right */}
           <text
             x="50"
             y="150"
@@ -37,7 +38,7 @@ export default function HeadlineSection() {
             clipPath="url(#left)"
             transform="skewY(-8) translate(0,85)"
           >
-            PRODUCT FROM A
+            BUSINESS FROM A
           </text>
           <text
             x="50"
@@ -49,9 +50,10 @@ export default function HeadlineSection() {
             clipPath="url(#left)"
             transform="skewY(-8) translate(0,85)"
           >
-            D I F F E R E N T  A N G LE
+            DIFFERENT ANGLE
           </text>
 
+          {/* Black Text - Clipped to Right Half, Skewed Up/Left */}
           <text
             x="50"
             y="150"
@@ -74,7 +76,7 @@ export default function HeadlineSection() {
             clipPath="url(#right)"
             transform="skewY(8) translate(0,-84)"
           >
-            PRODUCT FROM A
+            BUSINESS FROM A
           </text>
           <text
             x="50"
@@ -86,11 +88,10 @@ export default function HeadlineSection() {
             clipPath="url(#right)"
             transform="skewY(8) translate(0,-84)"
           >
-           D I F F E R E N T   A N G L E
+           DIFFERENT ANGLE {/* <--- This line is corrected */}
           </text>
         </svg>
       </div>
-
       <div className="vertical-left">YUVOCREATIONS</div>
       <div className="vertical-right">Let's Connect</div>
     </>

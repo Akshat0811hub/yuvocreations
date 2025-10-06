@@ -4,45 +4,55 @@ body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   background: #fff;
-  overflow: hidden;
+  min-height: 100vh;
 }
 
-/* Header + Navigation */
+/* 🚩 FIX: Added padding-top to shift content below the fixed header */
+.banner-wrapper {
+  height: 100vh; 
+  width: 100%;
+  position: relative; 
+  padding-top: 80px; /* NEW: Add padding equal to header height (80px) */
+  box-sizing: border-box; /* IMPORTANT: Ensures padding is included in the 100vh total height */
+}
+
+/* Header */
 header {
-  position: absolute;
-  
+  position: fixed; 
+  top: 0;
   left: 50px;
   right: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 10;
+  height: 80px; /* Header height is 80px */
+  background: #fff; 
+  z-index: 100; 
 }
 
+/* Nav & Logo styles remain unchanged */
 nav {
   display: flex;
   gap: 40px;
   font-size: 16px;
 }
-
 nav a {
   text-decoration: none;
   color: #000;
   font-weight: 400;
 }
-
 .logo {
   font-weight: 900;
   font-size: 22px;
 }
 
-/* Big headline */
+/* Headline Positioning adjusted for the new padding */
 .headline {
   position: absolute;
-  top: 60%;
+  /* Keep top: 50% and translate(-50%, -50%) for centering 
+     within the remaining space of the banner-wrapper */
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); 
   width: 90%;
+  /* Removed box-sizing as it's now on the wrapper */
 }
 
 svg {
@@ -50,38 +60,63 @@ svg {
   height: auto;
 }
 
+
+
+svg {
+  width: 100%;
+  height: auto;
+}
+
+/* --- SVG Entrance Animations (Unchanged) --- */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: skewY(-8deg) translate(-100px, 85px); }
+  to { opacity: 1; transform: skewY(-8deg) translate(0, 85px); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: skewY(8deg) translate(100px, -84px); }
+  to { opacity: 1; transform: skewY(8deg) translate(0, -84px); }
+}
+
 .cyan {
   fill: #ff9f29;
+  animation: slideInLeft 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .black {
   fill: #000;
+  animation: slideInRight 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-/* Side texts */
-.vertical-left {
-  position: absolute;
+/* Add a staggered delay to each line */
+/* NOTE: These selectors are based on the element's position in the HTML, not actual children. */
+.headline svg text:nth-child(3), .headline svg text:nth-child(6) { animation-delay: 0.1s; } 
+.headline svg text:nth-child(4), .headline svg text:nth-child(7) { animation-delay: 0.3s; }
+.headline svg text:nth-child(5), .headline svg text:nth-child(8) { animation-delay: 0.5s; }
+
+
+
+.vertical-left, .vertical-right {
+  position: fixed; /* Changed from absolute to fixed */
   top: 50%;
+  /* ... rest of styles remain ... */
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  z-index: 90;
+}
+.vertical-left {
   left: 10px;
   transform: rotate(-90deg) translateX(-50%);
   transform-origin: left top;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 2px;
 }
-
 .vertical-right {
-  position: absolute;
-  top: 50%;
   right: 10px;
   transform: rotate(90deg) translateX(-50%);
   transform-origin: right top;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 2px;
 }
 
-/* Pagination */
+/* Pagination & Social links (Unchanged) */
 .pagination {
   position: absolute;
   bottom: 40px;
@@ -89,8 +124,6 @@ svg {
   font-size: 14px;
   font-weight: 600;
 }
-
-/* Social links */
 .social {
   position: absolute;
   bottom: 40px;
@@ -99,7 +132,6 @@ svg {
   gap: 15px;
   font-size: 16px;
 }
-
 .social a {
   color: #000;
   text-decoration: none;
