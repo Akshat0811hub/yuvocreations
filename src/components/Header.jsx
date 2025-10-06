@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import '../css/Header.css';
 import logo from '../assets/logo.png';
 
+
+
+
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -19,15 +22,15 @@ const Navbar = () => {
 
   const services = [
     { name: 'Web Development', path: '/services/website' },
-    { name: 'Mobile App Development', path: '/mobile-apps' },
-    { name: 'Cloud Solutions', path: '/cloud-services' },
-    { name: 'Cybersecurity', path: '/cybersecurity' },
+    // { name: 'Mobile App Development', path: '/mobile-apps' },
+    // { name: 'Cloud Solutions', path: '/cloud-services' },
+    // { name: 'Cybersecurity', path: '/cybersecurity' },
     { name: 'UI/UX Design', path: '/ui-ux' },
     { name: 'IT Consulting', path: '/it-consulting' },
     { name: 'Digital Marketing', path: '/digital-marketing' },
-    { name: 'AI & Machine Learning', path: '/ai-ml' },
-    { name: 'Data Analytics', path: '/data-analytics' },
-    { name: 'DevOps Solutions', path: '/devops' },
+    // { name: 'AI & Machine Learning', path: '/ai-ml' },
+    // { name: 'Data Analytics', path: '/data-analytics' },
+    // { name: 'DevOps Solutions', path: '/devops' },
   ];
 
   return (

@@ -5,25 +5,25 @@ import Home from "./pages/Home";
 import Services from "./pages/Services";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Website from "./services/Website";  
+import Website from "./services/Website";  
 import Footer from "./components/Footer";
-import TactusHeader from "./components/mouse";
+import Mouse from "./components/mouse"; // ⬅️ FIX 1: Import the component using its name 'Mouse'
 
 function App() {
-  return (
-    <Router>
-      <Header />
-      <TactusHeader/>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/services/website" element={<Website />} /> {/* 🔥 Website page route */}
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-      <Footer />
-    </Router>
-  );
+  return (
+    <Router>
+      <Header />
+      <Mouse/> {/* The custom cursor component */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/services/website" element={<Website />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+      <Footer />
+    </Router>
+  );
 }
 
 export default App;

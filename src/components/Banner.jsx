@@ -49,7 +49,7 @@ export default function HeadlineSection() {
             clipPath="url(#left)"
             transform="skewY(-8) translate(0,85)"
           >
-            DIFFERENT  ANGLE
+            D I F F E R E N T  A N G LE
           </text>
 
           <text

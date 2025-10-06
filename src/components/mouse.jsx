@@ -1,75 +1,54 @@
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import '../css/mouse.css';
+// src/components/Mouse.jsx
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import "../css/mouse.css"; // Make sure the path is correct
 
-export default function TactusHeader() {
-  const cursorRef = useRef(null);
-  const iconRef = useRef(null);
+export default function Mouse() {
+  const ballRef = useRef(null);
 
   useEffect(() => {
-    const cursor = cursorRef.current;
-    const moveCursor = (e) => {
-      gsap.to(cursor, {
-        duration: 0.3,
-        x: e.clientX,
-        y: e.clientY,
-        ease: 'power3.out',
-        opacity: 1
+    const ball = ballRef.current;
+    if (!ball) return;
+
+    // Initial positions
+    const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    const pos = { x: mouse.x, y: mouse.y };
+    const speed = 0.2; // movement smoothing factor
+
+    // Mouse move listener
+    const onMove = (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    };
+    window.addEventListener("mousemove", onMove);
+
+    // GSAP ticker for smooth movement
+    const update = () => {
+      pos.x += (mouse.x - pos.x) * speed;
+      pos.y += (mouse.y - pos.y) * speed;
+      gsap.set(ball, { x: pos.x, y: pos.y });
+    };
+    gsap.ticker.add(update);
+
+    // Hover effect on links/buttons
+    const hoverIn = () => gsap.to(ball, { scale: 2, duration: 0.2 });
+    const hoverOut = () => gsap.to(ball, { scale: 1, duration: 0.2 });
+    const elements = document.querySelectorAll("a, button, .hoverable");
+    elements.forEach((el) => {
+      el.addEventListener("mouseenter", hoverIn);
+      el.addEventListener("mouseleave", hoverOut);
+    });
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      gsap.ticker.remove(update);
+      elements.forEach((el) => {
+        el.removeEventListener("mouseenter", hoverIn);
+        el.removeEventListener("mouseleave", hoverOut);
       });
     };
-
-    const handleMouseEnter = () => {
-      gsap.to(cursor, { scale: 1.25, duration: 0.25, ease: 'power3.out' });
-    };
-    const handleMouseLeave = () => {
-      gsap.to(cursor, { scale: 0.3, duration: 0.25, ease: 'power3.out' });
-    };
-
-    document.addEventListener('mousemove', moveCursor);
-    document.querySelectorAll('a, button, #nav-btn').forEach(el => {
-      el.addEventListener('mouseenter', handleMouseEnter);
-      el.addEventListener('mouseleave', handleMouseLeave);
-    });
-
-    return () => {
-      document.removeEventListener('mousemove', moveCursor);
-    };
   }, []);
 
-  useEffect(() => {
-    const icon = iconRef.current;
-    const paths = icon.querySelectorAll('path');
-
-    // Initial state for GSAP timeline
-    gsap.set(paths, { strokeDasharray: 100, strokeDashoffset: 100 });
-
-    const tl = gsap.timeline({ repeat: -1, yoyo: true });
-    paths.forEach((path, i) => {
-      tl.to(path, {
-        strokeDashoffset: 0,
-        duration: 0.6,
-        ease: 'power4.inOut'
-      }, i * 0.15);
-    });
-  }, []);
-
-  return (
-    <>
-      <div className="custom-cursor" ref={cursorRef}></div>
-
-      
-
-      <nav className="sticky-nav">
-        <div className="logo"></div>
-        <div id="nav-btn" ref={iconRef}>
-          <svg className="icon" viewBox="0 0 100 100">
-            <path d="M 20,30 H 80" />
-            <path d="M 20,50 H 80" />
-            <path d="M 20,70 H 80" />
-          </svg>
-        </div>
-      </nav>
-
-    </>
-  );
+  return <div id="magic-cursor" className="cursor-ball" ref={ballRef}></div>;
 }
