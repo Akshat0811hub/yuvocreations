@@ -9,6 +9,7 @@ import PremiumBezierCurve from '../components/beizercurve'
 // import SciFiHUD from '../components/SciFiHud'
 import Hero from '../components/mouse'
 import Banner from '../components/Banner'
+import WhyChooseUs from '../components/WhyChooseUs'
 
 
 const Home = () => {
@@ -22,6 +23,7 @@ const Home = () => {
       {/* <About/> */}
       <PremiumBezierCurve/>
       <ImgCarousel/>
+      <WhyChooseUs/>
       <Contact/>
     </div>
   )
