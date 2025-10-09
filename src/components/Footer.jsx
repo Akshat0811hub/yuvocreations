@@ -170,14 +170,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <button
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="back-to-top"
-        aria-label="Back to top"
-        title="Back to top"
-      >
-        &uarr;
-      </button>
+
     </footer>
   );
 };
