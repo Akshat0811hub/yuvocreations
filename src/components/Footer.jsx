@@ -115,30 +115,9 @@ const Footer = () => {
           {/* Newsletter / Contact */}
           <div className="footer-section newsletter-section">
             <h4 className="section-title">Get In Touch</h4>
-            <p className="newsletter-description">
-              Join our newsletter to receive the latest tech trends and exclusive updates from Yuvocreations.
-            </p>
+            
 
-            <form onSubmit={handleSubscribe} className="newsletter-form">
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="newsletter-input"
-                aria-label="Email address for newsletter subscription"
-                required
-              />
-              <button
-                type="submit"
-                className={`newsletter-button ${isSubscribed ? 'subscribed' : ''}`}
-                disabled={isSubscribed}
-                aria-live="polite"
-              >
-                {isSubscribed ? (<><CheckIcon />Subscribed!</>) : 'Subscribe Now'}
-              </button>
-            </form>
-
+            
             <div className="contact-info">
               <div className="contact-item">
                 <span className="contact-label">Phone:</span>
