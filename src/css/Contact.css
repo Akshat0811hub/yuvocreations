@@ -5,7 +5,7 @@
   --light-background: #ffffff; /* A very light grey for the main background */
   --dark-text: #1E1E1E;
   --medium-text: #555555;
-  --border-color: #E0E0E0;
+  --border-color: #ffffff;
   --white-card-bg: #ffffff;
 }
 
@@ -35,8 +35,10 @@
 
 /* -- Left Side: Services / Info -- */
 .services-section {
-  color: var(--dark-text);
-  padding-right: 2rem;
+  background-color: #fff !important; 
+  color: var(--primary-orange);
+  padding-right: 5rem ;
+
 }
 
 .services-header {
