@@ -702,7 +702,8 @@ export default function FluidCanvas() {
           justify-content: center;
           align-items: center;
           width: 100%;
-          height: 100vh;
+          height: 100svh;       /* modern visible viewport */
+min-height: 100svh;
           position: relative;
           overflow: hidden;
         }

@@ -1,116 +1,199 @@
-/* Premium Bezier Curve Styles */
+/* --- Base Styles --- */
 body {
-    /* White background and dark default text color */
-    background-color: #ffffff;
-    color: #1e293b; /* Dark Slate */
-    font-family: system-ui, -apple-system, sans-serif;
-    margin: 0;
+  background-color: #ffffff;
+  color: #1e293b;
+  font-family: system-ui, -apple-system, sans-serif;
+  margin: 0;
 }
 
+/* Container */
 .bezier-container {
-    min-height: 30vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: visible;
-    -webkit-user-select: none; 
-    -ms-user-select: none;    
-    user-select: none;        
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: visible;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
+/* Instructions */
 .bezier-container p.instructions {
-    /* Dark text color to be visible on white */
-    color: #ed8931; /* Slate 600 */
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 600;
-    position: absolute;
-    top: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
+  color: #ed8931;
+  text-align: center;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 600;
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
 }
 
-/* This is no longer needed on a white background */
+/* Background particles */
 .bg-glow {
-    display: none;
+  display: none;
 }
 
 .particles-container {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 .particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: rgba(249, 115, 22, 0.7); /* Orange */
-    border-radius: 50%;
-    animation: pulse 3s ease-in-out infinite;
-    box-shadow: 0 0 6px 3px rgba(249, 115, 22, 0.6); /* Orange glow */
-    transition: all 0.3s ease; /* Smooth transition for any style changes */
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(249, 115, 22, 0.7);
+  border-radius: 50%;
+  animation: pulse 3s ease-in-out infinite;
+  box-shadow: 0 0 6px 3px rgba(249, 115, 22, 0.6);
+  transition: all 0.3s ease;
 }
 
+/* Main wrapper */
 .main-content {
-    position: relative;
-    z-index: 10;
-    width: 100%;
-    max-width: 115rem;
-    padding: 0 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* SVG Container */
 .curve-container {
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    height: 320px;
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: clamp(180px, 30vw, 320px);
 }
 
+/* Glow around cursor */
 .cursor-glow {
-    position: absolute;
-    width: 5rem;
-    height: 5rem;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(249, 115, 22, 0.2) 0%, transparent 70%);
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
+  position: absolute;
+  width: clamp(40px, 6vw, 80px);
+  height: clamp(40px, 6vw, 80px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-/* Styles for the SVG path for smooth transitions */
+/* SVG line */
 .curve-svg path {
-    transition: stroke-width 0.3s ease, filter 0.3s ease;
+  stroke-width: clamp(4px, 0.8vw, 8px);
+  transition: stroke-width 0.3s ease, filter 0.3s ease;
 }
 
-/* Hover effect to make the rope thicker and glow more */
 .curve-container:hover .curve-svg path {
-    stroke-width: 8;
-    filter: drop-shadow(0 0 10px rgba(249, 115, 22, 0.5));
+  stroke-width: clamp(6px, 1vw, 10px);
+  filter: drop-shadow(0 0 10px rgba(249, 115, 22, 0.5));
 }
 
+/* Orange circles on ends */
 .control-point {
-    fill: #f97116; /* Orange */
-    filter: drop-shadow(0 0 5px rgba(249, 115, 22, 0.7));
-    animation: pulse 2s ease-in-out infinite;
+  fill: #f97116;
+  filter: drop-shadow(0 0 5px rgba(249, 115, 22, 0.7));
+  animation: pulse 2s ease-in-out infinite;
 }
 
+/* --- Animations --- */
 @keyframes pulse {
-    0%,
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.5;
-        transform: scale(0.9);
-    }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.9); }
+}
+
+/* --- Responsive Breakpoints --- */
+
+/* Tablets */
+@media (max-width: 768px) {
+  .curve-container {
+    height: clamp(160px, 40vw, 280px);
+  }
+  .particle {
+    opacity: 0.7;
+  }
+  .main-content {
+    padding: 0 0.5rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .curve-container {
+    height: clamp(140px, 45vw, 220px);
+  }
+  .cursor-glow {
+    width: clamp(30px, 10vw, 60px);
+    height: clamp(30px, 10vw, 60px);
+  }
+  .particles-container {
+    opacity: 0.5;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .particles-container {
+    display: none;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .particle,
+  .control-point {
+    animation: none !important;
+  }
+}
+/* --- Mobile rope sizing & containment --- */
+@media (max-width: 768px) {
+  /* Curve container thoda bada + overflow hide so it never bleeds out */
+  .curve-container {
+    height: clamp(170px, 55vw, 260px); /* ⬅️ slightly bigger than before */
+    overflow: hidden;                  /* ⬅️ keep rope inside on mobile */
+  }
+
+  /* Inline style (width:140%) ko override karke full-width fit */
+  .curve-svg {
+    width: 100% !important;
+    max-width: 100% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  /* Rope stroke thoda mota on mobile (very slightly) */
+  .curve-svg path {
+    stroke-width: clamp(7px, 2.2vw, 10px);
+  }
+
+  /* End circles thoda sa bigger without changing SVG attributes */
+  .control-point {
+    transform: scale(1.15);
+    transform-box: fill-box;   /* ensure scaling uses element box */
+    transform-origin: center;
+  }
+}
+
+/* Extra small phones: a hair bigger but still contained */
+@media (max-width: 480px) {
+  .curve-container {
+    height: clamp(160px, 58vw, 240px);
+  }
+  .curve-svg path {
+    stroke-width: clamp(8px, 2.6vw, 11px);
+  }
+  .control-point {
+    transform: scale(1.2);
+  }
 }

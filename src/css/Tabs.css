@@ -22,8 +22,8 @@
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   z-index: -1;
   position: relative;
-  opacity: 0.3; 
-    margin-top: 900px;
+  opacity: 0.3;
+  margin-top: 900px; /* ✅ remove big gap */
 }
 
 
@@ -165,7 +165,14 @@
 @media (max-width: 768px) {
   .tabs-wrap {
     margin: 20px auto;
+    width: 768px;
     padding: 16px;
+  }
+  .services-heading{
+    font-size: 80px;
+    width: 100%;
+    margin-bottom: 16px;
+    margin-top: 600px;
   }
   
   .tabs {

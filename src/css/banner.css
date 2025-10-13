@@ -6,28 +6,36 @@ body {
   background: #fff;
   min-height: 100vh;
 }
-
-/* 🚩 FIX: Added padding-top to shift content below the fixed header */
-.banner-wrapper {
-  height: 100vh; 
+html, body {
   width: 100%;
-  position: relative; 
-  padding-top: 80px; /* NEW: Add padding equal to header height (80px) */
-  box-sizing: border-box; /* IMPORTANT: Ensures padding is included in the 100vh total height */
+  overflow-x: hidden;
 }
 
-/* Header */
+/* Wrapper ensures headline sits below the header */
+.banner-wrapper {
+  height: 100svh;             /* fills visible screen height */
+  min-height: 100svh;
+  width: 100vw;               /* ensures full width */
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;           /* prevent scrollbars */
+}
+
+/* Fixed header */
 header {
-  position: fixed; 
+  position: fixed;
   top: 0;
   left: 50px;
   right: 50px;
-  height: 80px; /* Header height is 80px */
-  background: #fff; 
-  z-index: 100; 
+  height: 80px;
+  background: #fff;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-/* Nav & Logo styles remain unchanged */
+/* Navigation styling */
 nav {
   display: flex;
   gap: 40px;
@@ -43,16 +51,13 @@ nav a {
   font-size: 22px;
 }
 
-/* Headline Positioning adjusted for the new padding */
+/* Headline SVG container */
 .headline {
   position: absolute;
-  /* Keep top: 50% and translate(-50%, -50%) for centering 
-     within the remaining space of the banner-wrapper */
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%);
   width: 90%;
-  /* Removed box-sizing as it's now on the wrapper */
 }
 
 svg {
@@ -60,14 +65,7 @@ svg {
   height: auto;
 }
 
-
-
-svg {
-  width: 100%;
-  height: auto;
-}
-
-/* --- SVG Entrance Animations (Unchanged) --- */
+/* --- SVG Entrance Animations --- */
 @keyframes slideInLeft {
   from { opacity: 0; transform: skewY(-8deg) translate(-100px, 85px); }
   to { opacity: 1; transform: skewY(-8deg) translate(0, 85px); }
@@ -88,18 +86,15 @@ svg {
   animation: slideInRight 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-/* Add a staggered delay to each line */
-/* NOTE: These selectors are based on the element's position in the HTML, not actual children. */
+/* Add staggered delay */
 .headline svg text:nth-child(3), .headline svg text:nth-child(6) { animation-delay: 0.1s; } 
 .headline svg text:nth-child(4), .headline svg text:nth-child(7) { animation-delay: 0.3s; }
 .headline svg text:nth-child(5), .headline svg text:nth-child(8) { animation-delay: 0.5s; }
 
-
-
+/* Vertical labels */
 .vertical-left, .vertical-right {
-  position: fixed; /* Changed from absolute to fixed */
+  position: fixed;
   top: 50%;
-  /* ... rest of styles remain ... */
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 2px;
@@ -116,7 +111,7 @@ svg {
   transform-origin: right top;
 }
 
-/* Pagination & Social links (Unchanged) */
+/* Pagination & Social links */
 .pagination {
   position: absolute;
   bottom: 40px;
@@ -135,4 +130,60 @@ svg {
 .social a {
   color: #000;
   text-decoration: none;
+}
+
+/* -------------------------
+   RESPONSIVE DESIGN 
+--------------------------*/
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+  .headline{
+    width: 100%;
+  }
+  header {
+    left: 20px;
+    right: 20px;
+    height: 70px;
+    width: 100%;
+  }
+
+  .headline text {
+    font-size: 80px !important;
+  }
+
+  .vertical-left, .vertical-right {
+    display: none; /* Hide for cleaner mobile view */
+  }
+
+  .social, .pagination {
+    bottom: 20px;
+  }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+  .headline text {
+    font-size: 50px !important;
+    textLength: 700 !important;
+  }
+
+  nav {
+    gap: 20px;
+    font-size: 14px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  header {
+    left: 10px;
+    right: 10px;
+    height: 60px;
+  }
+
+  .social, .pagination {
+    font-size: 12px;
+  }
 }
