@@ -128,17 +128,16 @@ body {
   }
 }
 
-/* Mobile */
+
 @media (max-width: 480px) {
   .curve-container {
-    height: clamp(140px, 45vw, 220px);
+    height: clamp(160px, 40vw, 280px);
   }
-  .cursor-glow {
-    width: clamp(30px, 10vw, 60px);
-    height: clamp(30px, 10vw, 60px);
+  .particle {
+    opacity: 0.7;
   }
-  .particles-container {
-    opacity: 0.5;
+  .main-content {
+    padding: 0 0.5rem;
   }
 }
 

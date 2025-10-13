@@ -10,7 +10,8 @@
   border-radius: 16px;
   box-shadow: 0 10px 40px rgba(254, 158, 42, 0.08);
   margin-top: 20px;
-  position: relative;  
+  position: relative;
+  box-sizing: border-box;
 }
 
 .services-heading {
@@ -20,12 +21,15 @@
   color: #ff9f29;
   margin-bottom: 24px;
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  z-index: -1;
   position: relative;
   opacity: 0.3;
-  margin-top: 900px; /* ✅ remove big gap */
+  margin-top: 0;
+  line-height: 1;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
-
 
 .tabs {
   display: flex;
@@ -137,7 +141,6 @@
   font-weight: 700;
   margin-bottom: 16px;
   position: relative;
-  align-items: left;
   text-align: left;
 }
 
@@ -157,61 +160,127 @@
   font-size: 16px;
   line-height: 1.6;
   margin: 0;
-  align-items: left;
   text-align: left;
 }
 
-/* responsive design */
+/* Tablet devices (769px - 1024px) */
+@media (max-width: 1024px) {
+  .tabs-wrap {
+    margin: 30px 20px;
+    padding: 18px;
+    width: calc(100% - 40px);
+    max-width: 900px;
+    box-sizing: border-box;
+  }
+
+  .services-heading {
+    font-size: 100px;
+    padding: 30px 15px;
+    width: 100%;
+  }
+}
+
+/* Mobile Responsive - Following navbar pattern (max-width: 768px) */
 @media (max-width: 768px) {
   .tabs-wrap {
-    margin: 20px auto;
-    width: 768px;
-    padding: 16px;
+    margin: 20px 20px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    width: calc(100% - 40px);
+    max-width: 100%;
+    box-sizing: border-box;
   }
-  .services-heading{
-    font-size: 80px;
+
+  .services-heading {
+    font-size: 72px;
+    padding: 25px 15px;
+    margin-bottom: 20px;
     width: 100%;
-    margin-bottom: 16px;
-    margin-top: 600px;
+    max-width: 100%;
   }
   
   .tabs {
     flex-wrap: wrap;
     gap: 6px;
+    padding: 6px;
   }
   
   .tab {
     padding: 10px 16px;
     font-size: 14px;
+    flex: 1 1 auto;
+    min-width: 150px;
   }
   
   .tab-contents {
     padding: 24px;
     min-height: 160px;
+    border-radius: 12px;
   }
   
   .tab-content h3 {
     font-size: 20px;
+    margin-bottom: 14px;
   }
   
   .tab-content p {
     font-size: 15px;
+    line-height: 1.7;
   }
 }
 
+/* Extra small screens - Following navbar pattern (max-width: 480px) */
 @media (max-width: 480px) {
+  .tabs-wrap {
+    margin: 20px 20px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    width: calc(100% - 40px);
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .services-heading {
+    font-size: 48px;
+    padding: 20px 10px;
+    margin-bottom: 16px;
+    width: 100%;
+    max-width: 100%;
+  }
+  
   .tabs {
     flex-direction: column;
-    align-items: center;
+    gap: 8px;
+    padding: 8px;
   }
   
   .tab {
     width: 100%;
-    max-width: 200px;
+    padding: 12px 16px;
+    font-size: 14px;
     text-align: center;
+  }
+
+  .tab:hover {
+    transform: none;
+  }
+
+  .tab.active {
+    transform: none;
   }
   
   .tab-contents {
     padding: 20px;
+    min-height: 140px;
+  }
+  
+  .tab-content h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  
+  .tab-content p {
+    font-size: 14px;
+    line-height: 1.8;
   }
 }

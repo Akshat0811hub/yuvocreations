@@ -153,7 +153,7 @@ svg {
   }
 
   .vertical-left, .vertical-right {
-    display: none; /* Hide for cleaner mobile view */
+    display: none; 
   }
 
   .social, .pagination {
@@ -163,27 +163,25 @@ svg {
 
 /* Mobile (480px and below) */
 @media (max-width: 480px) {
-  .headline text {
-    font-size: 50px !important;
-    textLength: 700 !important;
+    .headline{
+    width: 100%;
   }
-
-  nav {
-    gap: 20px;
-    font-size: 14px;
-  }
-
-  .logo {
-    font-size: 18px;
-  }
-
   header {
-    left: 10px;
-    right: 10px;
-    height: 60px;
+    left: 20px;
+    right: 20px;
+    height: 70px;
+    width: 100%;
+  }
+
+  .headline text {
+    font-size: 80px !important;
+  }
+
+  .vertical-left, .vertical-right {
+    display: none; 
   }
 
   .social, .pagination {
-    font-size: 12px;
+    bottom: 20px;
   }
 }
