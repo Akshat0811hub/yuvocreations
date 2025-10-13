@@ -1,37 +1,21 @@
-/* ---------- Fluid tokens ---------- */
-:root {
-  --card-w: clamp(240px, 46vw, 420px);
-  --card-h: clamp(160px, 28vw, 280px);
-  --radius: clamp(220px, 32vw, 520px);
-}
-
-/* ---------- Keyframes ---------- */
-@keyframes rotate360 {
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(-360deg); }
-}
-@keyframes pulse {
-  0%,100% { transform: scale(1); opacity: .8; }
-  50% { transform: scale(1.3); opacity: 1; }
-}
-
-/* ---------- Layout ---------- */
-.root {
+/* Enhanced 3D Image Carousel Styles */
+.carousel-section {
   width: 100vw;
-  min-height: 100vh;
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   color: white;
-  gap: 5px;
+  gap: 20px;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background: white;
 }
 
-.header {
+.carousel-header {
   text-align: center;
   margin-bottom: 4rem;
   z-index: 10;
@@ -39,61 +23,87 @@
   width: 100%;
 }
 
-.title {
-  font-size: clamp(2rem, 6vw, 4rem);
-  font-weight: 700;
+.carousel-title {
+  font-size: 4rem;
+  font-weight: bold;
   margin-bottom: 1rem;
+  background: linear-gradient(45deg, #ffffff, #e0e7ff, #c7d2fe);
   -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: #ff9f29;
-  text-shadow: 0 4px 15px rgba(255,255,255,.1);
-  margin-top: 2rem;
+  text-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
 }
 
-.subtitle {
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
-  opacity: .9;
+.carousel-subtitle {
+  font-size: 1.5rem;
+  opacity: 0.9;
   margin: 0;
   color: #cbd5e1;
 }
 
-.carousel {
+/* 3D Carousel Container */
+.carousel-container {
   position: relative;
   width: 100%;
-  height: min(100vh, 900px);
+  height: 30vh;
   perspective: 1800px;
   margin: 0 auto;
   overflow: hidden;
 }
 
-.inner {
+.carousel-3d {
   position: absolute;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
   animation: rotate360 25s infinite linear;
-  transition: animation-play-state .3s ease;
+  transition: animation-play-state 0.3s ease;
 }
 
-.paused { animation: none; }
 
-/* ---------- Faces (cards) ---------- */
-.face {
+
+.carousel-face {
   position: absolute;
-  width: var(--card-w);
-  height: var(--card-h);
+  width: 420px;
+  height: 280px;
   left: 50%;
   top: 50%;
-  margin-left: calc(var(--card-w) / -2);
-  margin-top: calc(var(--card-h) / -2);
+  margin-left: -210px;
+  margin-top: -140px;
   border-radius: 20px;
   overflow: hidden;
   transform-origin: center;
-  transition: transform .3s ease;
+  transition: transform 0.3s ease;
 }
 
-/* anchor as card container */
-.cardLink {
+/* Enhanced spacing - images will be positioned at greater distances */
+.carousel-face:nth-child(1) {
+  transform: rotateY(0deg) translateZ(450px);
+}
+
+.carousel-face:nth-child(2) {
+  transform: rotateY(72deg) translateZ(450px);
+}
+
+.carousel-face:nth-child(3) {
+  transform: rotateY(144deg) translateZ(450px);
+}
+
+.carousel-face:nth-child(4) {
+  transform: rotateY(216deg) translateZ(450px);
+}
+
+.carousel-face:nth-child(5) {
+  transform: rotateY(288deg) translateZ(450px);
+}
+
+/* For 6 images, use 60deg increments */
+.carousel-face:nth-child(6) {
+  transform: rotateY(300deg) translateZ(450px);
+}
+
+/* Image Styling */
+.carousel-link {
   display: block;
   width: 100%;
   height: 100%;
@@ -101,23 +111,21 @@
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0,0,0,.6),
-              0 8px 25px rgba(0,0,0,.3),
-              inset 0 1px 0 rgba(255,255,255,.1);
-  transition: transform .4s ease, box-shadow .4s ease;
-  border: 1px solid rgba(255,255,255,.1);
-  will-change: transform;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 
+              0 8px 25px rgba(0, 0, 0, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* hover effects moved from JS to CSS (functionality same) */
-.cardLink:hover {
+.carousel-link:hover {
   transform: scale(1.05);
-  box-shadow: 0 25px 60px rgba(0,0,0,.8),
-              0 12px 35px rgba(0,0,0,.4),
-              0 0 30px rgba(255,255,255,.1);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 
+              0 12px 35px rgba(0, 0, 0, 0.4),
+              0 0 30px rgba(255, 255, 255, 0.1);
 }
 
-.cardMedia {
+.image-container {
   position: relative;
   width: 100%;
   height: 100%;
@@ -125,73 +133,85 @@
   border-radius: 20px;
 }
 
-.cardMedia img {
+.carousel-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform .4s ease;
+  transition: transform 0.4s ease;
 }
 
-.cardLink:hover .cardMedia img { transform: scale(1.1); }
+.carousel-link:hover .carousel-image {
+  transform: scale(1.1);
+}
 
-/* overlay */
-.overlay {
+/* Enhanced Image Overlay */
+.image-overlay {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
-  background: linear-gradient(transparent, rgba(0,0,0,.9), rgba(0,0,0,.95));
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* background: linear-gradient(transparent, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.95)); */
   color: white;
-  padding: clamp(1.25rem, 3vw, 2.5rem) clamp(1rem, 2.2vw, 2rem);
+  padding: 2.5rem 2rem 2rem 2rem;
   transform: translateY(10px);
   opacity: 0;
-  transition: transform .3s ease, opacity .3s ease;
+  transition: all 0.3s ease;
 }
 
-.cardLink:hover .overlay {
+/* .carousel-link:hover .image-overlay {
   transform: translateY(0);
   opacity: 1;
+} */
+
+.image-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
+  color: #ffffff;
 }
 
-.overlayTitle {
-  font-size: clamp(1rem, 2.5vw, 1.4rem);
-  font-weight: 700;
-  margin: 0 0 .5rem 0;
-  color: #fff;
-}
-
-.overlayDesc {
-  margin: 0 0 .5rem 0;
-  font-size: clamp(.85rem, 2vw, .95rem);
-  opacity: .8;
-  color: #cbd5e1;
-}
-
-.overlayCta {
+.image-cta {
   margin: 0;
-  font-size: clamp(.9rem, 2.2vw, 1rem);
-  opacity: .9;
+  font-size: 1rem;
+  opacity: 0.9;
   color: #e2e8f0;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-/* gleam overlay */
-.gleam {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg,
-              transparent 30%,
-              rgba(255,255,255,.15) 45%,
-              rgba(255,255,255,.1) 55%,
-              transparent 70%);
-  opacity: .4;
-  pointer-events: none;
-  border-radius: 20px;
-  transition: opacity .3s ease;
+.image-cta::after {
+  content: '→';
+  transition: transform 0.3s ease;
 }
 
-/* footer note (kept for structure) */
-.footerNote {
+.carousel-link:hover .image-cta::after {
+  transform: translateX(5px);
+}
+
+/* Enhanced Center Decoration */
+.carousel-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+.center-dot {
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.2) 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.6),
+              0 0 80px rgba(255, 255, 255, 0.3),
+              inset 0 2px 10px rgba(255, 255, 255, 0.4);
+  animation: pulse 4s infinite ease-in-out;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+/* Enhanced Controls */
+.carousel-controls {
   margin-top: 4rem;
   text-align: center;
   width: 100%;
@@ -199,88 +219,157 @@
   position: relative;
 }
 
-.footerNote p {
-  opacity: .7;
+.control-text {
+  opacity: 0.7;
   font-size: 1rem;
   margin: 0;
   color: #94a3b8;
   font-weight: 300;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
 }
 
-/* ---------- Responsiveness ---------- */
-@media (max-width: 1280px) {
-  .face { border-radius: 16px !important; }
-}
-
-@media (max-width: 1024px) {
-  .face {
-    width: clamp(260px, 50vw, 380px) !important;
-    height: clamp(170px, 30vw, 240px) !important;
-    margin-left: calc(clamp(260px, 50vw, 380px) / -2) !important;
-    margin-top: calc(clamp(170px, 30vw, 240px) / -2) !important;
+/* Enhanced Animations */
+@keyframes rotate360 {
+  from {
+    transform: rotateY(0deg);
   }
-  :root { --radius: clamp(200px, 36vw, 460px); }
+  to {
+    transform: rotateY(-360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
+/* Enhanced 3D Effects */
+.carousel-face::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background: linear-gradient(135deg, 
+    transparent 30%, 
+    rgba(255,255,255,0.15) 45%, 
+    rgba(255,255,255,0.1) 55%, 
+    transparent 70%); */
+  opacity: 0.4;
+  pointer-events: none;
+  border-radius: 20px;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-link:hover .carousel-face::before {
+  opacity: 0.6;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .carousel-container {
+    perspective: 1500px;
+  }
+  
+  .carousel-face {
+    width: 380px;
+    height: 240px;
+    margin-left: -190px;
+    margin-top: -120px;
+  }
+  
+  .carousel-face:nth-child(1) { transform: rotateY(0deg) translateZ(380px); }
+  .carousel-face:nth-child(2) { transform: rotateY(72deg) translateZ(380px); }
+  .carousel-face:nth-child(3) { transform: rotateY(144deg) translateZ(380px); }
+  .carousel-face:nth-child(4) { transform: rotateY(216deg) translateZ(380px); }
+  .carousel-face:nth-child(5) { transform: rotateY(288deg) translateZ(380px); }
+  .carousel-face:nth-child(6) { transform: rotateY(300deg) translateZ(380px); }
+  
+  .carousel-header {
+    margin-bottom: 3rem;
+  }
 }
 
 @media (max-width: 768px) {
-  .face {
-    width: clamp(220px, 74vw, 300px) !important;
-    height: clamp(150px, 48vw, 200px) !important;
-    margin-left: calc(clamp(220px, 74vw, 300px) / -2) !important;
-    margin-top: calc(clamp(150px, 48vw, 200px) / -2) !important;
+  .carousel-section {
+    min-height: 100vh;
   }
-  :root { --radius: clamp(180px, 46vw, 360px); }
-}
-
-@media (max-width: 480px) {
-  .face {
-    width: clamp(200px, 86vw, 260px) !important;
-    height: clamp(140px, 56vw, 180px) !important;
-    margin-left: calc(clamp(200px, 86vw, 260px) / -2) !important;
-    margin-top: calc(clamp(140px, 56vw, 180px) / -2) !important;
+  
+  .carousel-title {
+    font-size: 3rem;
   }
-  :root { --radius: clamp(160px, 52vw, 300px); }
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
-}
-
-/* Resize the carousel faces for different screens */
-@media (max-width: 1280px) {
+  
+  .carousel-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .carousel-container {
+    perspective: 1200px;
+  }
+  
   .carousel-face {
-    border-radius: 16px !important;
+    width: 300px;
+    height: 200px;
+    margin-left: -150px;
+    margin-top: -100px;
   }
-}
-
-@media (max-width: 1024px) {
-  .carousel-face {
-    width: clamp(260px, 50vw, 380px) !important;
-    height: clamp(170px, 30vw, 240px) !important;
-    margin-left: calc(clamp(260px, 50vw, 380px) / -2) !important;
-    margin-top: calc(clamp(170px, 30vw, 240px) / -2) !important;
+  
+  .carousel-face:nth-child(1) { transform: rotateY(0deg) translateZ(320px); }
+  .carousel-face:nth-child(2) { transform: rotateY(72deg) translateZ(320px); }
+  .carousel-face:nth-child(3) { transform: rotateY(144deg) translateZ(320px); }
+  .carousel-face:nth-child(4) { transform: rotateY(216deg) translateZ(320px); }
+  .carousel-face:nth-child(5) { transform: rotateY(288deg) translateZ(320px); }
+  .carousel-face:nth-child(6) { transform: rotateY(300deg) translateZ(320px); }
+  
+  .carousel-3d {
+    animation-duration: 30s;
   }
-}
-
-@media (max-width: 768px) {
-  .carousel-face {
-    width: clamp(220px, 74vw, 300px) !important;
-    height: clamp(150px, 48vw, 200px) !important;
-    margin-left: calc(clamp(220px, 74vw, 300px) / -2) !important;
-    margin-top: calc(clamp(150px, 48vw, 200px) / -2) !important;
+  
+  .carousel-header {
+    margin-bottom: 2rem;
+  }
+  
+  .carousel-controls {
+    margin-top: 2rem;
   }
 }
 
 @media (max-width: 480px) {
+  .carousel-container {
+    perspective: 1000px;
+  }
+  
   .carousel-face {
-    width: clamp(200px, 86vw, 260px) !important;
-    height: clamp(140px, 56vw, 180px) !important;
-    margin-left: calc(clamp(200px, 86vw, 260px) / -2) !important;
-    margin-top: calc(clamp(140px, 56vw, 180px) / -2) !important;
+    width: 260px;
+    height: 180px;
+    margin-left: -130px;
+    margin-top: -90px;
+  }
+  
+  .carousel-face:nth-child(1) { transform: rotateY(0deg) translateZ(280px); }
+  .carousel-face:nth-child(2) { transform: rotateY(72deg) translateZ(280px); }
+  .carousel-face:nth-child(3) { transform: rotateY(144deg) translateZ(280px); }
+  .carousel-face:nth-child(4) { transform: rotateY(216deg) translateZ(280px); }
+  .carousel-face:nth-child(5) { transform: rotateY(288deg) translateZ(280px); }
+  .carousel-face:nth-child(6) { transform: rotateY(300deg) translateZ(280px); }
+  
+  .carousel-title {
+    font-size: 2.5rem;
+  }
+  
+  .carousel-subtitle {
+    font-size: 1rem;
+  }
+  
+  .center-dot {
+    width: 30px;
+    height: 30px;
   }
 }
-
-/* (Optional) If you earlier had these classes referenced for compatibility */
-.image-overlay {}

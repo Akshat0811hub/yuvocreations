@@ -80,8 +80,7 @@ const ImgCarousel = () => {
           style={{
             position: "relative",
             width: "100%",
-            height: "100svh",      
-            minheight: "100svh",
+            height: "100svh",
             perspective: "1800px",
             margin: "0 auto",
             overflow: "hidden",
