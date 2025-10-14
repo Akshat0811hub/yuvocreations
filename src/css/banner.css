@@ -1,11 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   background: #fff;
   min-height: 100vh;
 }
+
 html, body {
   width: 100%;
   overflow-x: hidden;
@@ -13,12 +18,12 @@ html, body {
 
 /* Wrapper ensures headline sits below the header */
 .banner-wrapper {
-  height: 100svh;             /* fills visible screen height */
+  height: 100svh;
   min-height: 100svh;
-  width: 100vw;               /* ensures full width */
+  width: 100vw;
   position: relative;
   box-sizing: border-box;
-  overflow: hidden;           /* prevent scrollbars */
+  overflow: hidden;
 }
 
 /* Fixed header */
@@ -33,6 +38,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-sizing: border-box;
 }
 
 /* Navigation styling */
@@ -41,11 +47,13 @@ nav {
   gap: 40px;
   font-size: 16px;
 }
+
 nav a {
   text-decoration: none;
   color: #000;
   font-weight: 400;
 }
+
 .logo {
   font-weight: 900;
   font-size: 22px;
@@ -58,11 +66,13 @@ nav a {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90%;
+  max-width: 100%;
 }
 
 svg {
   width: 100%;
   height: auto;
+  display: block;
 }
 
 /* --- SVG Entrance Animations --- */
@@ -100,11 +110,13 @@ svg {
   letter-spacing: 2px;
   z-index: 90;
 }
+
 .vertical-left {
   left: 10px;
   transform: rotate(-90deg) translateX(-50%);
   transform-origin: left top;
 }
+
 .vertical-right {
   right: 10px;
   transform: rotate(90deg) translateX(-50%);
@@ -119,6 +131,7 @@ svg {
   font-size: 14px;
   font-weight: 600;
 }
+
 .social {
   position: absolute;
   bottom: 40px;
@@ -127,6 +140,7 @@ svg {
   gap: 15px;
   font-size: 16px;
 }
+
 .social a {
   color: #000;
   text-decoration: none;
@@ -138,14 +152,17 @@ svg {
 
 /* Tablets (768px and below) */
 @media (max-width: 768px) {
-  .headline{
-    width: 100%;
-  }
+  /* YE MAIN FIX HAI - header ko full width dena */
   header {
-    left: 20px;
-    right: 20px;
+    left: 0;
+    right: 0;
+    padding: 0 20px;
     height: 70px;
     width: 100%;
+  }
+
+  .headline {
+    width: 95%;
   }
 
   .headline text {
@@ -158,23 +175,39 @@ svg {
 
   .social, .pagination {
     bottom: 20px;
+  }
+  
+  .social {
+    right: 20px;
   }
 }
 
 /* Mobile (480px and below) */
 @media (max-width: 480px) {
-    .headline{
-    width: 100%;
-  }
+  /* YE MAIN FIX HAI - header ko full width dena */
   header {
-    left: 20px;
-    right: 20px;
-    height: 70px;
+    left: 0;
+    right: 0;
+    padding: 0 15px;
+    height: 60px;
     width: 100%;
   }
 
+  nav {
+    gap: 20px;
+    font-size: 14px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .headline {
+    width: 98%;
+  }
+
   .headline text {
-    font-size: 80px !important;
+    font-size: 50px !important;
   }
 
   .vertical-left, .vertical-right {
@@ -182,6 +215,16 @@ svg {
   }
 
   .social, .pagination {
-    bottom: 20px;
+    bottom: 15px;
+    font-size: 12px;
+  }
+  
+  .social {
+    right: 15px;
+    gap: 10px;
+  }
+  
+  .pagination {
+    left: 15px;
   }
 }
