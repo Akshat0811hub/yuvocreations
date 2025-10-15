@@ -181,7 +181,7 @@
 }
 
 /* Mobile Responsive - Following navbar pattern (max-width: 768px) */
-@media (max-width: 768px) {
+@media screen and (max-width: 600px) {
   .tabs-wrap {
     margin: 20px 20px;
     padding: 16px 20px;
@@ -197,6 +197,7 @@
     margin-bottom: 20px;
     width: 100%;
     max-width: 100%;
+    margin-top: 60vh !important;
   }
   
   .tabs {

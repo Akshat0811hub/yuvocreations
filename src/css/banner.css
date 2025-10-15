@@ -11,7 +11,8 @@ body {
   min-height: 100vh;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   overflow-x: hidden;
 }
@@ -77,13 +78,27 @@ svg {
 
 /* --- SVG Entrance Animations --- */
 @keyframes slideInLeft {
-  from { opacity: 0; transform: skewY(-8deg) translate(-100px, 85px); }
-  to { opacity: 1; transform: skewY(-8deg) translate(0, 85px); }
+  from {
+    opacity: 0;
+    transform: skewY(-8deg) translate(-100px, 85px);
+  }
+
+  to {
+    opacity: 1;
+    transform: skewY(-8deg) translate(0, 85px);
+  }
 }
 
 @keyframes slideInRight {
-  from { opacity: 0; transform: skewY(8deg) translate(100px, -84px); }
-  to { opacity: 1; transform: skewY(8deg) translate(0, -84px); }
+  from {
+    opacity: 0;
+    transform: skewY(8deg) translate(100px, -84px);
+  }
+
+  to {
+    opacity: 1;
+    transform: skewY(8deg) translate(0, -84px);
+  }
 }
 
 .cyan {
@@ -97,12 +112,24 @@ svg {
 }
 
 /* Add staggered delay */
-.headline svg text:nth-child(3), .headline svg text:nth-child(6) { animation-delay: 0.1s; } 
-.headline svg text:nth-child(4), .headline svg text:nth-child(7) { animation-delay: 0.3s; }
-.headline svg text:nth-child(5), .headline svg text:nth-child(8) { animation-delay: 0.5s; }
+.headline svg text:nth-child(3),
+.headline svg text:nth-child(6) {
+  animation-delay: 0.1s;
+}
+
+.headline svg text:nth-child(4),
+.headline svg text:nth-child(7) {
+  animation-delay: 0.3s;
+}
+
+.headline svg text:nth-child(5),
+.headline svg text:nth-child(8) {
+  animation-delay: 0.5s;
+}
 
 /* Vertical labels */
-.vertical-left, .vertical-right {
+.vertical-left,
+.vertical-right {
   position: fixed;
   top: 50%;
   font-size: 12px;
@@ -146,85 +173,24 @@ svg {
   text-decoration: none;
 }
 
-/* -------------------------
-   RESPONSIVE DESIGN 
---------------------------*/
 
-/* Tablets (768px and below) */
-@media (max-width: 768px) {
-  /* YE MAIN FIX HAI - header ko full width dena */
-  header {
-    left: 0;
-    right: 0;
-    padding: 0 20px;
-    height: 70px;
-    width: 100%;
-  }
-
-  .headline {
-    width: 95%;
-  }
-
-  .headline text {
-    font-size: 80px !important;
-  }
-
-  .vertical-left, .vertical-right {
-    display: none; 
-  }
-
-  .social, .pagination {
-    bottom: 20px;
-  }
-  
-  .social {
-    right: 20px;
-  }
-}
 
 /* Mobile (480px and below) */
-@media (max-width: 480px) {
-  /* YE MAIN FIX HAI - header ko full width dena */
-  header {
-    left: 0;
-    right: 0;
-    padding: 0 15px;
-    height: 60px;
-    width: 100%;
-  }
-
-  nav {
-    gap: 20px;
-    font-size: 14px;
-  }
-
-  .logo {
-    font-size: 18px;
-  }
+@media screen and (max-width: 600px) {
 
   .headline {
-    width: 98%;
+    margin-top: -555vh;
+    /* z-index: 1000; */
   }
 
-  .headline text {
-    font-size: 50px !important;
+  .vertical-left {
+    display: none;
   }
 
-  .vertical-left, .vertical-right {
-    display: none; 
+  .vertical-right {
+    display: none;
   }
 
-  .social, .pagination {
-    bottom: 15px;
-    font-size: 12px;
-  }
-  
-  .social {
-    right: 15px;
-    gap: 10px;
-  }
-  
-  .pagination {
-    left: 15px;
-  }
+
+
 }
