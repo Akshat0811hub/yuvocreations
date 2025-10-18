@@ -1,6 +1,3 @@
-/* =========================
-   ROOT VARIABLES
-========================= */
 :root {
   --color-black: #000000;
   --color-dark-gray: #000000;
@@ -11,9 +8,6 @@
   --color-border: #2d2d2d;
 }
 
-/* =========================
-   ICONS
-========================= */
 .icon {
   width: 1.25rem;
   height: 1.25rem;
@@ -33,19 +27,14 @@
   transform: translateY(-2px);
 }
 
-/* =========================
-   FOOTER BASE
-========================= */
 .footer {
+  height: 160vh;
+  margin-top: -5%;
   position: relative;
   background-color: var(--color-black);
   color: var(--color-pure-white);
-  overflow: hidden;
-  margin-top: 6rem;
-  border-top: 5px solid var(--color-primary-blue);
 }
 
-/* Decorative Background */
 .footer-background {
   position: absolute;
   inset: 0;
@@ -69,7 +58,7 @@
 .footer-particle {
   position: absolute;
   width: 3px;
-  height: 3px;
+
   background-color: var(--color-light-blue);
   border-radius: 50%;
   animation: particle-float linear infinite;
@@ -97,25 +86,18 @@
   }
 }
 
-/* =========================
-   CONTAINER
-========================= */
 .footer-container {
   position: relative;
   z-index: 2;
-  max-width: 1500px;
-  margin: 0 auto;
   padding: 2rem 2rem 2rem;
 }
 
-/* =========================
-   MAIN GRID
-========================= */
+
 .footer-main {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1.5fr;
   gap: 6rem;
-  margin-bottom: 1rem;
+
 }
 
 .footer-section {
@@ -124,18 +106,7 @@
   gap: 1rem;
 }
 
-/* Desktop adjustments */
-@media (min-width: 769px) {
 
-  .footer-section:nth-child(2),
-  .footer-section:nth-child(3) {
-    margin-top: 3rem;
-  }
-}
-
-/* =========================
-   LOGO AREA
-========================= */
 .footer-logo {
   display: flex;
   flex-direction: column;
@@ -194,9 +165,6 @@
   border-left: 5px solid var(--color-primary-blue);
 }
 
-/* =========================
-   SOCIAL LINKS
-========================= */
 .social-links {
   display: flex;
   gap: 1.5rem;
@@ -204,9 +172,6 @@
   justify-content: center;
 }
 
-/* =========================
-   SECTION TITLES
-========================= */
 .section-title {
   color: var(--color-pure-white);
   font-size: 1.4rem;
@@ -228,9 +193,6 @@
   box-shadow: 0 2px 8px rgba(255, 169, 63, 0.1);
 }
 
-/* =========================
-   LINKS
-========================= */
 .footer-links {
   list-style: none;
   padding: 0;
@@ -272,9 +234,6 @@
   width: 1.25rem;
 }
 
-/* =========================
-   NEWSLETTER
-========================= */
 .newsletter-section {
   border: 1px solid var(--color-border);
   border-radius: 16px;
@@ -404,43 +363,17 @@
   color: var(--color-primary-blue);
 }
 
-/* =========================
-   BACK TO TOP
-========================= */
-.back-to-top {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 55px;
-  height: 55px;
-  background: var(--color-primary-blue);
-  border: none;
-  border-radius: 50%;
-  color: var(--color-pure-white);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+@media screen and (min-width: 600px) {
+  .footer {
+    background-color: red;
+    height: 220vh;
+  }
 
-.back-to-top:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 10px 40px rgba(255, 169, 63, 0.7);
-}
-
-/* =========================
-   RESPONSIVENESS
-========================= */
-@media (max-width: 1200px) {
   .footer-main {
     gap: 3rem;
-  }
-}
-
-@media (max-width: 1024px) {
-  .footer-main {
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
+
   }
 
   .footer-section:first-child,
@@ -450,18 +383,11 @@
 
   .footer-logo img {
     width: 130px;
-    height: 130px;
+    height: 120px;
   }
-}
 
-@media (max-width: 768px) {
   .footer-container {
     padding: 3rem 1.5rem 2rem;
-  }
-
-  .footer-main {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
   }
 
   .logo-text h3 {
@@ -481,36 +407,81 @@
     text-align: center;
     gap: 1.5rem;
   }
+
+  .footer-section:nth-child(2),
+  .footer-section:nth-child(3) {
+    margin-top: 3rem;
+  }
 }
 
-@media (max-width: 480px) {
+.footer {
+  position: relative;
+  background-color: var(--color-black);
+  color: var(--color-pure-white);
+  border-top: 5px solid var(--color-primary-blue);
+  width: 100%;
+  padding-top: 2rem;
+}
+
+/* Remove fixed height */
+.footer-container {
+  position: relative;
+  z-index: 2;
+  padding: 2rem 2rem 2rem;
+}
+
+/* Keep grid layout */
+.footer-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 6rem;
+}
+
+/* -------------------------------
+   Responsive Fixes
+--------------------------------- */
+/* @media screen and (max-width: 1024px) {
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer {
+    padding-bottom: 1rem;
+  }
+
   .footer-container {
-    padding: 2rem 1rem;
+    padding: 1.5rem;
   }
 
-  .footer-logo img {
-    width: 110px;
-    height: 110px;
+  .footer-bottom {
+    text-align: center;
+    gap: 1rem;
   }
+} */
 
-  .section-title {
-    font-size: 1.2rem;
-  }
-
-  .footer-links a {
-    font-size: 0.9rem;
-  }
-
-  .newsletter-button {
-    padding: 12px 18px;
-    font-size: 0.9rem;
-  }
-
-  .back-to-top {
-    bottom: 1rem;
-    right: 1rem;
-    width: 48px;
-    height: 48px;
-    font-size: 18px;
-  }
+/* Ensure page fills only required space */
+/* html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+} */
