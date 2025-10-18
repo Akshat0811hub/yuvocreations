@@ -111,7 +111,7 @@ const WebsiteDesignPage = () => {
               <span className="webdesign-highlight-text"> That Converts</span>
             </h1>
             <p className="webdesign-hero-description">
-              Transform your online presence with stunning, responsive websites that engage visitors
+              Transform your online presence with stunning, responsive websites that engage visitors 
               and drive business growth. Our expert team creates custom solutions tailored to your brand.
             </p>
             <div className="webdesign-hero-buttons">
@@ -160,7 +160,7 @@ const WebsiteDesignPage = () => {
               Comprehensive web solutions to elevate your digital presence
             </p>
           </div>
-
+          
           <div className="webdesign-services-grid">
             <div className="webdesign-service-card">
               <div className="webdesign-service-icon webdesign-icon-responsive">
@@ -339,15 +339,15 @@ const WebsiteDesignPage = () => {
 
           <div className="webdesign-testimonials-slider">
             {testimonials.map((testimonial, index) => (
-              <div
+              <div 
                 key={index}
                 className={`webdesign-testimonial-card ${index === activeTestimonial ? 'webdesign-active' : ''}`}
               >
                 <div className="webdesign-testimonial-content">
                   <p className="webdesign-testimonial-text">"{testimonial.content}"</p>
                   <div className="webdesign-testimonial-author">
-                    <img
-                      src={testimonial.avatar}
+                    <img 
+                      src={testimonial.avatar} 
                       alt={testimonial.name}
                       className="webdesign-author-avatar"
                     />
@@ -386,7 +386,7 @@ const WebsiteDesignPage = () => {
           <div className="webdesign-faq-list">
             {faqs.map((faq, index) => (
               <div key={index} className="webdesign-faq-item">
-                <button
+                <button 
                   className={`webdesign-faq-question ${activeFaq === index ? 'webdesign-active' : ''}`}
                   onClick={() => toggleFaq(index)}
                 >
@@ -408,7 +408,7 @@ const WebsiteDesignPage = () => {
           <div className="webdesign-cta-content">
             <h2 className="webdesign-cta-title">Ready to Transform Your Online Presence?</h2>
             <p className="webdesign-cta-text">
-              Let's create a website that not only looks amazing but drives real business results.
+              Let's create a website that not only looks amazing but drives real business results. 
               Get started with a free consultation today.
             </p>
             <div className="webdesign-cta-buttons">
