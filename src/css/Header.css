@@ -73,9 +73,6 @@
   height: 48px;
 }
 
-/* ================================
-   🧭 NAVIGATION LINKS
-================================== */
 .nav-links {
   display: flex;
   gap: 40px;
@@ -234,8 +231,8 @@
    🧩 HERO SECTION
 ================================== */
 .hero-section {
-  height: auto;
-  min-height: fit-content;
+  /* height: auto; */
+  /* min-height: fit-content; */
   padding: 140px 0 60px 0;
   /* ensures content is below fixed navbar */
   text-align: center;
@@ -391,7 +388,7 @@
   /* ===== HERO SECTION FIX ===== */
   .hero-section {
     position: relative;
-    height: auto;
+    /* height: auto; */
     padding: 100px 20px 40px 20px;
     /* Adds spacing below navbar */
     text-align: center;
@@ -421,9 +418,9 @@
     margin-top: 20px;
   }
 
-  body {
+  /* body {
     overflow-x: hidden;
-  }
+  } */
 
   section {
     margin: 0;
