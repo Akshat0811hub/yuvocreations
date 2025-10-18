@@ -88,7 +88,7 @@ export default function HeadlineSection() {
             clipPath="url(#right)"
             transform="skewY(8) translate(0,-84)"
           >
-            DIFFERENT ANGLE {/* <--- This line is corrected */}
+           DIFFERENT ANGLE {/* <--- This line is corrected */}
           </text>
         </svg>
       </div>

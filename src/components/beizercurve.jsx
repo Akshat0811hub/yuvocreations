@@ -20,7 +20,7 @@ const PremiumBezierCurve = () => {
   const viewboxHeight = 320;
   const startX = 50;
   const endX = viewboxWidth - 50;
-
+  
   const initialPath = `M ${startX} ${centerY} Q ${viewboxWidth / 2} ${centerY} ${endX} ${centerY}`;
 
   // --- ANIMATIONS & SCROLLING ---
@@ -44,7 +44,7 @@ const PremiumBezierCurve = () => {
       ease: "power2.out",
     });
   }, []);
-
+  
   const calculateScrollProps = useCallback((stretchY) => {
     const maxStretch = 250;
     const scrollThreshold = 20;
@@ -53,12 +53,12 @@ const PremiumBezierCurve = () => {
     if (Math.abs(stretchDistance) < scrollThreshold) {
       return { target: null, duration: 0 };
     }
-
+    
     const intensity = Math.min(Math.abs(stretchDistance) / maxStretch, 1);
-
+    
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     const currentScroll = window.pageYOffset;
-
+    
     let scrollAmount;
     if (stretchDistance > 0) { // Pulling down, scroll up
       scrollAmount = -(currentScroll * intensity * 1.5);
@@ -97,19 +97,19 @@ const PremiumBezierCurve = () => {
 
   const handleInteractionMove = useCallback((e) => {
     if (!isDragging) return;
-
-    e.preventDefault();
-
+    
+    e.preventDefault(); 
+    
     const { x, y } = getSVGCoordinates(e);
     lastInteractionPoint.current = { x, y };
-
+    
     const newPath = `M ${startX} ${centerY} Q ${x} ${y} ${endX} ${centerY}`;
-
+    
     gsap.to(glowRef.current, {
-      x: x - (viewboxWidth / 2),
-      y: y - centerY,
-      duration: 0.2,
-      ease: "power2.out"
+        x: x - (viewboxWidth / 2),
+        y: y - centerY,
+        duration: 0.2,
+        ease: "power2.out"
     });
 
     gsap.to(pathRef.current, {
@@ -118,7 +118,7 @@ const PremiumBezierCurve = () => {
       ease: "power3.out"
     });
   }, [isDragging, getSVGCoordinates, centerY, startX, endX]);
-
+  
   const handleInteractionEnd = useCallback(() => {
     if (!isDragging) return;
     setIsDragging(false);
@@ -130,11 +130,11 @@ const PremiumBezierCurve = () => {
       duration: 1.5,
       ease: "elastic.out(1, 0.2)"
     });
-
-    gsap.to(glowRef.current, {
-      opacity: 0,
-      duration: 0.5,
-      ease: "power2.out"
+    
+     gsap.to(glowRef.current, {
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out"
     });
 
     if (target !== null) {
@@ -145,24 +145,24 @@ const PremiumBezierCurve = () => {
   }, [isDragging, calculateScrollProps, initialPath, smoothScrollTo]);
 
   const handleMouseEnter = useCallback((e) => {
-    if (isDragging) return;
-    const { x, y } = getSVGCoordinates(e);
-    gsap.to(glowRef.current, {
-      x: x - (viewboxWidth / 2),
-      y: y - centerY,
-      opacity: 1,
-      duration: 0.3,
-      ease: "power2.out"
-    });
+      if (isDragging) return;
+      const { x, y } = getSVGCoordinates(e);
+      gsap.to(glowRef.current, {
+        x: x - (viewboxWidth / 2),
+        y: y - centerY,
+        opacity: 1,
+        duration: 0.3,
+        ease: "power2.out"
+      });
   }, [isDragging, getSVGCoordinates, centerY]);
 
   const handleMouseLeave = useCallback(() => {
     if (!isDragging) {
-      gsap.to(glowRef.current, {
-        opacity: 0,
-        duration: 0.3,
-        ease: "power2.out"
-      });
+        gsap.to(glowRef.current, {
+            opacity: 0,
+            duration: 0.3,
+            ease: "power2.out"
+        });
     }
   }, [isDragging]);
 
@@ -194,7 +194,7 @@ const PremiumBezierCurve = () => {
           }} />
         ))}
       </div>
-
+      
       <div className="main-content">
         <div
           ref={containerRef}
@@ -206,27 +206,27 @@ const PremiumBezierCurve = () => {
           style={{ cursor: isDragging ? 'grabbing' : 'grab', touchAction: 'none' }}
         >
           <div className="shimmer" />
-
+          
           <div ref={glowRef} className="cursor-glow orange-glow" />
-
-          <svg
-            viewBox={`0 0 ${viewboxWidth} ${viewboxHeight}`}
-            className="curve-svg"
-            style={{
-              width: '140%',
-              height: 'auto',
-              overflow: 'visible',
-              position: 'absolute',       // ✅ Add: Position it relative to the container
-              left: '50%',                // ✅ Add: Move its left edge to the center
-              transform: 'translateX(-50%)' // ✅ Add: Pull it back by half its own width
-            }}
-            preserveAspectRatio="none"
-          >
+          
+        <svg
+    viewBox={`0 0 ${viewboxWidth} ${viewboxHeight}`}
+    className="curve-svg"
+    style={{
+        width: '140%', 
+        height: 'auto', 
+        overflow: 'visible',
+        position: 'absolute',       // ✅ Add: Position it relative to the container
+        left: '50%',                // ✅ Add: Move its left edge to the center
+        transform: 'translateX(-50%)' // ✅ Add: Pull it back by half its own width
+    }}
+    preserveAspectRatio="none"
+>
             <defs>
               <linearGradient id="premium-gradient" gradientUnits="userSpaceOnUse" x1={startX} y1={centerY} x2={endX} y2={centerY}>
-                <stop offset="0%" stopColor="#fbbf24"><animate attributeName="stopColor" values="#fbbf24;#f97316;#f59e0b;#fbbf24" dur="4s" repeatCount="indefinite" /></stop>
-                <stop offset="50%" stopColor="#f97316"><animate attributeName="stopColor" values="#f97316;#f59e0b;#fbbf24;#f97316" dur="4s" repeatCount="indefinite" /></stop>
-                <stop offset="100%" stopColor="#f59e0b"><animate attributeName="stopColor" values="#f59e0b;#fbbf24;#f97316;#f59e0b" dur="4s" repeatCount="indefinite" /></stop>
+                 <stop offset="0%" stopColor="#fbbf24"><animate attributeName="stopColor" values="#fbbf24;#f97316;#f59e0b;#fbbf24" dur="4s" repeatCount="indefinite" /></stop>
+                 <stop offset="50%" stopColor="#f97316"><animate attributeName="stopColor" values="#f97316;#f59e0b;#fbbf24;#f97316" dur="4s" repeatCount="indefinite" /></stop>
+                 <stop offset="100%" stopColor="#f59e0b"><animate attributeName="stopColor" values="#f59e0b;#fbbf24;#f97316;#f59e0b" dur="4s" repeatCount="indefinite" /></stop>
               </linearGradient>
               <filter id="glow">
                 <feGaussianBlur stdDeviation="3.5" result="coloredBlur" />
@@ -236,7 +236,7 @@ const PremiumBezierCurve = () => {
                 </feMerge>
               </filter>
             </defs>
-
+            
             <path
               ref={pathRef}
               d={initialPath}
@@ -246,7 +246,7 @@ const PremiumBezierCurve = () => {
               filter="url(#glow)"
               strokeLinecap="round"
             />
-
+            
             <circle cx={startX} cy={centerY} r="6" className="control-point" />
             <circle cx={endX} cy={centerY} r="6" className="control-point" />
           </svg>

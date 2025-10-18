@@ -125,13 +125,13 @@ const About = () => {
         <div className="hero-content">
           <div className="hero-text animate-on-scroll">
             <h1 className="hero-title">
-              Transforming Ideas into
+              Transforming Ideas into 
               <span className="highlight"> Digital Reality</span>
             </h1>
             <p className="hero-description">
-              We are a passionate team of IT professionals dedicated to delivering
-              innovative technology solutions that drive business growth and success.
-              With years of expertise and a commitment to excellence, we turn your
+              We are a passionate team of IT professionals dedicated to delivering 
+              innovative technology solutions that drive business growth and success. 
+              With years of expertise and a commitment to excellence, we turn your 
               vision into powerful digital experiences.
             </p>
             <div className="hero-buttons">
@@ -240,8 +240,8 @@ const About = () => {
             <div className="mission-text">
               <h2>Our Mission</h2>
               <p>
-                To empower businesses with innovative technology solutions that drive growth,
-                efficiency, and success. We believe in the power of technology to transform
+                To empower businesses with innovative technology solutions that drive growth, 
+                efficiency, and success. We believe in the power of technology to transform 
                 ideas into reality and are committed to being your trusted partner in digital transformation.
               </p>
               <div className="mission-features">
