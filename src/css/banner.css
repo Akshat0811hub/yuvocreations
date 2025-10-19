@@ -1,101 +1,73 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
 
-/* ---------- Design Tokens (fluid + safe-area aware) ---------- */
-* { box-sizing: border-box; }
-
-:root {
-  /* fluid scale: small phones → tablets */
-  --scale: clamp(0.80, 0.92 + 0.6vw, 1.10);
-
-  /* header height & horizontal padding become fluid */
-  --header-h: calc(64px * var(--scale));
-  --page-pad: clamp(12px, 4vw, 50px);
-
-  /* controls in-hero paddings */
-  --hero-pad-x: clamp(8px, 3vw, 24px);
-
-  /* safe area insets (for notches) */
-  --safe-top: env(safe-area-inset-top, 0px);
-  --safe-right: env(safe-area-inset-right, 0px);
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
-  --safe-left: env(safe-area-inset-left, 0px);
+* {
+  box-sizing: border-box;
 }
 
-/* ---------- Base ---------- */
-html, body {
+body {
   margin: 0;
-  width: 100%;
-  overflow-x: hidden;           /* prevent accidental horizontal scroll */
   font-family: 'Montserrat', sans-serif;
   background: #fff;
-  -webkit-text-size-adjust: 100%;
+  min-height: 100vh;
 }
 
-/* Avoid “vh” bugs on mobile toolbars using dvh/svh fallback
-   and account for the fixed header height */
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Wrapper ensures headline sits below the header */
 .banner-wrapper {
-  min-height: calc(100dvh - var(--header-h) - var(--safe-top) - var(--safe-bottom));
-  min-height: calc(100svh - var(--header-h) - var(--safe-top) - var(--safe-bottom));
-  position: relative;
+  height: 100svh;
+  min-height: 100svh;
   width: 100vw;
-  overflow: hidden;             /* no bleed causing phantom space */
-  padding-top: calc(var(--header-h) + var(--safe-top)); /* keep content below header */
-  display: flex;                /* ✅ flex-center: keeps banner in normal flow */
-  align-items: center;          /* vertical center */
-  justify-content: center;      /* horizontal center */
-  z-index: 1;                   /* safety over backgrounds */
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-/* ---------- Header ---------- */
+/* Fixed header */
 header {
   position: fixed;
   top: 0;
-  left: calc(var(--page-pad) + var(--safe-left));
-  right: calc(var(--page-pad) + var(--safe-right));
-  height: var(--header-h);
+  left: 50px;
+  right: 50px;
+  height: 80px;
   background: #fff;
   z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: clamp(8px, 2.5vw, 24px);
+  box-sizing: border-box;
 }
 
-/* Navigation */
+/* Navigation styling */
 nav {
   display: flex;
-  gap: clamp(10px, 4vw, 40px);
-  font-size: clamp(12px, 1.9vw, 16px);
-  flex: 1 1 auto;
-  justify-content: flex-end;
-  min-width: 0; /* prevent overflow */
+  gap: 40px;
+  font-size: 16px;
 }
 
 nav a {
   text-decoration: none;
   color: #000;
   font-weight: 400;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .logo {
   font-weight: 900;
-  font-size: clamp(18px, 2.6vw, 22px);
-  flex: 0 1 auto;
-  min-width: 0;
+  font-size: 22px;
 }
 
-/* ---------- Headline / SVG ---------- */
+/* Headline SVG container */
 .headline {
-  position: relative;           /* ✅ not absolute */
-  width: min(92%, 1200px);
-  margin: 0 auto;
-  padding: 0 var(--hero-pad-x);
-  display: block;
-  transform: none !important;   /* kill any leftover translate */
-  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 100%;
 }
 
 svg {
@@ -106,86 +78,119 @@ svg {
 
 /* --- SVG Entrance Animations --- */
 @keyframes slideInLeft {
-  from { opacity: 0; transform: translate(-24px, 12px) skewY(-8deg); }
-  to   { opacity: 1; transform: translate(0, 12px)   skewY(-8deg); }
+  from {
+    opacity: 0;
+    transform: skewY(-8deg) translate(-100px, 85px);
+  }
+
+  to {
+    opacity: 1;
+    transform: skewY(-8deg) translate(0, 85px);
+  }
 }
 
 @keyframes slideInRight {
-  from { opacity: 0; transform: translate(24px, -12px) skewY(8deg); }
-  to   { opacity: 1; transform: translate(0, -12px)    skewY(8deg); }
+  from {
+    opacity: 0;
+    transform: skewY(8deg) translate(100px, -84px);
+  }
+
+  to {
+    opacity: 1;
+    transform: skewY(8deg) translate(0, -84px);
+  }
 }
 
-.cyan  { fill: #ff9f29; animation: slideInLeft 0.9s cubic-bezier(0.25,0.46,0.45,0.94) both; }
-.black { fill: #000;     animation: slideInRight 0.9s cubic-bezier(0.25,0.46,0.45,0.94) both; }
+.cyan {
+  fill: #ff9f29;
+  animation: slideInLeft 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
 
-/* Stagger */
+.black {
+  fill: #000;
+  animation: slideInRight 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Add staggered delay */
 .headline svg text:nth-child(3),
-.headline svg text:nth-child(6) { animation-delay: 0.10s; }
-.headline svg text:nth-child(4),
-.headline svg text:nth-child(7) { animation-delay: 0.30s; }
-.headline svg text:nth-child(5),
-.headline svg text:nth-child(8) { animation-delay: 0.50s; }
-
-/* Prefer reduced motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-  .cyan, .black { animation: none !important; }
+.headline svg text:nth-child(6) {
+  animation-delay: 0.1s;
 }
 
-/* ---------- Edge labels ---------- */
+.headline svg text:nth-child(4),
+.headline svg text:nth-child(7) {
+  animation-delay: 0.3s;
+}
+
+.headline svg text:nth-child(5),
+.headline svg text:nth-child(8) {
+  animation-delay: 0.5s;
+}
+
+/* Vertical labels */
 .vertical-left,
 .vertical-right {
   position: fixed;
   top: 50%;
-  font-size: clamp(10px, 1.6vw, 12px);
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 2px;
   z-index: 90;
-  pointer-events: none;
 }
 
-.vertical-left  { left: calc(10px + var(--safe-left));  transform: rotate(-90deg) translateX(-50%); transform-origin: left top; }
-.vertical-right { right: calc(10px + var(--safe-right)); transform: rotate(90deg)  translateX(-50%); transform-origin: right top; }
+.vertical-left {
+  left: 10px;
+  transform: rotate(-90deg) translateX(-50%);
+  transform-origin: left top;
+}
 
-/* ---------- Pagination / Social ---------- */
+.vertical-right {
+  right: 10px;
+  transform: rotate(90deg) translateX(-50%);
+  transform-origin: right top;
+}
+
+/* Pagination & Social links */
 .pagination {
   position: absolute;
-  bottom: clamp(16px, 5vw, 40px);
-  left: clamp(12px, 4vw, 20px);
-  font-size: clamp(12px, 2vw, 14px);
+  bottom: 40px;
+  left: 20px;
+  font-size: 14px;
   font-weight: 600;
 }
 
 .social {
   position: absolute;
-  bottom: clamp(16px, 5vw, 40px);
-  right: clamp(12px, 4vw, 40px);
+  bottom: 40px;
+  right: 40px;
   display: flex;
-  gap: clamp(10px, 3vw, 15px);
-  font-size: clamp(14px, 2.4vw, 16px);
+  gap: 15px;
+  font-size: 16px;
 }
 
-.social a { color: #000; text-decoration: none; }
-
-/* ---------- Collapsible nav for narrow widths ---------- */
-@media (max-width: 420px) {
-  nav { gap: 12px; }
-  nav a { max-width: 28vw; }  /* ellipsis prevents overflow */
+.social a {
+  color: #000;
+  text-decoration: none;
 }
 
-@media (max-width: 360px) {
-  nav { display: none; }      /* super-small phones */
-}
 
-/* ---------- Tiny text safety in SVG ---------- */
-@media (max-width: 900px) {
-  .headline { width: min(94%, 720px); }
-  .headline svg text { font-size: clamp(22px, 7.5vw, 56px); }
-}
 
-/* ---------- Next section spacing (prevents sticking to hero) ---------- */
-/* Adjust selector to your actual projects section */
-.featured-projects,
-section#projects {
-  margin-top: 0 !important;  /* kill accidental negative margins */
-  scroll-margin-top: calc(var(--header-h) + var(--safe-top) + 16px);
+/* Mobile (480px and below) */
+@media screen and (max-width: 600px) {
+
+  .headline {
+    margin-top: -555vh;
+    /* z-index: 1000; */
+  }
+
+  .vertical-left {
+    display: none;
+  }
+
+  .vertical-right {
+    display: none;
+  }
+
+
+
 }
