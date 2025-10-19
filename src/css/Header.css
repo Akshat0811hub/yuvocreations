@@ -179,6 +179,7 @@
 /* ================================
    🔘 BUTTONS
 ================================== */
+
 .nav-buttons {
   display: flex;
   gap: 12px;
@@ -230,9 +231,12 @@
   background: linear-gradient(135deg, #ff7e5f 0%, #fe9e2a 100%);
 }
 
+
 /* ================================
    🧩 HERO SECTION
 ================================== */
+
+
 .hero-section {
   height: auto;
   min-height: fit-content;
@@ -253,6 +257,7 @@
 /* ================================
    🧰 CONTENT SECTION
 ================================== */
+
 .content {
   max-width: 800px;
   margin: 100px auto;
@@ -274,6 +279,8 @@
   margin-bottom: 20px;
   font-size: 18px;
 }
+
+
 
 .hamburger {
   display: none;
@@ -301,6 +308,8 @@
 .hamburger.active span:nth-child(1) {
   transform: rotate(45deg) translateY(9px);
 }
+
+
 
 .hamburger.active span:nth-child(2) {
   opacity: 0;
