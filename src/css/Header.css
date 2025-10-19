@@ -1,19 +1,24 @@
-/* ================================
-   🌐 NAVBAR BASE STYLES
-================================== */
 .navbar-wrapper {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   padding: 20px;
-  transition: padding 0.4s ease;
   z-index: 1000;
+
+  /* ✨ BOUNCY EFFECT: Changed ease-in-out to a bouncy cubic-bezier */
+  /* The duration is slightly longer to make the bounce more visible. */
+  transition: padding 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55);
 }
 
 .navbar-wrapper.scrolled {
   padding: 15px 20px;
+  
+  /* ✨ BOUNCY EFFECT: Make sure the background also uses the same transition */
+  transition: padding 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55), 
+              background-color 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55);
 }
+
 
 .navbar {
   background: white;
@@ -25,18 +30,23 @@
   align-items: center;
   margin: 0 auto;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  transition: max-width 0.4s ease;
+
+  /* ✨ BOUNCY EFFECT: Replaced 'all' with the specific properties for better performance */
+  /* and applied the same bouncy cubic-bezier timing function. */
+  transition: max-width 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55), 
+              padding 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55), 
+              box-shadow 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55),
+              background 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55);
 }
 
 .navbar-wrapper.scrolled .navbar {
-  max-width: 900px;
+ max-width: 1000px;
   padding: 16px 32px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
-
 /* ================================
    🧱 LOGO
 ================================== */
@@ -319,123 +329,209 @@
   transform: rotate(-45deg) translateY(-9px);
 }
 
-/* ================= MOBILE RESPONSIVE ================= */
-@media screen and (max-width: 600px) {
+/* ===================== MOBILE GLASSMORPHIC NAVBAR (FIXED AFTER SCROLL) ===================== */
+@media screen and (max-width: 500px) {
 
-  /* HAMBURGER MENU */
+  /* Prevent right scroll + keep interaction intact */
+  html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Ensure wrapper blur or transforms never break fixed elements */
+  .navbar-wrapper {
+    transform: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Hide desktop CTA */
+  .nav-buttons.desktop-only {
+    display: none !important;
+  }
+
+  /* === HAMBURGER === */
   .hamburger {
-    display: flex;
-    margin-left: 45vw;
-    z-index: 500;
-
-  }
-
-  .btn-signup {
-    display: none;
-  }
-
-  /* NAVBAR FIX */
-  .navbar {
-    width: 90%;
-    margin: 0 auto;
-  }
-
-  .navbar-wrapper.scrolled .navbar {
-    padding: 12px 20px;
-  }
-
-  .logo-icon {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
     width: 40px;
-    height: 40px;
+    height: 32px;
+    margin-left: auto;
+    margin-right: 20px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    z-index: 1100;
+    transition: transform 0.3s ease;
   }
 
-  /* NAV LINKS FOR MOBILE MENU */
-  .nav-links {
+  .hamburger span {
+    height: 4px;
+    width: 100%;
+    background: #000;
+    border-radius: 4px;
+    transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+  }
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+  }
+
+  /* === BACKDROP BLUR === */
+  .navbar-wrapper.menu-is-open::after,
+  .navbar-wrapper.dropdown-is-open::after {
+    content: "";
     position: fixed;
     inset: 0;
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1040;
+    animation: fadeIn 0.4s ease forwards;
+    pointer-events: auto;
+  }
+
+  /* === MAIN POPUP MENU === */
+  .nav-links {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    width: 90%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 22px;
+    display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 18px;
+    padding: 65px 25px 45px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-100%);
-    transition: all 0.4s ease;
-    z-index: 1050;
-    overflow-y: auto;
+    transition: all 0.55s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+    z-index: 10500;
+    pointer-events: none;
   }
 
   .nav-links.open {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
   }
 
-  .nav-links a {
-    color: white;
-    font-size: 24px;
+  .nav-links li {
+    list-style: none;
+  }
+
+  .nav-links a,
+  .dropdown-toggle {
+    color: #000;
+    font-size: 19px;
     font-weight: 600;
+    text-decoration: none;
+    padding: 6px 0;
+    transition: all 0.3s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
   }
 
-  .nav-links a:hover {
+  .nav-links a:hover,
+  .dropdown-toggle:hover {
     color: #fe9e2a;
+    transform: scale(1.05);
   }
 
+  /* === CTA BUTTON === */
   .mobile-btn {
-    display: block;
-    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
   }
 
-  .mobile-btn .btn {
+  .mobile-btn .btn-signup {
     background: linear-gradient(135deg, #fe9e2a 0%, #ff7e5f 100%);
     color: white;
     font-size: 18px;
-    padding: 14px 40px;
-    border-radius: 12px;
+    font-weight: 600;
+    padding: 14px 44px;
+    border-radius: 14px;
+    transition: all 0.35s ease;
+    box-shadow: 0 8px 20px rgba(254, 158, 42, 0.35);
   }
 
-  /* ===== HERO SECTION FIX ===== */
-  .hero-section {
-    position: relative;
-    height: auto;
-    padding: 100px 20px 40px 20px;
-    /* Adds spacing below navbar */
-    text-align: center;
+  .mobile-btn .btn-signup:hover {
+    background: linear-gradient(135deg, #ffb347 0%, #ff7e5f 100%);
+    transform: scale(1.07) translateY(-3px);
+    box-shadow: 0 10px 25px rgba(254, 158, 42, 0.45);
   }
 
-  .hero-text {
-    transform: none;
-    margin-bottom: 0;
-    line-height: 1.4;
+  /* === DROPDOWN ARROW === */
+  .dropdown-arrow {
+    margin-left: 8px;
+    transition: transform 0.3s ease;
   }
 
-  .hero-section h1,
-  .hero-section h2,
-  .hero-section h3 {
-    margin: 0;
-    padding: 0;
+  .dropdown-arrow.rotated {
+    transform: rotate(180deg);
   }
 
-  /* ===== OUR SERVICES SECTION ===== */
-  .services-section {
-    margin-top: 0;
-    padding-top: 0 !important;
-    /* removes unnecessary extra space */
+  /* === SECONDARY POPUP (SERVICES SUBMENU) === */
+  .dropdown-menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 85%;
+    max-width: 340px;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 18px;
+    padding: 40px 25px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 10600;
+    transition: all 0.45s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    pointer-events: none;
   }
 
-  .services-section h2 {
-    margin-top: 20px;
+  .dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
   }
 
-  body {
-    overflow-x: hidden;
+  .dropdown-menu a {
+    color: #000;
+    font-size: 17px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
   }
 
-  section {
-    margin: 0;
-    padding: 0;
+  .dropdown-menu a:hover {
+    color: #fe9e2a;
+    transform: scale(1.05);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 }
+

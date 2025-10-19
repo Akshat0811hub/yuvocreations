@@ -45,16 +45,38 @@ const Navbar = () => {
   }, [menuOpen]);
 
   // close mobile menu on desktop resize
-  useEffect(() => {
-    const onResize = () => {
-      if (window.innerWidth > 768) {
-        setMenuOpen(false);
-        setDropdownOpen(false);
-      }
-    };
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
+  // close dropdown/menu if clicked outside (desktop + mobile) — robust version
+useEffect(() => {
+  const onClickOutside = (e) => {
+    if (!navRef.current) return;
+
+    const clicked = e.target;
+
+    // Elements that should keep menus open when clicked inside
+    const insideNavLinks = navRef.current.querySelector('.nav-links');
+    const insideDropdownMenu = navRef.current.querySelector('.dropdown-menu');
+    const hamburgerEl = navRef.current.querySelector('.hamburger');
+    const logoEl = navRef.current.querySelector('.logo');
+
+    const clickedInsideNavLinks = insideNavLinks && insideNavLinks.contains(clicked);
+    const clickedInsideDropdown = insideDropdownMenu && insideDropdownMenu.contains(clicked);
+    const clickedHamburger = hamburgerEl && hamburgerEl.contains(clicked);
+    const clickedLogo = logoEl && logoEl.contains(clicked);
+
+    // If click was inside any of those interactive areas, do nothing
+    if (clickedInsideNavLinks || clickedInsideDropdown || clickedHamburger || clickedLogo) {
+      return;
+    }
+
+    // Otherwise the click is "outside" — close everything
+    setDropdownOpen(false);
+    setMenuOpen(false);
+  };
+
+  document.addEventListener('click', onClickOutside, { capture: true });
+  return () => document.removeEventListener('click', onClickOutside, { capture: true });
+}, []);
+
 
   const isMobile = () => window.innerWidth <= 768;
 
@@ -74,7 +96,7 @@ const Navbar = () => {
   };
 
   return (
-    <div ref={navRef} className={`navbar-wrapper ${scrolled ? 'scrolled' : ''}`}>
+    <div ref={navRef} className={`navbar-wrapper ${scrolled ? 'scrolled' : ''} ${menuOpen ? 'menu-is-open' : ''}`}>
       <nav className="navbar">
         {/* Logo */}
         <Link to="/" className="logo" aria-label="Home">
@@ -152,3 +174,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+

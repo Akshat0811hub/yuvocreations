@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
 
+:root {
+    --slideLeftX: -50%;
+    --slideLeftY: 50px;
+    --slideRightX: 50%;
+    --slideRightY: -118.5px;
+  }
+
 * {
   box-sizing: border-box;
 }
@@ -63,7 +70,7 @@ nav a {
 /* Headline SVG container */
 .headline {
   position: absolute;
-  top: 50%;
+  top: calc(50vh + 40px);
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90%;
@@ -80,24 +87,22 @@ svg {
 @keyframes slideInLeft {
   from {
     opacity: 0;
-    transform: skewY(-8deg) translate(-100px, 85px);
+    transform: skewY(-8deg) translate(var(--slideLeftX), var(--slideLeftY));
   }
-
   to {
     opacity: 1;
-    transform: skewY(-8deg) translate(0, 85px);
+    transform: skewY(-8deg) translate(0, var(--slideLeftY));
   }
 }
 
 @keyframes slideInRight {
   from {
     opacity: 0;
-    transform: skewY(8deg) translate(100px, -84px);
+    transform: skewY(8deg) translate(var(--slideRightX), var(--slideRightY));
   }
-
   to {
     opacity: 1;
-    transform: skewY(8deg) translate(0, -84px);
+    transform: skewY(8deg) translate(0, var(--slideRightY));
   }
 }
 
@@ -111,7 +116,7 @@ svg {
   animation: slideInRight 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-/* Add staggered delay */
+/* Add staggered delay for one-by-one effect */
 .headline svg text:nth-child(3),
 .headline svg text:nth-child(6) {
   animation-delay: 0.1s;
@@ -173,24 +178,89 @@ svg {
   text-decoration: none;
 }
 
+/* Tablet (601px to 1024px) */
+@media screen and (max-width: 1024px) and (min-width: 601px) {
+  header {
+    left: 30px;
+    right: 30px;
+    height: 70px;
+  }
 
+  nav {
+    gap: 30px;
+    font-size: 14px;
+  }
 
-/* Mobile (480px and below) */
-@media screen and (max-width: 600px) {
+  .logo {
+    font-size: 20px;
+  }
 
   .headline {
-    margin-top: -555vh;
-    /* z-index: 1000; */
+    width: 95%;
+    top: calc(50vh + 35px);
   }
 
-  .vertical-left {
-    display: none;
+  .vertical-left,
+  .vertical-right {
+    font-size: 10px;
   }
 
+  .pagination {
+    font-size: 12px;
+    left: 15px;
+  }
+
+  .social {
+    right: 30px;
+    gap: 12px;
+    font-size: 14px;
+  }
+}
+
+/* Mobile (600px and below) */
+@media screen and (max-width: 600px) {
+  :root {
+    --slideLeftX: -50%;
+    --slideLeftY: 50px;
+    --slideRightX: 50%;
+    --slideRightY: -119px;
+  }
+
+  header {
+    left: 20px;
+    right: 20px;
+    height: 60px;
+  }
+
+  nav {
+    gap: 20px;
+    font-size: 12px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .headline {
+    width: 95%;
+    top: calc(30vh + 30px);
+  }
+
+  /* .vertical-left,
   .vertical-right {
     display: none;
+  } */
+
+  .pagination {
+    font-size: 10px;
+    left: 10px;
+    bottom: 20px;
   }
 
-
-
+  .social {
+    right: 20px;
+    gap: 10px;
+    font-size: 12px;
+    bottom: 20px;
+  }
 }

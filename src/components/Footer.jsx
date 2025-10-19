@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../css/footer.css';
-import logoImage from '../assets/logobg.png'; 
+import logoImage from '../assets/logobg.png';
 
 // Functional Icons (using SVG inline for no external dependencies)
 const ArrowRightIcon = ({ color }) => (
@@ -38,149 +38,132 @@ const Footer = () => {
     if (email.trim()) {
       setIsSubscribed(true);
       setEmail('');
-      setTimeout(() => setIsSubscribed(false), 3000); 
+      setTimeout(() => setIsSubscribed(false), 3000);
     }
   };
 
   const currentYear = new Date().getFullYear();
 
   return (
-    <>
-      
+    <footer className="footer">
+      <div className="footer-background">
+        <div className="footer-gradient"></div>
+        <div className="footer-particles">
+          {[...Array(50)].map((_, i) => (
+            <div
+              key={i}
+              className="footer-particle"
+              style={{
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 8}s`,
+                animationDuration: `${8 + Math.random() * 8}s`
+              }}
+            />
+          ))}
+        </div>
+      </div>
 
-      <footer className="footer">
-        <div className="footer-background">
-          <div className="footer-gradient"></div>
-          <div className="footer-particles">
-            {[...Array(50)].map((_, i) => (
-              <div
-                key={i}
-                className="footer-particle"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 8}s`,
-                  animationDuration: `${8 + Math.random() * 8}s`
-                }}
+      <div className="footer-container">
+        <div className="footer-main">
+          <div className="footer-section">
+            <div className="footer-logo">
+              <div className="logo-main">
+                <img src={logoImage} alt="Logo" />
+                <div className="logo-text">
+                  <h3>Yuvocreations</h3>
+                </div>
+              </div>
+              <div className="logo-tagline">Innovate, Integrate, Elevate</div>
+            </div>
+            <div className="company-description">
+              Yuvocreations delivers innovative, tailored IT solutions that drive growth and efficiency for modern enterprises. We specialize in full-stack development and cloud architecture.
+            </div>
+            <div className="social-links">
+              <a href="https://www.facebook.com/profile.php?id=61565786861921" className="social-link" aria-label="Find us on Facebook"><FacebookIcon /></a>
+              <a href="https://www.instagram.com/yuvocreations/" className="social-link" aria-label="Follow us on Instagram"><InstagramIcon /></a>
+              <a href="https://www.linkedin.com/company/yuvocreations/" className="social-link" aria-label="Connect with us on LinkedIn"><LinkedInIcon /></a>
+              <a href="https://twitter.com/yuvocreations" className="social-link" aria-label="Follow us on X"><XIcon /></a>
+            </div>
+          </div>
+
+          <div className="footer-section">
+            <h4 className="section-title">Key Services</h4>
+            <ul className="footer-links">
+              <li><a href="#web-development"><ArrowRightIcon />Web Development</a></li>
+              <li><a href="#mobile-apps"><ArrowRightIcon />UI/UX Design</a></li>
+              <li><a href="#cloud-solutions"><ArrowRightIcon />Branding Services</a></li>
+              <li><a href="#data-analytics"><ArrowRightIcon />Advance Digital Marketing</a></li>
+            </ul>
+          </div>
+
+          <div className="footer-section">
+            <h4 className="section-title">About Us</h4>
+            <ul className="footer-links">
+              <li><a href="#about"><ArrowRightIcon />Company Mission</a></li>
+              <li><a href="#portfolio"><ArrowRightIcon />Client Portfolio</a></li>
+              <li><a href="#testimonials"><ArrowRightIcon />Success Stories</a></li>
+              <li><a href="#blog"><ArrowRightIcon />Insights Blog</a></li>
+            </ul>
+          </div>
+
+          <div className="footer-section newsletter-section">
+            <h4 className="section-title">Get In Touch</h4>
+            <p className="newsletter-description">
+              Join our newsletter to receive the latest tech trends and exclusive updates from Yuvocreations.
+            </p>
+            <form onSubmit={handleSubscribe} className="newsletter-form">
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="newsletter-input"
+                aria-label="Email address for newsletter subscription"
+                required
               />
-            ))}
+              <button
+                type="submit"
+                className={`newsletter-button ${isSubscribed ? 'subscribed' : ''}`}
+                disabled={isSubscribed}
+              >
+                {isSubscribed ? (
+                  <>
+                    <CheckIcon />Subscribed!
+                  </>
+                ) : 'Subscribe Now'}
+              </button>
+            </form>
+            <div className="contact-info">
+              <div className="contact-item">
+                <span className="contact-label">Phone:</span>
+                <a href="tel:+917889487784" style={{ color: 'var(--color-text-light)', textDecoration: 'none' }}>+91 7042123166</a>
+              </div>
+              <div className="contact-item">
+                <span className="contact-label">Email:</span>
+                <a href="mailto:contact@yuvocreations.com" style={{ color: 'var(--color-text-light)', textDecoration: 'none' }}>contactus@yuvocreations.com</a>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="footer-container">
-          
-          <div className="footer-main">
-            
-            <div className="footer-section">
-              <div className="footer-logo">
-                <div className="logo-main">
-                  <img src={logoImage} alt="Logo" />
-                  <div className="logo-text">
-                    <h3>Yuvocreations</h3>
-                  </div>
-                </div>
-                <div className="logo-tagline">Innovate, Integrate, Elevate</div>
-              </div>
-              <div className="company-description">
-                Yuvocreations delivers innovative, tailored IT solutions that drive growth and efficiency for modern enterprises. We specialize in full-stack development and cloud architecture.
-              </div>
-              <div className="social-links">
-                <a href="https://www.facebook.com/profile.php?id=61565786861921" className="social-link" aria-label="Find us on Facebook"><FacebookIcon /></a>
-                <a href="https://www.instagram.com/yuvocreations/" className="social-link" aria-label="Follow us on Instagram"><InstagramIcon /></a>
-                <a href="https://www.linkedin.com/company/yuvocreations/" className="social-link" aria-label="Connect with us on LinkedIn"><LinkedInIcon /></a>
-                <a href="https://twitter.com/yuvocreations" className="social-link" aria-label="Follow us on X"><XIcon /></a>
-              </div>
-            </div>
+        <div className="footer-divider"></div>
 
-            <div className="footer-section">
-              <h4 className="section-title">Key Services</h4>
-              <ul className="footer-links">
-                <li><a href="#web-development"><ArrowRightIcon />Web Development</a></li>
-                <li><a href="#mobile-apps"><ArrowRightIcon />UI/UX Design</a></li>
-                <li><a href="#cloud-solutions"><ArrowRightIcon />Branding Services</a></li>
-                {/* <li><a href="#ai-ml"><ArrowRightIcon />AI & Data Science</a></li> */}
-                {/* <li><a href="#cybersecurity"><ArrowRightIcon />Cybersecurity</a></li> */}
-                <li><a href="#data-analytics"><ArrowRightIcon />Advance Digital Marketing</a></li>
-              </ul>
-            </div>
-
-            <div className="footer-section">
-              <h4 className="section-title">About Us</h4>
-              <ul className="footer-links">
-                <li><a href="#about"><ArrowRightIcon />Company Mission</a></li>
-                {/* <li><a href="#team"><ArrowRightIcon />Our Expert Team</a></li> */}
-                {/* <li><a href="#careers"><ArrowRightIcon />Careers & Culture</a></li> */}
-                <li><a href="#portfolio"><ArrowRightIcon />Client Portfolio</a></li>
-                <li><a href="#testimonials"><ArrowRightIcon />Success Stories</a></li>
-                <li><a href="#blog"><ArrowRightIcon />Insights Blog</a></li>
-              </ul>
-            </div>
-
-            <div className="footer-section newsletter-section">
-              <h4 className="section-title">Get In Touch</h4>
-              <p className="newsletter-description">
-                Join our newsletter to receive the latest tech trends and exclusive updates from Yuvocreations.
-              </p>
-              
-              <form onSubmit={handleSubscribe} className="newsletter-form">
-                <input
-                  type="email"
-                  placeholder="Enter your email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="newsletter-input"
-                  aria-label="Email address for newsletter subscription"
-                  required
-                />
-                <button 
-                  type="submit"
-                  className={`newsletter-button ${isSubscribed ? 'subscribed' : ''}`}
-                  disabled={isSubscribed}
-                >
-                  {isSubscribed ? (
-                    <>
-                      <CheckIcon />Subscribed!
-                    </>
-                  ) : 'Subscribe Now'}
-                </button>
-              </form>
-              
-              <div className="contact-info">
-                <div className="contact-item">
-                  <span className="contact-label">Phone:</span>
-                  <a href="tel:+917889487784" style={{ color: 'var(--color-text-light)', textDecoration: 'none' }}>+91 7042123166</a>
-                </div>
-                <div className="contact-item">
-                  <span className="contact-label">Email:</span>
-                  <a href="mailto:contact@yuvocreations.com" style={{ color: 'var(--color-text-light)', textDecoration: 'none' }}>contactus@yuvocreations.com</a>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div className="footer-divider"></div>
-
-          <div className="footer-bottom">
-            <div className="footer-bottom-left">
-              <p className="copyright">
-                &copy; {currentYear} Yuvocreations Private Limited | All Rights Reserved.
-              </p>
-              <div className="legal-links">
-                <a href="#privacy">Privacy Policy</a>
-                <span className="separator">•</span>
-                <a href="#terms">Terms of Service</a>
-                <span className="separator">•</span>
-                <a href="#cookies">Cookie Policy</a>
-              </div>
+        <div className="footer-bottom">
+          <div className="footer-bottom-left">
+            <p className="copyright">
+              &copy; {currentYear} Yuvocreations Private Limited | All Rights Reserved.
+            </p>
+            <div className="legal-links">
+              <a href="#privacy">Privacy Policy</a>
+              <span className="separator">•</span>
+              <a href="#terms">Terms of Service</a>
+              <span className="separator">•</span>
+              <a href="#cookies">Cookie Policy</a>
             </div>
           </div>
-
         </div>
-
-        
-
-      </footer>
-    </>
+      </div>
+    </footer>
   );
 };
 
