@@ -246,10 +246,7 @@ svg {
     top: calc(30vh + 30px);
   }
 
-  /* .vertical-left,
-  .vertical-right {
-    display: none;
-  } */
+  
 
   .pagination {
     font-size: 10px;
