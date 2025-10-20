@@ -3,28 +3,30 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
-
+import Uiux from "./services/Uiux";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Website from "./services/Website";  
+import Website from "./services/Website";
 import Footer from "./components/Footer";
 import Mouse from "./components/mouse"; // ⬅️ FIX 1: Import the component using its name 'Mouse'
 
 function App() {
-  return (
-    <Router>
-      <Header />
-      <Mouse/> {/* The custom cursor component */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/services/website" element={<Website />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-      <Footer />
-    </Router>
-  );
+  return (
+    <Router>
+            <Header />
+            <Mouse /> {/* The custom cursor component */}     {" "}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/services/website" element={<Website />} />
+        <Route path="/services/uiux" element={<Uiux />} />
+        <Route path="/services/ui-ux" element={<Uiux />} /> {/* alias */}
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+            <Footer />   {" "}
+    </Router>
+  );
 }
 
 export default App;

@@ -82,7 +82,7 @@ useEffect(() => {
 
   const services = [
     { name: 'Web Development', path: '/services/website' },
-    { name: 'UI/UX Design', path: '/ui-ux' },
+    { name: 'UI/UX Design', path: '/services/ui-ux' },
     { name: 'IT Consulting', path: '/it-consulting' },
     { name: 'Digital Marketing', path: '/digital-marketing' },
   ];
