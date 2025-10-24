@@ -1,68 +1,74 @@
-/* Enhanced 3D Image Carousel Styles */
-.carousel-section {
+/* =========================================
+   🔶 YuvoCreations 3D Image Carousel
+   Clean, smooth, responsive white layout
+   ========================================= */
+
+/* ====== Base Styles ====== */
+.carouselSection {
   width: 100vw;
-  min-height: 10vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Arial', sans-serif;
-  color: white;
-  gap: 20px;
-  margin: 0;
-  padding: 0;
+  font-family: "Arial", sans-serif;
+  color: #1e293b;
+  gap: 5px;
+  background: #ffffff;
   box-sizing: border-box;
-  background: white;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
 }
 
-.carousel-header {
+/* ====== Header ====== */
+.carouselHeader {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   z-index: 10;
   position: relative;
   width: 100%;
 }
 
-.carousel-title {
-  font-size: 4rem;
+.carouselTitle {
+  font-size: clamp(2rem, 4vw, 4rem);
   font-weight: bold;
-  margin-bottom: 1rem;
-  background: linear-gradient(45deg, #ffffff, #e0e7ff, #c7d2fe);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ff9f29;
   text-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
-.carousel-subtitle {
-  font-size: 1.5rem;
+.carouselSubtitle {
+  font-size: clamp(1rem, 2vw, 1.5rem);
   opacity: 0.9;
+  color: #64748b;
   margin: 0;
-  color: #cbd5e1;
 }
 
-/* 3D Carousel Container */
-.carousel-container {
+/* ====== Carousel Container ====== */
+.carouselContainer {
   position: relative;
   width: 100%;
-  height: 30vh;
+  height: 80vh;
   perspective: 1800px;
   margin: 0 auto;
-  overflow: hidden;
+  overflow: visible;
+  z-index: 1;
 }
 
-.carousel-3d {
+/* ====== 3D Carousel Wrapper ====== */
+.carousel3d {
   position: absolute;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  animation: rotate360 25s infinite linear;
+  animation: rotate360 55s infinite linear;
   transition: animation-play-state 0.3s ease;
 }
 
-
-
-.carousel-face {
+/* ====== Each Image Face ====== */
+.carouselFace {
   position: absolute;
   width: 420px;
   height: 280px;
@@ -73,37 +79,13 @@
   border-radius: 20px;
   overflow: hidden;
   transform-origin: center;
-  transition: transform 0.3s ease;
+  background: #ffffff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s ease;
 }
 
-/* Enhanced spacing - images will be positioned at greater distances */
-.carousel-face:nth-child(1) {
-  transform: rotateY(0deg) translateZ(450px);
-}
-
-.carousel-face:nth-child(2) {
-  transform: rotateY(72deg) translateZ(450px);
-}
-
-.carousel-face:nth-child(3) {
-  transform: rotateY(144deg) translateZ(450px);
-}
-
-.carousel-face:nth-child(4) {
-  transform: rotateY(216deg) translateZ(450px);
-}
-
-.carousel-face:nth-child(5) {
-  transform: rotateY(288deg) translateZ(450px);
-}
-
-/* For 6 images, use 60deg increments */
-.carousel-face:nth-child(6) {
-  transform: rotateY(300deg) translateZ(450px);
-}
-
-/* Image Styling */
-.carousel-link {
+/* ====== Image Link Card ====== */
+.carouselLink {
   display: block;
   width: 100%;
   height: 100%;
@@ -111,21 +93,18 @@
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 
-              0 8px 25px rgba(0, 0, 0, 0.3),
-              inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transition: all 0.4s ease;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  background: #fff;
 }
 
-.carousel-link:hover {
+.carouselLink:hover {
   transform: scale(1.05);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 
-              0 12px 35px rgba(0, 0, 0, 0.4),
-              0 0 30px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.2);
 }
 
-.image-container {
+.imageContainer {
   position: relative;
   width: 100%;
   height: 100%;
@@ -133,102 +112,79 @@
   border-radius: 20px;
 }
 
-.carousel-image {
+.carouselImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
 }
 
-.carousel-link:hover .carousel-image {
+.carouselLink:hover .carouselImage {
   transform: scale(1.1);
 }
 
-/* Enhanced Image Overlay */
-.image-overlay {
+/* ====== Overlay Info ====== */
+.imageOverlay {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  /* background: linear-gradient(transparent, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.95)); */
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
   color: white;
-  padding: 2.5rem 2rem 2rem 2rem;
+  padding: 2rem;
   transform: translateY(10px);
   opacity: 0;
   transition: all 0.3s ease;
 }
 
-/* .carousel-link:hover .image-overlay {
+.carouselLink:hover .imageOverlay {
   transform: translateY(0);
   opacity: 1;
-} */
+}
 
-.image-title {
+.imageTitle {
   font-size: 1.4rem;
   font-weight: bold;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.3rem 0;
   color: #ffffff;
 }
 
-.image-cta {
-  margin: 0;
+.imageDesc {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  color: #e2e8f0;
+  margin-bottom: 0.5rem;
+}
+
+.imageCta {
   font-size: 1rem;
   opacity: 0.9;
-  color: #e2e8f0;
+  color: #ffffff;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.image-cta::after {
-  content: '→';
-  transition: transform 0.3s ease;
-}
-
-.carousel-link:hover .image-cta::after {
-  transform: translateX(5px);
-}
-
-/* Enhanced Center Decoration */
-.carousel-center {
+/* ====== Subtle Light Reflection Layer ====== */
+.lightReflection {
+  content: "";
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 5;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 60%
+  );
+  opacity: 0.4;
+  pointer-events: none;
+  border-radius: 20px;
 }
 
-.center-dot {
-  width: 40px;
-  height: 40px;
-  background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.2) 100%);
-  border-radius: 50%;
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.6),
-              0 0 80px rgba(255, 255, 255, 0.3),
-              inset 0 2px 10px rgba(255, 255, 255, 0.4);
-  animation: pulse 4s infinite ease-in-out;
-  border: 2px solid rgba(255, 255, 255, 0.8);
-}
-
-/* Enhanced Controls */
-.carousel-controls {
-  margin-top: 4rem;
-  text-align: center;
-  width: 100%;
-  z-index: 10;
-  position: relative;
-}
-
-.control-text {
-  opacity: 0.7;
-  font-size: 1rem;
-  margin: 0;
-  color: #94a3b8;
-  font-weight: 300;
-  letter-spacing: 0.5px;
-}
-
-/* Enhanced Animations */
+/* ====== Rotation Animation ====== */
 @keyframes rotate360 {
   from {
     transform: rotateY(0deg);
@@ -238,149 +194,158 @@
   }
 }
 
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.8;
+/* ====== Responsive Circle Radius (Dynamic) ====== */
+:root {
+  --circle-radius: 450px;
+}
+
+@media (max-width: 1440px) {
+  :root {
+    --circle-radius: 400px;
   }
-  50% {
-    transform: scale(1.3);
-    opacity: 1;
-  }
 }
 
-/* Enhanced 3D Effects */
-.carousel-face::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  /* background: linear-gradient(135deg, 
-    transparent 30%, 
-    rgba(255,255,255,0.15) 45%, 
-    rgba(255,255,255,0.1) 55%, 
-    transparent 70%); */
-  opacity: 0.4;
-  pointer-events: none;
-  border-radius: 20px;
-  transition: opacity 0.3s ease;
-}
-
-.carousel-link:hover .carousel-face::before {
-  opacity: 0.6;
-}
-
-/* Responsive Design */
 @media (max-width: 1024px) {
-  .carousel-container {
-    perspective: 1500px;
-  }
-  
-  .carousel-face {
-    width: 380px;
-    height: 240px;
-    margin-left: -190px;
-    margin-top: -120px;
-  }
-  
-  .carousel-face:nth-child(1) { transform: rotateY(0deg) translateZ(380px); }
-  .carousel-face:nth-child(2) { transform: rotateY(72deg) translateZ(380px); }
-  .carousel-face:nth-child(3) { transform: rotateY(144deg) translateZ(380px); }
-  .carousel-face:nth-child(4) { transform: rotateY(216deg) translateZ(380px); }
-  .carousel-face:nth-child(5) { transform: rotateY(288deg) translateZ(380px); }
-  .carousel-face:nth-child(6) { transform: rotateY(300deg) translateZ(380px); }
-  
-  .carousel-header {
-    margin-bottom: 3rem;
+  :root {
+    --circle-radius: 320px;
   }
 }
 
 @media (max-width: 768px) {
-  .carousel-section {
-    min-height: 100vh;
-  }
-  
-  .carousel-title {
-    font-size: 3rem;
-  }
-  
-  .carousel-subtitle {
-    font-size: 1.2rem;
-  }
-  
-  .carousel-container {
-    perspective: 1200px;
-  }
-  
-  .carousel-face {
-    width: 300px;
-    height: 200px;
-    margin-left: -150px;
-    margin-top: -100px;
-  }
-  
-  .carousel-face:nth-child(1) { transform: rotateY(0deg) translateZ(320px); }
-  .carousel-face:nth-child(2) { transform: rotateY(72deg) translateZ(320px); }
-  .carousel-face:nth-child(3) { transform: rotateY(144deg) translateZ(320px); }
-  .carousel-face:nth-child(4) { transform: rotateY(216deg) translateZ(320px); }
-  .carousel-face:nth-child(5) { transform: rotateY(288deg) translateZ(320px); }
-  .carousel-face:nth-child(6) { transform: rotateY(300deg) translateZ(320px); }
-  
-  .carousel-3d {
-    animation-duration: 30s;
-  }
-  
-  .carousel-header {
-    margin-bottom: 2rem;
-  }
-  
-  .carousel-controls {
-    margin-top: 2rem;
+  :root {
+    --circle-radius: 220px;
   }
 }
 
 @media (max-width: 480px) {
-  .carousel-section {
-    min-height: 100vh;
+  :root {
+    --circle-radius: 160px;
   }
-  
-  .carousel-title {
-    font-size: 3rem;
+}
+
+@media (max-width: 360px) {
+  :root {
+    --circle-radius: 130px;
   }
-  
-  .carousel-subtitle {
-    font-size: 1.2rem;
+}
+
+/* ====== Responsive Adjustments ====== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .carouselContainer {
+    height: 70vh;
+    perspective: 1500px;
   }
-  
-  .carousel-container {
+
+  .carouselFace {
+    width: 360px;
+    height: 230px;
+    margin-left: -180px;
+    margin-top: -115px;
+  }
+
+  .carousel3d {
+    animation-duration: 60s; /* slightly slower on tablets */
+  }
+}
+
+/* ===============================
+   📲 MOBILE OPTIMIZATION (Final Tweaks)
+   =============================== */
+
+/* Mobile Landscape */
+@media (max-width: 768px) {
+  .carouselContainer {
+    height: 60vh;
     perspective: 1200px;
   }
-  
-  .carousel-face {
-    width: 300px;
-    height: 200px;
-    margin-left: -150px;
-    margin-top: -100px;
+
+  .carouselFace {
+    width: 250px; /* 🔹 slightly smaller */
+    height: 165px;
+    margin-left: -125px;
+    margin-top: -82.5px;
   }
-  
-  .carousel-face:nth-child(1) { transform: rotateY(0deg) translateZ(320px); }
-  .carousel-face:nth-child(2) { transform: rotateY(72deg) translateZ(320px); }
-  .carousel-face:nth-child(3) { transform: rotateY(144deg) translateZ(320px); }
-  .carousel-face:nth-child(4) { transform: rotateY(216deg) translateZ(320px); }
-  .carousel-face:nth-child(5) { transform: rotateY(288deg) translateZ(320px); }
-  .carousel-face:nth-child(6) { transform: rotateY(300deg) translateZ(320px); }
-  
-  .carousel-3d {
-    animation-duration: 30s;
+
+  /* 🔹 Increase circle radius slightly for subtle spacing */
+  :root {
+    --circle-radius: 250px;
   }
-  
-  .carousel-header {
-    margin-bottom: 2rem;
+
+  .carousel3d {
+    animation-duration: 65s;
   }
-  
-  .carousel-controls {
-    margin-top: 2rem;
+
+  .carouselTitle {
+    font-size: 2.4rem;
+  }
+
+  .carouselSubtitle {
+    font-size: 1.1rem;
+  }
+}
+
+/* Mobile Portrait */
+@media (max-width: 480px) {
+  .carouselContainer {
+    height: 55vh;
+    perspective: 1100px;
+  }
+
+  .carouselFace {
+    width: 210px; /* 🔹 smaller card size */
+    height: 140px;
+    margin-left: -105px;
+    margin-top: -70px;
+  }
+
+  /* 🔹 More space between cards for perfect visibility */
+  :root {
+    --circle-radius: 200px;
+  }
+
+  .carousel3d {
+    animation-duration: 70s;
+  }
+
+  .carouselTitle {
+    font-size: 2rem;
+  }
+
+  .carouselSubtitle {
+    font-size: 1rem;
+  }
+}
+
+/* Small Phones */
+@media (max-width: 360px) {
+  .carouselContainer {
+    height: 50vh;
+    perspective: 950px;
+  }
+
+  .carouselFace {
+    width: 190px; /* 🔹 slightly smaller still */
+    height: 125px;
+    margin-left: -95px;
+    margin-top: -62.5px;
+  }
+
+  /* 🔹 Slightly wider circle for comfort */
+  :root {
+    --circle-radius: 170px;
+  }
+
+  .carousel3d {
+    animation-duration: 75s;
+  }
+
+  .carouselTitle {
+    font-size: 1.8rem;
+  }
+
+  .carouselSubtitle {
+    font-size: 0.9rem;
   }
 }

@@ -1,6 +1,5 @@
-// ...imports same as your file...
 import React, { useState } from "react";
-import "../css/imgcarousel.module.css";
+import styles from "../css/imgcarousel.module.css";
 import car1 from "../assets/car1.png";
 import car2 from "../assets/car2.png";
 import car3 from "../assets/car3.png";
@@ -12,254 +11,103 @@ const ImgCarousel = () => {
   const [isPaused] = useState(false);
 
   const images = [
-    { src: car1, alt: "Exponent Institute", link: "https://exponentinstitute.com/", title: "Exponent Institute", description: "Educational Excellence" },
-    { src: car2, alt: "Shreeram Neuro Centre", link: "https://shreeramneurocentre.com/", title: "Shreeram Neuro Centre", description: "Healthcare Innovation" },
-    { src: car3, alt: "Manohar Hospital", link: "https://manoharhospital.com/", title: "Manohar Hospital", description: "Medical Care Excellence" },
-    { src: car4, alt: "Meliorist", link: "https://www.meliorist.in/", title: "Meliorist", description: "Digital Solutions" },
-    { src: car5, alt: "Iphone", link: "https://apple-website-pi-blond.vercel.app/", title: "Iphone", description: "Moder Design" },
+    {
+      src: car1,
+      link: "https://exponentinstitute.com/",
+      title: "Exponent Institute",
+      description: "Educational Excellence",
+    },
+    {
+      src: car2,
+      link: "https://shreeramneurocentre.com/",
+      title: "Shreeram Neuro Centre",
+      description: "Healthcare Innovation",
+    },
+    {
+      src: car3,
+      link: "https://manoharhospital.com/",
+      title: "Manohar Hospital",
+      description: "Medical Care Excellence",
+    },
+    {
+      src: car4,
+      link: "https://www.meliorist.in/",
+      title: "Meliorist",
+      description: "Digital Solutions",
+    },
+    {
+      src: car5,
+      link: "https://greenfungi.org/",
+      title: "Green Fungi",
+      description: "Minimal E-Commerce",
+    },
   ];
 
   const angleIncrement = 360 / images.length;
 
   return (
     <>
-      <div
-        style={{
-          width: "100vw",
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          fontFamily: "Arial, sans-serif",
-          color: "white",
-          gap: "5px",
-          margin: 0,
-          padding: 0,
-          boxSizing: "border-box",
-        }}
-      >
+      {/* === Carousel Section === */}
+      <div className={styles.carouselSection}>
         {/* Header */}
-        <div
-          style={{
-            textAlign: "center",
-            marginBottom: "4rem",
-            zIndex: 10,
-            position: "relative",
-            width: "100%",
-          }}
-        >
-          <h2
-            style={{
-              fontSize: "4rem",
-              fontWeight: "bold",
-              marginBottom: "1rem",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: "#ff9f29",
-              textShadow: "0 4px 15px rgba(255, 255, 255, 0.1)",
-              marginTop: "2rem",
-            }}
-          >
-            Our Featured Projects
-          </h2>
-          <p
-            style={{
-              fontSize: "1.5rem",
-              opacity: 0.9,
-              margin: 0,
-              color: "#cbd5e1",
-            }}
-          >
+        <div className={styles.carouselHeader}>
+          <h2 className={styles.carouselTitle}>Our Featured Projects</h2>
+          <p className={styles.carouselSubtitle}>
             Discover our amazing work portfolio
           </p>
         </div>
 
         {/* Carousel Container */}
-        <div
-          style={{
-            position: "relative",
-            width: "100%",
-            height: "100svh",
-            perspective: "1800px",
-            margin: "0 auto",
-            overflow: "hidden",
-          }}
-        >
+        <div className={styles.carouselContainer}>
           <div
+            className={styles.carousel3d}
             style={{
-              position: "absolute",
-              width: "100%",
-              height: "100%",
-              transformStyle: "preserve-3d",
-              animation: isPaused ? "none" : "rotate360 25s infinite linear",
-              transition: "animation-play-state 0.3s ease",
+              animation: isPaused
+                ? "none"
+                : "rotate360 55s infinite linear",
             }}
           >
             {images.map((image, index) => {
-              const rotateY = angleIncrement * index;
-              const translateZ = 450;
+              const rotateY = angleIncrement * index; // ✅ define rotation for each card
 
               return (
                 <div
                   key={index}
-                  className="carousel-face"  
+                  className={styles.carouselFace}
                   style={{
-                    position: "absolute",
-                    width: "420px",
-                    height: "280px",
-                    left: "50%",
-                    top: "50%",
-                    marginLeft: "-210px",
-                    marginTop: "-140px",
-                    borderRadius: "20px",
-                    overflow: "hidden",
-                    transformOrigin: "center",
-                    transition: "transform 0.3s ease",
-                    transform: `rotateY(${rotateY}deg) translateZ(${translateZ}px)`,
+                    transform: `rotateY(${rotateY}deg) translateZ(var(--circle-radius))`,
                   }}
                 >
                   <a
                     href={image.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{
-                      display: "block",
-                      width: "100%",
-                      height: "100%",
-                      textDecoration: "none",
-                      position: "relative",
-                      borderRadius: "20px",
-                      overflow: "hidden",
-                      boxShadow:
-                        "0 20px 50px rgba(0, 0, 0, 0.6), 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
-                      transition: "all 0.4s ease",
-                      border: "1px solid rgba(255, 255, 255, 0.1)",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = "scale(1.05)";
-                      e.currentTarget.style.boxShadow =
-                        "0 25px 60px rgba(0, 0, 0, 0.8), 0 12px 35px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 255, 255, 0.1)";
-
-                      const img = e.currentTarget.querySelector("img");
-                      if (img) img.style.transform = "scale(1.1)";
-
-                      const overlay =
-                        e.currentTarget.querySelector(".image-overlay");
-                      if (overlay) {
-                        overlay.style.transform = "translateY(0)";
-                        overlay.style.opacity = "1";
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = "scale(1)";
-                      e.currentTarget.style.boxShadow =
-                        "0 20px 50px rgba(0, 0, 0, 0.6), 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
-
-                      const img = e.currentTarget.querySelector("img");
-                      if (img) img.style.transform = "scale(1)";
-
-                      const overlay =
-                        e.currentTarget.querySelector(".image-overlay");
-                      if (overlay) {
-                        overlay.style.transform = "translateY(10px)";
-                        overlay.style.opacity = "0";
-                      }
-                    }}
+                    className={styles.carouselLink}
                   >
-                    <div
-                      style={{
-                        position: "relative",
-                        width: "100%",
-                        height: "100%",
-                        overflow: "hidden",
-                        borderRadius: "20px",
-                      }}
-                    >
+                    <div className={styles.imageContainer}>
                       <img
                         src={image.src}
-                        alt={image.alt}
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                          transition: "transform 0.4s ease",
-                        }}
+                        alt={image.title}
+                        className={styles.carouselImage}
                       />
-                      <div
-                        className="image-overlay"
-                        style={{
-                          position: "absolute",
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          background:
-                            "linear-gradient(transparent, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.95))",
-                          color: "white",
-                          padding: "2.5rem 2rem 2rem 2rem",
-                          transform: "translateY(10px)",
-                          opacity: 0,
-                          transition: "all 0.3s ease",
-                        }}
-                      >
-                        <h3
-                          style={{
-                            fontSize: "1.4rem",
-                            fontWeight: "bold",
-                            margin: "0 0 0.5rem 0",
-                            color: "#ffffff",
-                          }}
-                        >
-                          {image.title}
-                        </h3>
-                        <p
-                          style={{
-                            margin: "0 0 0.5rem 0",
-                            fontSize: "0.9rem",
-                            opacity: 0.8,
-                            color: "#cbd5e1",
-                          }}
-                        >
+                      <div className={styles.imageOverlay}>
+                        <h3 className={styles.imageTitle}>{image.title}</h3>
+                        <p className={styles.imageDesc}>
                           {image.description}
                         </p>
-                        <p
-                          style={{
-                            margin: 0,
-                            fontSize: "1rem",
-                            opacity: 0.9,
-                            color: "#e2e8f0",
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "8px",
-                          }}
-                        >
-                          View Project →
-                        </p>
+                        <p className={styles.imageCta}>View Project →</p>
                       </div>
                     </div>
 
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        background:
-                          "linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.15) 45%, rgba(255,255,255,0.1) 55%, transparent 70%)",
-                        opacity: 0.4,
-                        pointerEvents: "none",
-                        borderRadius: "20px",
-                        transition: "opacity 0.3s ease",
-                      }}
-                    />
+                    {/* Subtle highlight reflection layer */}
+                    <div className={styles.lightReflection}></div>
                   </a>
                 </div>
               );
             })}
           </div>
 
-          {/* keep your keyframes here or in CSS file */}
+          {/* Keyframes definition */}
           <style>{`
             @keyframes rotate360 {
               from { transform: rotateY(0deg); }
@@ -268,27 +116,15 @@ const ImgCarousel = () => {
           `}</style>
         </div>
 
-        <div
-          style={{
-            marginTop: "4rem",
-            textAlign: "center",
-            width: "100%",
-            zIndex: 10,
-            position: "relative",
-          }}
-        >
-          <p
-            style={{
-              opacity: 0.7,
-              fontSize: "1rem",
-              margin: 0,
-              color: "#94a3b8",
-              fontWeight: 300,
-              letterSpacing: "0.5px",
-            }}
-          ></p>
+        {/* Optional Footer/Controls */}
+        <div className={styles.carouselControls}>
+          <p className={styles.carouselFooterText}>
+            {/* You can add pagination or pause info here later */}
+          </p>
         </div>
       </div>
+
+      {/* WorkFlow Section Below Carousel */}
       <Workflow />
     </>
   );

@@ -81,10 +81,9 @@ useEffect(() => {
   const isMobile = () => window.innerWidth <= 768;
 
   const services = [
-    { name: 'Web Development', path: '/services/website' },
-    { name: 'UI/UX Design', path: '/services/ui-ux' },
-    { name: 'IT Consulting', path: '/it-consulting' },
-    { name: 'Digital Marketing', path: '/digital-marketing' },
+    { name: 'Web Development ', path: '/services/website' },
+    { name: 'Branding & Design', path: '/services/ui-ux' },
+    { name: 'Digital Marketing & Growth', path: '/digital-marketing' },
   ];
 
   const toggleMenu = () => setMenuOpen((v) => !v);

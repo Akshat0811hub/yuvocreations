@@ -114,56 +114,23 @@ body {
 }
 
 /* --- Responsive Breakpoints --- */
-
-/* Tablets */
+/* --- MOBILE (Perfect as before) --- */
 @media (max-width: 768px) {
   .curve-container {
-    height: clamp(160px, 40vw, 280px);
-  }
-  .particle {
-    opacity: 0.7;
-  }
-  .main-content {
-    padding: 0 0.5rem;
-  }
-}
-
-
-@media (max-width: 480px) {
-  .curve-container {
-    height: clamp(160px, 40vw, 280px);
-  }
-  .particle {
-    opacity: 0.7;
-  }
-  .main-content {
-    padding: 0 0.5rem;
-  }
-}
-
-/* Very small screens */
-@media (max-width: 360px) {
-  .particles-container {
-    display: none;
-  }
-}
-
-/* Reduced motion preference */
-@media (prefers-reduced-motion: reduce) {
-  .particle,
-  .control-point {
-    animation: none !important;
-  }
-}
-/* --- Mobile rope sizing & containment --- */
-@media (max-width: 768px) {
-  /* Curve container thoda bada + overflow hide so it never bleeds out */
-  .curve-container {
-    height: clamp(170px, 55vw, 260px); /* ⬅️ slightly bigger than before */
-    overflow: hidden;                  /* ⬅️ keep rope inside on mobile */
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: clamp(220px, 65vw, 340px);
+    overflow: visible;
+    margin: 0 auto;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  /* Inline style (width:140%) ko override karke full-width fit */
   .curve-svg {
     width: 100% !important;
     max-width: 100% !important;
@@ -171,28 +138,98 @@ body {
     transform: translateX(-50%) !important;
   }
 
-  /* Rope stroke thoda mota on mobile (very slightly) */
   .curve-svg path {
-    stroke-width: clamp(7px, 2.2vw, 10px);
+    stroke-width: clamp(12px, 5vw, 22px);
+    filter: drop-shadow(0 0 8px rgba(249, 115, 22, 0.5));
   }
 
-  /* End circles thoda sa bigger without changing SVG attributes */
   .control-point {
-    transform: scale(1.15);
-    transform-box: fill-box;   /* ensure scaling uses element box */
+    transform: scale(1.3);
+    transform-box: fill-box;
     transform-origin: center;
+  }
+
+  .main-content {
+    padding: 0 0.3rem;
   }
 }
 
-/* Extra small phones: a hair bigger but still contained */
+/* --- SMALL PHONES --- */
 @media (max-width: 480px) {
   .curve-container {
-    height: clamp(160px, 58vw, 240px);
+    height: clamp(230px, 70vw, 360px);
   }
   .curve-svg path {
-    stroke-width: clamp(8px, 2.6vw, 11px);
+    stroke-width: clamp(14px, 6vw, 26px);
   }
   .control-point {
-    transform: scale(1.2);
+    transform: scale(1.4);
+  }
+}
+
+/* --- DESKTOP & LAPTOP (FULL SCREEN WIDTH RESPONSIVE) --- */
+@media (min-width: 769px) and (max-width: 1599px) {
+  .curve-container {
+    position: relative;
+    width: 100vw; /* 🔥 full screen width */
+    max-width: 100vw;
+    height: clamp(200px, 30vw, 360px);
+    overflow: visible;
+    margin: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* make SVG match screen width */
+  .curve-svg {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    display: block;
+  }
+
+  /* smooth thickness based on screen size */
+  .curve-svg path {
+    stroke-width: clamp(6px, 0.8vw, 12px);
+    transition: stroke-width 0.3s ease;
+    filter: drop-shadow(0 0 10px rgba(249, 115, 22, 0.4));
+  }
+
+  .control-point {
+    transform: scale(1.15);
+  }
+}
+
+/* --- EXTRA LARGE SCREENS (1600px+) --- */
+@media (min-width: 1600px) {
+  .curve-container {
+    position: relative;
+    width: 100vw; /* 🔥 fills the full screen width */
+    max-width: 100vw;
+    height: clamp(260px, 25vw, 520px);
+    margin: 0 auto;
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .curve-svg {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .curve-svg path {
+    stroke-width: clamp(6px, 0.7vw, 14px);
+  }
+
+  .control-point {
+    transform: scale(1.1);
   }
 }

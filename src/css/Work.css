@@ -437,75 +437,191 @@
   }
 }
 
-/* Responsive Design */
+/* =====================================================
+   📱 FIXED: Keep Desktop Layout Responsive for All Screens
+   (No layout switching, only scaling)
+   ===================================================== */
+
+/* 🔹 Large tablets and small laptops */
 @media (max-width: 1024px) {
   .workflow-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
-  
-  .workflow-connections {
-    display: none;
+
+  .workflow-step {
+    height: auto;
+    min-height: 380px;
   }
-  
+
+  .step-title {
+    font-size: 1.3rem;
+  }
+
+  .step-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .workflow-card {
+    padding: 1.5rem;
+  }
+
   .title-work,
   .title-flow {
     font-size: 3rem;
   }
-}
 
-@media (max-width: 768px) {
-  .workflow-desktop {
-    display: none;
-  }
-  
-  .workflow-mobile {
-    display: flex;
-  }
-  
-  .title-work,
-  .title-flow {
-    font-size: 2.5rem;
-  }
-  
-  .workflow-subtitle {
-    font-size: 1.125rem;
-  }
-  
-  .workflow-container {
-    padding: 1.5rem;
-  }
-  
-  .workflow-header {
-    margin-bottom: 2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .title-work,
-  .title-flow {
-    font-size: 2rem;
-  }
-  
   .workflow-subtitle {
     font-size: 1rem;
+    width: 90%;
   }
-  
+
+  .workflow-connections {
+    display: none; /* optional: hide connector lines for smaller screens */
+  }
+}
+
+/* 🔹 Mobile landscape */
+@media (max-width: 768px) {
+  .workflow-grid {
+    grid-template-columns: 1fr; /* single column view */
+    gap: 2rem;
+  }
+
+  .workflow-step {
+    min-height: 350px;
+    height: auto;
+    transform: none !important;
+  }
+
+  .workflow-card {
+    padding: 1.25rem 1rem;
+    width: 90%;
+    margin: 0 auto;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .step-badge {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    top: -0.8rem;
+    right: -0.8rem;
+  }
+
+  .step-icon {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .step-title {
+    font-size: 1.25rem;
+  }
+
+  .step-description {
+    font-size: 0.9rem;
+  }
+
   .workflow-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .title-work,
+  .title-flow {
+    font-size: 2.4rem;
+    text-align: center;
+  }
+
+  .workflow-subtitle {
+    text-align: center;
+    font-size: 1rem;
+  }
+}
+
+/* 🔹 Mobile portrait */
+@media (max-width: 480px) {
+  .workflow-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .workflow-step {
+    height: auto;
+    min-height: 330px;
+    transform: none !important;
+  }
+
+  .workflow-card {
     padding: 1rem;
+    width: 95%;
+    margin: 0 auto;
+    border-radius: 1rem;
   }
-  
-  .mobile-card {
-    padding: 1.25rem;
+
+  .step-icon {
+    font-size: 2.4rem;
   }
-  
-  .mobile-badge {
-    width: 2rem;
-    height: 2rem;
-    font-size: 0.875rem;
+
+  .step-title {
+    font-size: 1.2rem;
   }
-  
-  .mobile-icon {
+
+  .step-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .step-details {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .detail-tag {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.75rem;
+  }
+
+  .workflow-container {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .title-work,
+  .title-flow {
     font-size: 2rem;
+  }
+
+  .workflow-subtitle {
+    font-size: 0.9rem;
+    width: 100%;
+  }
+}
+
+/* 🔹 Very small phones (≤360px width) */
+@media (max-width: 360px) {
+  .workflow-card {
+    padding: 0.9rem;
+    border-radius: 0.75rem;
+  }
+
+  .step-icon {
+    font-size: 2rem;
+  }
+
+  .step-title {
+    font-size: 1rem;
+  }
+
+  .step-description {
+    font-size: 0.85rem;
+  }
+
+  .title-work,
+  .title-flow {
+    font-size: 1.8rem;
+  }
+
+  .workflow-subtitle {
+    font-size: 0.85rem;
   }
 }
