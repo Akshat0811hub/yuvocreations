@@ -13,8 +13,8 @@ import Mouse from "./components/mouse"; // ⬅️ FIX 1: Import the component us
 function App() {
   return (
     <Router>
-            <Header />
-            <Mouse /> {/* The custom cursor component */}     {" "}
+      <Header />
+      <Mouse /> {/* The custom cursor component */}{" "}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
@@ -23,9 +23,7 @@ function App() {
         <Route path="/services/ui-ux" element={<Uiux />} /> {/* alias */}
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-      </Routes>
-            <Footer />   {" "}
-    </Router>
+      </Routes> <Footer />  {" "}</Router>
   );
 }
 

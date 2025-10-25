@@ -1,41 +1,52 @@
-/* WebsiteDesignPage.css */
+/* =====================================================
+   🧡 MODERN HERO BANNER (White / Orange / Black)
+   ===================================================== */
 
-/* Reset and Base Styles */
-.webdesign-page-container {
-  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  color: #1a202c;
-  overflow-x: hidden;
-}
-
-.webdesign-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-/* Hero Section */
 .webdesign-hero-zone {
-  background: linear-gradient(135deg, #fe932a 0%, #ff3c3c 100%);
-  padding: 8rem 0 6rem;
   position: relative;
+  background: #ffffff;
+  padding: 7rem 0 6rem;
   overflow: hidden;
 }
 
-.webdesign-hero-zone::before {
+/* 🔸 Soft floating orange gradient blobs */
+.webdesign-hero-zone::before,
+.webdesign-hero-zone::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="10" cy="60" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="90" cy="40" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.25;
+  z-index: 0;
+  animation: floatGradient 10s ease-in-out infinite alternate;
 }
 
+.webdesign-hero-zone::before {
+  width: 300px;
+  height: 300px;
+  top: -80px;
+  right: -100px;
+  background: radial-gradient(circle, #fe932a 0%, transparent 70%);
+}
+
+.webdesign-hero-zone::after {
+  width: 250px;
+  height: 250px;
+  bottom: -100px;
+  left: -80px;
+  background: radial-gradient(circle, #ff3c3c 0%, transparent 70%);
+}
+
+@keyframes floatGradient {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(20px, -20px); }
+}
+
+/* 🔸 Content Layout */
 .webdesign-hero-content {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 4rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -44,140 +55,148 @@
   z-index: 2;
 }
 
+/* Left Side Text */
 .webdesign-hero-text-area {
   flex: 1;
-  color: white;
+  color: #1a202c;
+  animation: fadeUp 1s ease forwards;
 }
 
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Headline */
 .webdesign-main-headline {
-  font-size: 3.5rem;
+  font-size: 3.4rem;
   font-weight: 800;
   line-height: 1.1;
-  margin-bottom: 1.5rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.3rem;
+  color: #0f172a;
 }
 
 .webdesign-highlight-text {
-  background: linear-gradient(45deg, #ffd89b, #19547b);
+  background: linear-gradient(90deg, #fe932a, #ff3c3c);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
+/* Description */
 .webdesign-hero-description {
-  font-size: 1.25rem;
-  opacity: 0.9;
-  margin-bottom: 2.5rem;
-  max-width: 500px;
+  font-size: 1.2rem;
+  color: #4a5568;
+  max-width: 520px;
+  margin-bottom: 2.2rem;
+  line-height: 1.8;
 }
 
+/* 🔸 Buttons */
 .webdesign-hero-buttons {
   display: flex;
-  gap: 1rem;
   flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .webdesign-primary-btn,
 .webdesign-secondary-btn {
   padding: 1rem 2rem;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  border-radius: 12px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
+  transition: all 0.3s ease;
   border: none;
 }
 
+/* Primary Button - Orange */
 .webdesign-primary-btn {
-  background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+  background: linear-gradient(90deg, #fe932a, #ff3c3c);
   color: white;
-  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
-}
-
-.webdesign-secondary-btn {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 20px rgba(254, 147, 42, 0.3);
 }
 
 .webdesign-primary-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+  box-shadow: 0 12px 30px rgba(254, 147, 42, 0.4);
+}
+
+/* Secondary Button - Outline */
+.webdesign-secondary-btn {
+  background: transparent;
+  color: #fe932a;
+  border: 2px solid #fe932a;
 }
 
 .webdesign-secondary-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: #fe932a;
+  color: white;
   transform: translateY(-3px);
 }
 
-.webdesign-btn-ripple {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: all 0.6s ease;
-}
-
-.webdesign-primary-btn:active .webdesign-btn-ripple {
-  width: 300px;
-  height: 300px;
-}
-
+/* 🔸 Right Side Visuals */
 .webdesign-hero-visual {
   flex: 1;
   position: relative;
   height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Floating Glass Cards */
 .webdesign-floating-card {
   position: absolute;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(15px);
   border-radius: 20px;
   padding: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  animation: webdesign-float 6s ease-in-out infinite;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  animation: floatCard 6s ease-in-out infinite;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.07);
+  transition: transform 0.3s ease;
+}
+
+.webdesign-floating-card:hover {
+  transform: scale(1.05);
 }
 
 .webdesign-card-1 {
-  top: 20px;
-  left: 0;
-  animation-delay: 0s;
+  top: 0;
+  left: 10%;
+  width: 180px;
+  height: 120px;
 }
 
 .webdesign-card-2 {
-  top: 120px;
-  right: 0;
+  top: 130px;
+  right: 10%;
+  width: 200px;
+  height: 130px;
   animation-delay: 2s;
 }
 
 .webdesign-card-3 {
-  bottom: 20px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
+  width: 160px;
+  height: 100px;
   animation-delay: 4s;
 }
 
-@keyframes webdesign-float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  25% { transform: translateY(-10px) rotate(1deg); }
-  50% { transform: translateY(-5px) rotate(-1deg); }
-  75% { transform: translateY(-15px) rotate(0.5deg); }
+@keyframes floatCard {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
+/* Tiny Decorative Browser Mockup */
 .webdesign-mini-browser {
-  width: 200px;
-  height: 120px;
+  width: 180px;
+  height: 110px;
   background: white;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -203,35 +222,50 @@
   background: linear-gradient(45deg, #e2e8f0, #cbd5e0);
 }
 
-.webdesign-mobile-mockup {
-  width: 80px;
-  height: 140px;
-  background: #1a202c;
-  border-radius: 12px;
-  padding: 8px;
+/* =====================================================
+   📱 RESPONSIVE HERO
+   ===================================================== */
+@media (max-width: 992px) {
+  .webdesign-hero-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 3rem;
+  }
+
+  .webdesign-main-headline {
+    font-size: 2.6rem;
+  }
+
+  .webdesign-hero-description {
+    font-size: 1.1rem;
+    margin: 0 auto 2rem;
+  }
+
+  .webdesign-hero-buttons {
+    justify-content: center;
+  }
+
+  .webdesign-hero-visual {
+    height: 320px;
+  }
 }
 
-.webdesign-mobile-screen {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, #4299e1, #667eea);
-  border-radius: 6px;
+@media (max-width: 480px) {
+  .webdesign-main-headline {
+    font-size: 2rem;
+  }
+
+  .webdesign-hero-description {
+    font-size: 1rem;
+  }
+
+  .webdesign-primary-btn,
+  .webdesign-secondary-btn {
+    width: 100%;
+    max-width: 300px;
+  }
 }
 
-.webdesign-color-palette {
-  display: flex;
-  gap: 8px;
-}
-
-.webdesign-color-palette span {
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-}
-
-.webdesign-color-1 { background: #ff6b6b; }
-.webdesign-color-2 { background: #4ecdc4; }
-.webdesign-color-3 { background: #45b7d1; }
 
 /* Services Section */
 .webdesign-services-zone {

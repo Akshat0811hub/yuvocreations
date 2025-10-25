@@ -437,10 +437,6 @@
   }
 }
 
-/* =====================================================
-   📱 FIXED: Keep Desktop Layout Responsive for All Screens
-   (No layout switching, only scaling)
-   ===================================================== */
 
 /* 🔹 Large tablets and small laptops */
 @media (max-width: 1024px) {
