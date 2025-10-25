@@ -1,4 +1,8 @@
-/* --- Base Styles & Typography --- */
+/* ==========================================================
+   WHY CHOOSE US — FINAL POLISHED VERSION
+   White Stacked Cards + Smooth Popup + Mobile Center Fix
+========================================================== */
+
 .why-choose-us-wrapper {
   --primary-color: #ff8c00;
   --text-dark: #212529;
@@ -6,16 +10,39 @@
   --background-light: #ffffff;
   --white: #ffffff;
   --shadow-color: 24, 24, 24;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
-/* --- Main Section Styles --- */
+/* --- Main Section --- */
 .why-choose-us-wrapper .why-choose-us {
-  padding: 100px 20px; 
+  padding: 100px 20px;
   background-color: var(--background-light);
   overflow: hidden;
+  position: relative;
+  transition: all 0.4s ease;
 }
 
+/* --- Soft Background Glow --- */
+.why-choose-us-wrapper .why-choose-us::before {
+  content: "";
+  position: absolute;
+  top: 25%;
+  left: 10%;
+  width: 80%;
+  height: 55%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.7), transparent 70%);
+  filter: blur(70px);
+  opacity: 0.4;
+  animation: softGlow 8s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes softGlow {
+  0% { opacity: 0.3; transform: scale(1); }
+  100% { opacity: 0.6; transform: scale(1.05); }
+}
+
+/* --- Section Layout --- */
 .why-choose-us-wrapper .section-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -23,115 +50,373 @@
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: 80px;
+  position: relative;
+  z-index: 1;
 }
-/* ... (Text and button styles remain the same) ... */
-.why-choose-us-wrapper .section-content { text-align: left; }
-.why-choose-us-wrapper .section-title { font-size: 42px; font-weight: 700; color: var(--text-dark) !important; margin-bottom: 16px; }
-.why-choose-us-wrapper .section-subtitle { font-size: 18px; color: var(--text-light) !important; line-height: 1.7; margin-bottom: 32px; }
-.why-choose-us-wrapper .cta-button { background: var(--primary-color); color: var(--white) !important; padding: 14px 32px; font-size: 16px; font-weight: 500; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 6px rgba(255, 140, 0, 0.3); transition: all 0.3s ease; }
-.why-choose-us-wrapper .cta-button:hover { transform: translateY(-3px); box-shadow: 0 7px 14px rgba(255, 140, 0, 0.3), 0 3px 6px rgba(0, 0, 0, 0.08); }
 
+/* --- Text Section --- */
+.why-choose-us-wrapper .section-content {
+  text-align: left;
+  animation: fadeInUp 1s ease-out both;
+}
 
-/* --- NEW: Automatic Floating Photo Stack --- */
+.why-choose-us-wrapper .section-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+  white-space: nowrap;
+}
+
+.why-choose-us-wrapper .section-title span {
+  color: var(--primary-color);
+}
+
+.why-choose-us-wrapper .section-subtitle {
+  font-size: 18px;
+  color: var(--text-light);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+/* --- CTA Button --- */
+.why-choose-us-wrapper .cta-button {
+  background: var(--primary-color);
+  color: var(--white);
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(255, 140, 0, 0.35);
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.why-choose-us-wrapper .cta-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: all 0.6s ease;
+}
+
+.why-choose-us-wrapper .cta-button:hover::after {
+  left: 100%;
+}
+
+.why-choose-us-wrapper .cta-button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(255, 140, 0, 0.4);
+}
+
+/* ======================================================
+   IMAGE SIDE — White Stacked Cards + 3D Tilt Effect
+====================================================== */
 .why-choose-us-wrapper .section-graphic {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 450px;
-  perspective: 1000px;
+  perspective: 1200px;
 }
 
+/* --- White Card Layers --- */
+.why-choose-us-wrapper .section-graphic::before,
+.why-choose-us-wrapper .section-graphic::after {
+  content: "";
+  position: absolute;
+  width: 72%;
+  height: 82%;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  transition: transform 0.6s ease, box-shadow 0.4s ease;
+  z-index: 1;
+  will-change: transform;
+}
+
+.why-choose-us-wrapper .section-graphic::before {
+  transform: rotate(4deg);
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
+}
+.why-choose-us-wrapper .section-graphic::after {
+  transform: rotate(8deg);
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.1));
+}
+
+/* --- 3D Tilt Hover Animation --- */
+.why-choose-us-wrapper .section-graphic:hover::before {
+  transform: rotateX(10deg) rotateY(-8deg) rotate(-6deg);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+.why-choose-us-wrapper .section-graphic:hover::after {
+  transform: rotateX(-10deg) rotateY(8deg) rotate(12deg);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Main Floating Photo Card --- */
 .why-choose-us-wrapper .photo-stack {
   width: 75%;
   position: relative;
   z-index: 10;
   padding: 15px 15px 60px 15px;
   background: var(--white);
-  box-shadow: 0 10px 30px -5px rgba(var(--shadow-color), 0.2);
   border-radius: 8px;
+  box-shadow: 0 10px 30px -5px rgba(var(--shadow-color), 0.25);
   transform: rotate(-3deg);
-  /* FIX: Added the new automatic float animation */
   animation: gentleFloat 6s ease-in-out infinite;
-  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: transform 0.4s ease;
 }
 
-.why-choose-us-wrapper .photo-stack img { width: 100%; display: block; }
-
-.why-choose-us-wrapper .section-graphic::before,
-.why-choose-us-wrapper .section-graphic::after {
-  content: '';
-  position: absolute;
-  width: 70%;
-  height: 80%;
-  background: #f1f3f5;
+.why-choose-us-wrapper .photo-stack img {
+  width: 100%;
+  display: block;
   border-radius: 8px;
-  box-shadow: 0 8px 20px -5px rgba(var(--shadow-color), 0.15);
-  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.why-choose-us-wrapper .section-graphic::before { transform: rotate(4deg); z-index: 2; }
-.why-choose-us-wrapper .section-graphic::after { transform: rotate(8deg); z-index: 1; }
-
-/* FIX: The hover animation now also pauses the float */
 .why-choose-us-wrapper .section-graphic:hover .photo-stack {
-  animation-play-state: paused; /* Stop the float on hover */
+  animation-play-state: paused;
   transform: translateY(-10px) rotate(0deg) scale(1.05);
-  box-shadow: 0 20px 40px -10px rgba(var(--shadow-color), 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
 }
-.why-choose-us-wrapper .section-graphic:hover::before { transform: translateY(-5px) rotate(-10deg); }
-.why-choose-us-wrapper .section-graphic:hover::after { transform: translateY(5px) rotate(12deg); }
 
-
-/* --- Keyframes for Animations --- */
 @keyframes gentleFloat {
   0% { transform: translateY(0) rotate(-3deg); }
   50% { transform: translateY(-15px) rotate(-3deg); }
   100% { transform: translateY(0) rotate(-3deg); }
 }
-@keyframes wcu-fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes wcu-fadeOut { from { opacity: 1; } to { opacity: 0; } }
-@keyframes wcu-scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-@keyframes wcu-scaleDown { from { transform: scale(1); opacity: 1; } to { transform: scale(0.95); opacity: 0; } }
 
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-/* --- NEW: Animated Popup Styles --- */
+/* ======================================================
+   POPUP — Smooth Entry + White Theme
+====================================================== */
 .why-choose-us-wrapper .popup-overlay {
-  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(10, 10, 10, 0.85);
-  display: flex; justify-content: center; align-items: center;
-  z-index: 1000; backdrop-filter: blur(5px); padding: 20px; box-sizing: border-box;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.88);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: overlayFadeIn 0.4s ease forwards;
 }
-.why-choose-us-wrapper .popup-overlay.opening { animation: wcu-fadeIn 0.3s ease-out forwards; }
-.why-choose-us-wrapper .popup-overlay.closing { animation: wcu-fadeOut 0.3s ease-out forwards; }
 
-.why-choose-us-wrapper .popup-content { 
-  position: relative; max-width: 1200px; width: 100%; 
-  background-color: #f8f9fa; padding: 40px; border-radius: 16px;
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
-.why-choose-us-wrapper .popup-content.opening { animation: wcu-scaleUp 0.3s ease-out forwards; }
-.why-choose-us-wrapper .popup-content.closing { animation: wcu-scaleDown 0.3s ease-out forwards; }
 
+.why-choose-us-wrapper .popup-content {
+  position: relative;
+  max-width: 1000px;
+  width: 100%;
+  background: var(--white);
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  animation: popupEnter 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  overflow-y: auto;
+  max-height: 85vh;
+  transition: all 0.4s ease;
+}
 
+@keyframes popupEnter {
+  0% { opacity: 0; transform: translateY(50px) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
 
+.why-choose-us-wrapper .popup-content.closing {
+  animation: popupExit 0.4s ease forwards;
+}
 
-.why-choose-us-wrapper .popup-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(10, 10, 10, 0.85); display: flex; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px); padding: 20px; box-sizing: border-box; }
-.why-choose-us-wrapper .popup-content { position: relative; max-width: 1200px; width: 100%; background-color: #f8f9fa; padding: 40px; border-radius: 16px; }
-.why-choose-us-wrapper .close-button { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.05); border: none; font-size: 24px; cursor: pointer; color: var(--text-light); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1010; transition: all 0.2s ease; }
-.why-choose-us-wrapper .popup-title { text-align: center; font-size: 28px; color: var(--text-dark) !important; margin-bottom: 30px; }
-.why-choose-us-wrapper .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-.why-choose-us-wrapper .feature-card { background: var(--white); padding: 25px; border-radius: 12px; text-align: left; border: 1px solid #e2e8f0; transition: all 0.3s ease; }
-.why-choose-us-wrapper .feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px -5px rgba(var(--shadow-color), 0.1); border-color: var(--primary-color); }
-.why-choose-us-wrapper .feature-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background-color: #fff5e6; color: var(--primary-color); border-radius: 8px; margin-bottom: 16px; }
-.why-choose-us-wrapper .feature-title { font-size: 20px; font-weight: 700; color: var(--text-dark) !important; margin-bottom: 8px; }
-.why-choose-us-wrapper .feature-description { font-size: 15px; color: var(--text-light) !important; line-height: 1.6; }
-/* ... (burst animation styles remain the same) ... */
-.why-choose-us-wrapper .features-grid.closed .burst-item, .why-choose-us-wrapper .features-grid.preopen .burst-item { opacity: 0; transform: translate3d(var(--dx, 0px), var(--dy, 0px), 0) scale(0.5); transition: all 0.4s cubic-bezier(0.6, -0.28, 0.735, 0.045); }
-.why-choose-us-wrapper .features-grid.open .burst-item { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
-.why-choose-us-wrapper .burst-item { transition: transform 640ms cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 520ms ease-out; }
-.why-choose-us-wrapper .features-grid.open .burst-item { transition-delay: calc(var(--i) * 60ms); }
+@keyframes popupExit {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(50px) scale(0.95); }
+}
+
+/* --- Close Button --- */
+.why-choose-us-wrapper .close-button {
+  position: sticky;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-light);
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1010;
+  transition: all 0.3s ease;
+}
+
+.why-choose-us-wrapper .close-button:hover {
+  background: rgba(255, 140, 0, 0.15);
+  color: var(--primary-color);
+  transform: scale(1.1) rotate(90deg);
+}
+
+/* ======================================================
+   FEATURE CARDS — Twisting Icons
+====================================================== */
+.why-choose-us-wrapper .features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+  margin-top: 30px;
+  animation: fadeInUp 0.6s ease-in-out;
+}
+
+.why-choose-us-wrapper .feature-card {
+  background: var(--white);
+  padding: 25px;
+  border-radius: 10px;
+  text-align: left;
+  border: 1px solid #e2e8f0;
+  transition: all 0.35s ease;
+  animation: cardFadeUp 0.6s ease both;
+}
+
+@keyframes cardFadeUp {
+  0% { opacity: 0; transform: translateY(25px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.why-choose-us-wrapper .feature-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 15px 35px rgba(255, 140, 0, 0.25),
+    0 10px 20px rgba(0, 0, 0, 0.08);
+  border-color: var(--primary-color);
+}
+
+/* --- Twisting / Rotating Icon --- */
+.why-choose-us-wrapper .feature-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff5e6;
+  color: var(--primary-color);
+  border-radius: 8px;
+  margin-bottom: 16px;
+  transition: all 0.5s ease;
+  transform-style: preserve-3d;
+}
+
+.why-choose-us-wrapper .feature-card:hover .feature-icon {
+  background-color: var(--primary-color);
+  color: white;
+  transform: rotateY(360deg) scale(1.1);
+}
+
+/* ======================================================
+   RESPONSIVENESS — Centered & Larger Image
+====================================================== */
 @media (max-width: 768px) {
-  .why-choose-us-wrapper .section-container { grid-template-columns: 1fr; text-align: center; }
-  .why-choose-us-wrapper .section-content { text-align: center; }
-  .why-choose-us-wrapper .section-graphic { grid-row: 1; height: 350px; margin-bottom: 40px; }
+  .why-choose-us-wrapper .section-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 60px;
+  }
+
+  .why-choose-us-wrapper .section-graphic {
+    height: 360px;
+    margin-bottom: 25px;
+  }
+
+  .why-choose-us-wrapper .photo-stack {
+    width: 85%;
+  }
+
+  .why-choose-us-wrapper .section-content {
+    text-align: center;
+  }
+
+  .why-choose-us-wrapper .section-title {
+    text-align: center;
+    font-size: 34px;
+  }
+
+  .why-choose-us-wrapper .section-subtitle {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .why-choose-us-wrapper .cta-button {
+    margin: 0 auto;
+    display: inline-block;
+  }
+
+  .why-choose-us-wrapper .popup-content {
+    padding: 28px 20px;
+    max-height: 80vh;
+  }
+
+  .why-choose-us-wrapper .features-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .why-choose-us-wrapper .section-graphic {
+    height: 340px;
+  }
+
+  .why-choose-us-wrapper .photo-stack {
+    width: 92%;
+  }
+
+  .why-choose-us-wrapper .section-title {
+    font-size: 30px;
+  }
+
+  .why-choose-us-wrapper .section-subtitle {
+    font-size: 15px;
+  }
+
+  .why-choose-us-wrapper .features-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .why-choose-us-wrapper .feature-card {
+    text-align: center;
+  }
+
+  .why-choose-us-wrapper .feature-icon {
+    margin: 0 auto 12px;
+  }
+}
+
+/* ======================================================
+   ✅ FIXED: Scroll Lock Without Jumping
+====================================================== */
+body.popup-open {
+  overflow: hidden !important; /* Prevent background scroll */
+  height: 100%;
+  touch-action: none;
+}
+
+/* Optional: Smooth scroll restoration after closing */
+html {
+  scroll-behavior: smooth;
 }

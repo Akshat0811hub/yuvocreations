@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/footer.css';
 import logoImage from '../assets/logobg.png';
 
@@ -33,6 +33,8 @@ const Footer = () => {
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
 
+  const [showTop, setShowTop] = useState(false);
+
   const handleSubscribe = (e) => {
     e.preventDefault();
     if (email.trim()) {
@@ -41,6 +43,16 @@ const Footer = () => {
       setTimeout(() => setIsSubscribed(false), 3000);
     }
   };
+
+
+useEffect(() => {
+  const handleScroll = () => {
+    setShowTop(window.scrollY > 250); // appears after 250px scroll
+  };
+  window.addEventListener('scroll', handleScroll);
+  return () => window.removeEventListener('scroll', handleScroll);
+}, []);
+
 
   const currentYear = new Date().getFullYear();
 
@@ -163,7 +175,22 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      {/* ✅ Smooth Fade-In/Out Back-to-Top Button */}
+  {showTop && (
+  <button
+    className="back-to-top show"
+    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+    aria-label="Back to top"
+  >
+    ↑
+  </button>
+)}
+
+
+
+
     </footer>
+    
   );
 };
 

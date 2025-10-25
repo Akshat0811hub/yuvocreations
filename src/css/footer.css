@@ -429,8 +429,9 @@
 }
 
 /* =========================
-   RESPONSIVENESS
+   ⚡ RESPONSIVE IMPROVEMENTS
 ========================= */
+
 @media (max-width: 1200px) {
   .footer-main {
     gap: 3rem;
@@ -440,7 +441,7 @@
 @media (max-width: 1024px) {
   .footer-main {
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 2.5rem;
   }
 
   .footer-section:first-child,
@@ -452,66 +453,409 @@
     width: 130px;
     height: 130px;
   }
-}
 
+  .company-description {
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 1rem;
+  }
+}
+/* =========================================================
+   📱 FULL RESPONSIVE COMBINED FOOTER FIX
+   Includes:
+   - Newsletter Responsiveness
+   - Contact Info Layout Fix
+   - Mobile & Small Screen Center Alignment
+   ========================================================= */
+
+/* ===============================
+   📱 Up to 768px (Tablets & Mobiles)
+=============================== */
 @media (max-width: 768px) {
+
+  /* Footer Container */
   .footer-container {
-    padding: 3rem 1.5rem 2rem;
+    padding: 2rem 1.2rem;
   }
 
+  /* Grid layout for About Us + Key Services */
   .footer-main {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    text-align: center;
+  }
+
+  .footer-section:nth-child(2),
+  .footer-section:nth-child(3) {
+    text-align: center;
+    align-items: center;
+  }
+
+  .footer-section:first-child,
+  .newsletter-section {
+    grid-column: 1 / -1;
+  }
+
+  /* Logo Area */
+  .footer-logo {
+    text-align: center;
+  }
+
+  .footer-logo img {
+    width: 120px;
+    height: 120px;
   }
 
   .logo-text h3 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
+    text-align: center;
   }
 
   .company-description {
     font-size: 0.85rem;
-  }
-
-  .newsletter-section {
-    padding: 1.8rem;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
+    padding: 1rem;
     text-align: center;
-    gap: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .footer-container {
-    padding: 2rem 1rem;
   }
 
-  .footer-logo img {
-    width: 110px;
-    height: 110px;
-  }
-
+  /* Section Titles & Links */
   .section-title {
     font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    text-align: center;
+  }
+
+  .footer-links {
+    align-items: center;
+    justify-content: center;
   }
 
   .footer-links a {
     font-size: 0.9rem;
+    padding: 6px 0;
+    text-align: center;
+    justify-content: center;
   }
 
+  /* Newsletter (✅ untouched styling) */
+  .newsletter-section {
+    width: 100%;
+    max-width: 100%;
+    padding: 1.5rem;
+    text-align: left; /* keep layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .newsletter-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .newsletter-input,
   .newsletter-button {
-    padding: 12px 18px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .footer-main {
+    overflow: hidden; /* prevent overflow issues */
+  }
+
+  /* Contact Info Fix */
+  .contact-info {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: flex-start;
+    justify-content: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .contact-item {
+    display: flex;
+    flex-direction: row; /* keep label + value in one line */
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    flex-wrap: wrap;
     font-size: 0.9rem;
   }
 
-  .back-to-top {
-    bottom: 1rem;
-    right: 1rem;
-    width: 48px;
-    height: 48px;
-    font-size: 18px;
+  .contact-label {
+    color: var(--color-primary-blue);
+    font-weight: 600;
+    min-width: 65px;
+    font-size: 0.95rem;
+  }
+
+  .contact-item a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-size: 0.9rem;
+    word-break: break-word;
+  }
+
+  /* Footer bottom */
+  .footer-bottom {
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .legal-links {
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+  }
+
+  .copyright {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  .footer {
+    margin-top: 3rem;
   }
 }
 
+/* ===============================
+   📱 Up to 480px (Small Phones)
+=============================== */
+@media (max-width: 480px) {
+
+  .footer-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .footer-section {
+    padding: 0.5rem;
+    text-align: center;
+    align-items: center;
+  }
+
+  .footer-logo img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .logo-text h3 {
+    font-size: 1.3rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .footer-links a {
+    font-size: 0.85rem;
+  }
+
+  /* ✅ Newsletter stays same visually */
+  .newsletter-section {
+    grid-column: 1 / -1;
+    padding: 1.2rem;
+    text-align: left;
+  }
+
+  .newsletter-input {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+
+  .newsletter-button {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 12px 18px;
+  }
+
+  /* Contact Info */
+  .contact-info {
+    padding: 1rem;
+    border-radius: 10px;
+    gap: 0.6rem;
+  }
+
+  .contact-item {
+    font-size: 0.85rem;
+    gap: 0.3rem;
+  }
+
+  .contact-label {
+    font-size: 0.9rem;
+    min-width: 55px;
+  }
+
+  .contact-item a {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .footer-bottom {
+    margin-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .legal-links {
+    gap: 0.4rem;
+    font-size: 0.7rem;
+    justify-content: center;
+  }
+
+  .copyright {
+    font-size: 0.75rem;
+  }
+
+  .footer {
+    margin-top: 2.5rem;
+  }
+}
+
+/* ===============================
+   📱 Extra Small (≤360px)
+=============================== */
+@media (max-width: 360px) {
+  .newsletter-input,
+  .newsletter-button {
+    font-size: 0.85rem;
+    padding: 9px 10px;
+  }
+
+  .contact-info {
+    padding: 0.9rem;
+    border-radius: 8px;
+  }
+
+  .contact-label,
+  .contact-item a {
+    font-size: 0.8rem;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+  }
+
+  .copyright {
+    font-size: 0.7rem;
+  }
+}
+
+/* =========================
+   🔝 SMOOTH BACK-TO-TOP ANIMATION
+========================= */
+.back-to-top {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 55px;
+  height: 55px;
+  background: var(--color-primary-blue);
+  border: none;
+  border-radius: 50%;
+  color: var(--color-pure-white);
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;                 /* hidden by default */
+  visibility: hidden;
+  transform: translateY(20px);
+  pointer-events: none;
+  z-index: 9999;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    visibility 0.4s ease;
+}
+
+/* when active */
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.back-to-top:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 169, 63, 0.6);
+}
+
+/* mobile sizing */
+@media (max-width: 480px) {
+  .back-to-top {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+
+
+/* =========================================
+   📱 Legal Links Size & Spacing Optimization
+   ========================================= */
+
+@media (max-width: 768px) {
+  .legal-links {
+    font-size: 0.8rem; /* smaller text */
+    gap: 0.6rem; /* reduce spacing between links */
+    justify-content: center;
+    text-align: center;
+  }
+
+  .legal-links a {
+    font-size: 0.8rem;
+  }
+
+  .separator {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .legal-links {
+    font-size: 0.7rem;
+    gap: 0.4rem;
+    flex-wrap: wrap; /* ensures they wrap neatly if needed */
+  }
+
+  .legal-links a,
+  .separator {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .legal-links {
+    font-size: 0.65rem;
+    gap: 0.3rem;
+  }
+
+  .legal-links a,
+  .separator {
+    font-size: 0.65rem;
+  }
+}

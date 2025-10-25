@@ -330,62 +330,78 @@
 }
 
 /* ===================== MOBILE GLASSMORPHIC NAVBAR (FIXED AFTER SCROLL) ===================== */
-@media screen and (max-width: 500px) {
+/* ==========================================================
+   🌟 UNIVERSAL RESPONSIVE NAVBAR FIX
+   (Keeps same design — cleaner, smoother, one unified version)
+========================================================== */
 
-  /* Prevent right scroll + keep interaction intact */
+/* Mobile Navbar Optimized for All Small Screens */
+@media screen and (max-width: 768px) {
+
+  /* Prevent side-scroll issues */
   html, body {
     max-width: 100vw;
     overflow-x: hidden;
     position: relative;
   }
 
-  /* Ensure wrapper blur or transforms never break fixed elements */
+  /* Remove desktop shadows + blur interference */
   .navbar-wrapper {
     transform: none !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
+    padding: 14px 18px !important;
   }
 
-  /* Hide desktop CTA */
+  .navbar {
+    padding: 14px 20px;
+    border-radius: 14px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Hide desktop buttons */
   .nav-buttons.desktop-only {
     display: none !important;
   }
 
-  /* === HAMBURGER === */
+  /* ======================================
+     🍔 Hamburger
+  ====================================== */
   .hamburger {
     display: flex !important;
     flex-direction: column;
     justify-content: space-between;
-    width: 40px;
-    height: 32px;
+    width: 36px;
+    height: 26px;
     margin-left: auto;
-    margin-right: 20px;
     border: none;
     background: transparent;
     cursor: pointer;
-    z-index: 1100;
+    z-index: 1200;
     transition: transform 0.3s ease;
   }
 
   .hamburger span {
-    height: 4px;
+    height: 3px;
     width: 100%;
-    background: #000;
-    border-radius: 4px;
+    background: #1a1a1a;
+    border-radius: 3px;
     transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
   }
 
   .hamburger.active span:nth-child(1) {
-    transform: translateY(10px) rotate(45deg);
+    transform: translateY(8px) rotate(45deg);
   }
   .hamburger.active span:nth-child(2) {
     opacity: 0;
   }
   .hamburger.active span:nth-child(3) {
-    transform: translateY(-10px) rotate(-45deg);
+    transform: translateY(-8px) rotate(-45deg);
   }
 
-  /* === BACKDROP BLUR === */
+  /* ======================================
+     🌫️ Backdrop Blur When Menu Open
+  ====================================== */
   .navbar-wrapper.menu-is-open::after,
   .navbar-wrapper.dropdown-is-open::after {
     content: "";
@@ -398,25 +414,32 @@
     pointer-events: auto;
   }
 
-  /* === MAIN POPUP MENU === */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ======================================
+     📜 Mobile Menu (Glass Popup)
+  ====================================== */
   .nav-links {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
+    width: 88%;
     max-width: 400px;
-    background: rgba(255, 255, 255, 0.96);
+    background: rgba(255, 255, 255, 0.97);
     border-radius: 22px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 18px;
-    padding: 65px 25px 45px;
+    padding: 60px 25px 40px;
     opacity: 0;
     visibility: hidden;
     transition: all 0.55s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
     z-index: 10500;
     pointer-events: none;
   }
@@ -435,7 +458,7 @@
   .nav-links a,
   .dropdown-toggle {
     color: #000;
-    font-size: 19px;
+    font-size: 18px;
     font-weight: 600;
     text-decoration: none;
     padding: 6px 0;
@@ -451,20 +474,22 @@
     transform: scale(1.05);
   }
 
-  /* === CTA BUTTON === */
+  /* ======================================
+     🟠 CTA BUTTON (Inside Popup)
+  ====================================== */
   .mobile-btn {
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-top: 30px;
+    margin-top: 25px;
   }
 
   .mobile-btn .btn-signup {
     background: linear-gradient(135deg, #fe9e2a 0%, #ff7e5f 100%);
     color: white;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 600;
-    padding: 14px 44px;
+    padding: 13px 40px;
     border-radius: 14px;
     transition: all 0.35s ease;
     box-shadow: 0 8px 20px rgba(254, 158, 42, 0.35);
@@ -472,21 +497,12 @@
 
   .mobile-btn .btn-signup:hover {
     background: linear-gradient(135deg, #ffb347 0%, #ff7e5f 100%);
-    transform: scale(1.07) translateY(-3px);
-    box-shadow: 0 10px 25px rgba(254, 158, 42, 0.45);
+    transform: scale(1.06);
   }
 
-  /* === DROPDOWN ARROW === */
-  .dropdown-arrow {
-    margin-left: 8px;
-    transition: transform 0.3s ease;
-  }
-
-  .dropdown-arrow.rotated {
-    transform: rotate(180deg);
-  }
-
-  /* === SECONDARY POPUP (SERVICES SUBMENU) === */
+  /* ======================================
+     🔽 Dropdown (Submenu)
+  ====================================== */
   .dropdown-menu {
     position: fixed;
     top: 50%;
@@ -496,7 +512,7 @@
     max-width: 340px;
     background: rgba(255, 255, 255, 0.98);
     border-radius: 18px;
-    padding: 40px 25px 30px;
+    padding: 35px 25px 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -529,214 +545,22 @@
     transform: scale(1.05);
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-}
-
-@media screen and (max-width: 600px) {
-
-  /* Prevent right scroll + keep interaction intact */
-  html, body {
-    max-width: 100vw;
-    overflow-x: hidden;
-    position: relative;
+  /* ======================================
+     🧭 Logo + Spacing
+  ====================================== */
+  .logo {
+    font-size: 34px;
+    gap: 6px;
   }
 
-  /* Ensure wrapper blur or transforms never break fixed elements */
-  .navbar-wrapper {
-    transform: none !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+  .logo-icon {
+    width: 44px;
+    height: 44px;
   }
 
-  /* Hide desktop CTA */
-  .nav-buttons.desktop-only {
-    display: none !important;
-  }
-
-  /* === HAMBURGER === */
-  .hamburger {
-    display: flex !important;
-    flex-direction: column;
+  .navbar {
     justify-content: space-between;
-    width: 40px;
-    height: 32px;
-    margin-left: auto;
-    margin-right: 20px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    z-index: 1100;
-    transition: transform 0.3s ease;
-  }
-
-  .hamburger span {
-    height: 4px;
-    width: 100%;
-    background: #000;
-    border-radius: 4px;
-    transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
-  }
-
-  .hamburger.active span:nth-child(1) {
-    transform: translateY(10px) rotate(45deg);
-  }
-  .hamburger.active span:nth-child(2) {
-    opacity: 0;
-  }
-  .hamburger.active span:nth-child(3) {
-    transform: translateY(-10px) rotate(-45deg);
-  }
-
-  /* === BACKDROP BLUR === */
-  .navbar-wrapper.menu-is-open::after,
-  .navbar-wrapper.dropdown-is-open::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    backdrop-filter: blur(8px);
-    background: rgba(0, 0, 0, 0.55);
-    z-index: 1040;
-    animation: fadeIn 0.4s ease forwards;
-    pointer-events: auto;
-  }
-
-  /* === MAIN POPUP MENU === */
-  .nav-links {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 400px;
-    background: rgba(255, 255, 255, 0.96);
-    border-radius: 22px;
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 18px;
-    padding: 65px 25px 45px;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.55s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
-    z-index: 10500;
-    pointer-events: none;
-  }
-
-  .nav-links.open {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%) scale(1);
-    pointer-events: auto;
-  }
-
-  .nav-links li {
-    list-style: none;
-  }
-
-  .nav-links a,
-  .dropdown-toggle {
-    color: #000;
-    font-size: 19px;
-    font-weight: 600;
-    text-decoration: none;
-    padding: 6px 0;
-    transition: all 0.3s ease;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-
-  .nav-links a:hover,
-  .dropdown-toggle:hover {
-    color: #fe9e2a;
-    transform: scale(1.05);
-  }
-
-  /* === CTA BUTTON === */
-  .mobile-btn {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 30px;
-  }
-
-  .mobile-btn .btn-signup {
-    background: linear-gradient(135deg, #fe9e2a 0%, #ff7e5f 100%);
-    color: white;
-    font-size: 18px;
-    font-weight: 600;
-    padding: 14px 44px;
-    border-radius: 14px;
-    transition: all 0.35s ease;
-    box-shadow: 0 8px 20px rgba(254, 158, 42, 0.35);
-  }
-
-  .mobile-btn .btn-signup:hover {
-    background: linear-gradient(135deg, #ffb347 0%, #ff7e5f 100%);
-    transform: scale(1.07) translateY(-3px);
-    box-shadow: 0 10px 25px rgba(254, 158, 42, 0.45);
-  }
-
-  /* === DROPDOWN ARROW === */
-  .dropdown-arrow {
-    margin-left: 8px;
-    transition: transform 0.3s ease;
-  }
-
-  .dropdown-arrow.rotated {
-    transform: rotate(180deg);
-  }
-
-  /* === SECONDARY POPUP (SERVICES SUBMENU) === */
-  .dropdown-menu {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);
-    width: 85%;
-    max-width: 340px;
-    background: rgba(255, 255, 255, 0.98);
-    border-radius: 18px;
-    padding: 40px 25px 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    visibility: hidden;
-    z-index: 10600;
-    transition: all 0.45s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    pointer-events: none;
-  }
-
-  .dropdown-menu.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%) scale(1);
-    pointer-events: auto;
-  }
-
-  .dropdown-menu a {
-    color: #000;
-    font-size: 17px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-
-  .dropdown-menu a:hover {
-    color: #fe9e2a;
-    transform: scale(1.05);
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
   }
 }
 
