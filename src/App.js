@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
+import Careers from "./pages/Careers";
 import Uiux from "./services/Uiux";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -21,7 +22,8 @@ function App() {
         <Route path="/services/website" element={<Website />} />
         <Route path="/services/uiux" element={<Uiux />} />
         <Route path="/services/ui-ux" element={<Uiux />} /> {/* alias */}
-        <Route path="/about" element={<About />} />
+        <Route path="/About" element={<About />} />
+        <Route path="/career" element={<Careers />} />
         <Route path="/contact" element={<Contact />} />
       </Routes> <Footer />  {" "}</Router>
   );
