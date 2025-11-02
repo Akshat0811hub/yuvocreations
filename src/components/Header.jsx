@@ -83,7 +83,7 @@ useEffect(() => {
   const services = [
     { name: 'Web Development ', path: '/services/website' },
     { name: 'Branding & Design', path: '/services/ui-ux' },
-    { name: 'Digital Marketing & Growth', path: '/digital-marketing' },
+    { name: 'Digital Marketing & Growth', path: '/services/Digital' },
   ];
 
   const toggleMenu = () => setMenuOpen((v) => !v);
