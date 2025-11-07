@@ -122,6 +122,9 @@
   letter-spacing: -0.02em;
   animation: fade-in-up 1s ease-out 0.2s backwards;
 }
+.hero-main-title {
+  margin-top: 8rem;
+}
 .hero-highlight {
   position: relative;
   display: inline-block;

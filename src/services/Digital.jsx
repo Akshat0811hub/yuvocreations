@@ -91,10 +91,7 @@ export default function DigitalMarketingPage() {
       {/* Hero */}
       <section className="hero-showcase">
         <div className="hero-showcase-content">
-          <div className="hero-eyebrow">
-            <span className="hero-eyebrow-dot" />
-            Digital Excellence
-          </div>
+          
           <h1 className="hero-main-title">
             Transform Your Brand
             <br />
