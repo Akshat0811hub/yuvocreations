@@ -5,6 +5,7 @@ import '../pagescss/Digital.css';
 
 export default function DigitalMarketingPage() {
   const [activeCard, setActiveCard] = useState(null);
+  const [activeFaq, setActiveFaq] = useState(null);
 
   const portfolioProjects = [
     {
@@ -54,6 +55,34 @@ export default function DigitalMarketingPage() {
       position: 'Founder, Style & Co',
       text:
         'From concept to execution, everything was flawless. They understood our vision and delivered beyond what we imagined. Our brand has never looked better!',
+    },
+  ];
+
+  const faqs = [
+    {
+      question: 'What services do you offer?',
+      answer:
+        'We offer comprehensive digital marketing services including brand strategy, social media marketing, content creation, SEO, PPC campaigns, email marketing, and analytics. Our approach is tailored to each client\'s unique needs and goals.',
+    },
+    {
+      question: 'How long does it take to see results?',
+      answer:
+        'While some improvements can be seen within the first month, significant results typically manifest within 3-6 months. Digital marketing is a long-term investment, and we focus on sustainable growth rather than quick fixes.',
+    },
+    {
+      question: 'What industries do you work with?',
+      answer:
+        'We work across various industries including e-commerce, technology, healthcare, fashion, finance, and B2B services. Our team has diverse experience and adapts strategies to suit any industry vertical.',
+    },
+    {
+      question: 'Do you offer customized packages?',
+      answer:
+        'Absolutely! Every business is unique, and we create customized strategies and packages based on your specific goals, budget, and market conditions. We believe in flexible solutions that grow with your business.',
+    },
+    {
+      question: 'How do you measure success?',
+      answer:
+        'We use data-driven KPIs including ROI, conversion rates, engagement metrics, traffic growth, and lead generation. You\'ll receive detailed monthly reports with actionable insights and transparent performance tracking.',
     },
   ];
 
@@ -255,6 +284,69 @@ export default function DigitalMarketingPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="faq-section">
+        <div className="faq-container">
+          <div className="faq-header">
+            <div className="faq-label">FAQ</div>
+            <h2 className="faq-title">Frequently Asked Questions</h2>
+            <p className="faq-description">
+              Got questions? We've got answers. Find everything you need to know
+              about our services and process.
+            </p>
+          </div>
+
+          <div className="faq-list">
+            {faqs.map((faq, idx) => (
+              <div
+                key={idx}
+                className={`faq-item ${activeFaq === idx ? 'active' : ''}`}
+              >
+                <button
+                  className="faq-question"
+                  onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
+                >
+                  <span>{faq.question}</span>
+                  <span className="faq-icon">{activeFaq === idx ? '−' : '+'}</span>
+                </button>
+                <div className="faq-answer">
+                  <p>{faq.answer}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact CTA */}
+      <section className="contact-cta-section">
+        <div className="contact-cta-container">
+          <div className="contact-cta-content">
+            <h2 className="contact-cta-title">
+              Ready to Transform Your Digital Presence?
+            </h2>
+            <p className="contact-cta-text">
+              Let's create something extraordinary together. Get in touch and
+              discover how we can help your brand reach new heights.
+            </p>
+            <div className="contact-cta-buttons">
+              <button
+                className="cta-primary-btn"
+                onClick={() => console.log('Get Started clicked')}
+              >
+                Get Started Today
+              </button>
+              <button
+                className="cta-secondary-btn"
+                onClick={() => console.log('Schedule Call clicked')}
+              >
+                Schedule a Call
+              </button>
+            </div>
           </div>
         </div>
       </section>
