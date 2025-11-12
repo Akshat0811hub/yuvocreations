@@ -19,48 +19,7 @@ function Careers() {
       </section>
 
       {/* HIGHLIGHTS */}
-      <section className="careers__highlights container">
-        <div className="highlight">
-          <span className="kpi">200M+</span>
-          <p>monthly impressions managed</p>
-        </div>
-        <div className="highlight">
-          <span className="kpi">120%</span>
-          <p>avg. YoY client growth on paid</p>
-        </div>
-        <div className="highlight">
-          <span className="kpi">35+</span>
-          <p>marketers, analysts & creatives</p>
-        </div>
-        <div className="highlight">
-          <span className="kpi">#1</span>
-          <p>place to learn fast (our bias)</p>
-        </div>
-      </section>
-
-      {/* WHY JOIN */}
-      <section className="careers__why container">
-        <div className="why__copy">
-          <h2>Why join our crew</h2>
-          <p>
-            We ship bold ideas, measure everything, and celebrate outcomes. You'll get ownership,
-            thoughtful feedback, and space to experiment.
-          </p>
-          <ul className="bullets">
-            <li>Real impact — own channels and see results weekly</li>
-            <li>Strong craft culture — crits, playbooks, and demos</li>
-            <li>Learning stipend, conferences, and mentorship</li>
-            <li>Remote-friendly with flexible hours</li>
-          </ul>
-        </div>
-        <div className="why__panel">
-          <div className="panel__card">Growth paths with clear ladders</div>
-          <div className="panel__card">Cross-functional pods</div>
-          <div className="panel__card">No drama, just momentum</div>
-          <div className="panel__card">Outcome &gt; outputs</div>
-        </div>
-      </section>
-
+      
       {/* GALLERY (abstract placeholders) */}
       <section className="careers__gallery container">
         <div className="gallery__cell" data-caption="Campaign War Room"></div>
@@ -70,35 +29,7 @@ function Careers() {
       </section>
 
       {/* PERKS */}
-      <section className="careers__perks container" id="perks">
-        <h2>Perks &amp; benefits</h2>
-        <div className="perks__grid">
-          <div className="perk">
-            <h3>Hybrid &amp; Remote</h3>
-            <p>Work where you're most effective.</p>
-          </div>
-          <div className="perk">
-            <h3>Learning Budget</h3>
-            <p>₹50k/year for books &amp; courses.</p>
-          </div>
-          <div className="perk">
-            <h3>Health Cover</h3>
-            <p>Comprehensive plan for you &amp; fam.</p>
-          </div>
-          <div className="perk">
-            <h3>No Meeting Fridays</h3>
-            <p>Deep work &gt; calendar chaos.</p>
-          </div>
-          <div className="perk">
-            <h3>Latest Tools</h3>
-            <p>From GA4 to the good keyboards.</p>
-          </div>
-          <div className="perk">
-            <h3>Flexible Leave</h3>
-            <p>Take time when you need it.</p>
-          </div>
-        </div>
-      </section>
+      
 
       {/* HIRING PROCESS */}
       <section className="careers__process container">
