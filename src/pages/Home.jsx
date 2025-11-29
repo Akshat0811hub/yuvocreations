@@ -21,7 +21,7 @@ const Home = () => {
       {/* <ParallaxMouseEffect/> */}
       <Tabs/>
       {/* <About/> */}
-      <PremiumBezierCurve/>
+      {/* <PremiumBezierCurve/> */}
       <ImgCarousel/>
       <WhyChooseUs/>
       <Contact/>

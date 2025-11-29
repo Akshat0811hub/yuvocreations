@@ -566,3 +566,1142 @@
 
 
 
+.navbar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  z-index: 1000;
+
+  /* ✨ BOUNCY EFFECT: Changed ease-in-out to a bouncy cubic-bezier */
+  /* The duration is slightly longer to make the bounce more visible. */
+  transition: padding 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55);
+}
+
+.navbar-wrapper.scrolled {
+  padding: 15px 20px;
+  
+  /* ✨ BOUNCY EFFECT: Make sure the background also uses the same transition */
+  transition: padding 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55), 
+              background-color 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55);
+}
+
+
+.navbar {
+  background: white;
+  border-radius: 16px;
+  padding: 20px 40px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+  /* ✨ BOUNCY EFFECT: Replaced 'all' with the specific properties for better performance */
+  /* and applied the same bouncy cubic-bezier timing function. */
+  transition: max-width 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55), 
+              padding 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55), 
+              box-shadow 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55),
+              background 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55);
+}
+
+.navbar-wrapper.scrolled .navbar {
+ max-width: 1000px;
+  padding: 16px 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+/* ================================
+   🧱 LOGO
+================================== */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 44px;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-wrapper.scrolled .logo-icon {
+  width: 48px;
+  height: 48px;
+}
+
+/* ================================
+   🧭 NAVIGATION LINKS
+================================== */
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links>li {
+  position: relative;
+}
+
+.nav-links a {
+  color: #666;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #fe9e2a;
+}
+
+/* ================================
+   🔽 DROPDOWN MENU
+================================== */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  color: #666;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.3s ease;
+}
+
+.dropdown-toggle:hover {
+  color: #fe9e2a;
+}
+
+.dropdown-arrow {
+  transition: transform 0.3s ease;
+}
+
+.dropdown-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  min-width: 240px;
+  list-style: none;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(15px);
+}
+
+.dropdown-menu li {
+  margin: 0;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 12px 16px;
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+  background: linear-gradient(135deg, #fe9e2a 0%, #ff7e5f 100%);
+  color: white;
+  transform: translateX(4px);
+}
+
+/* ================================
+   🔘 BUTTONS
+================================== */
+
+.nav-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.mobile-btn {
+  display: none;
+}
+
+.btn {
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-login {
+  background: transparent;
+  color: #1a1a1a;
+  border: 2px solid transparent;
+}
+
+.btn-login:hover {
+  border-color: #e0e0e0;
+}
+
+.btn-signup {
+  background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-signup:hover {
+  background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-wrapper.scrolled .btn-signup {
+  background: linear-gradient(135deg, #fe9e2a 0%, #ff7e5f 100%);
+}
+
+.navbar-wrapper.scrolled .btn-signup:hover {
+  background: linear-gradient(135deg, #ff7e5f 0%, #fe9e2a 100%);
+}
+
+
+/* ================================
+   🧩 HERO SECTION
+================================== */
+
+
+.hero-section {
+  height: auto;
+  min-height: fit-content;
+  padding: 140px 0 60px 0;
+  /* ensures content is below fixed navbar */
+  text-align: center;
+}
+
+.hero-text {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #1a1a1a;
+  margin-bottom: 0;
+  transform: none;
+}
+
+/* ================================
+   🧰 CONTENT SECTION
+================================== */
+
+.content {
+  max-width: 800px;
+  margin: 100px auto;
+  padding: 40px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.content h1 {
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  font-size: 48px;
+}
+
+.content p {
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 22px;
+  cursor: pointer;
+  z-index: 1100;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.hamburger span {
+  width: 100%;
+  height: 3px;
+  background: #1a1a1a;
+  margin: 3px 0;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(9px);
+}
+
+
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-9px);
+}
+
+/* ===================== MOBILE GLASSMORPHIC NAVBAR (FIXED AFTER SCROLL) ===================== */
+/* ==========================================================
+   🌟 UNIVERSAL RESPONSIVE NAVBAR FIX
+   (Keeps same design — cleaner, smoother, one unified version)
+========================================================== */
+
+/* Mobile Navbar Optimized for All Small Screens */
+@media screen and (max-width: 768px) {
+
+  /* Prevent side-scroll issues */
+  html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Remove desktop shadows + blur interference */
+  .navbar-wrapper {
+    transform: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 14px 18px !important;
+  }
+
+  .navbar {
+    padding: 14px 20px;
+    border-radius: 14px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Hide desktop buttons */
+  .nav-buttons.desktop-only {
+    display: none !important;
+  }
+
+  /* ======================================
+     🍔 Hamburger
+  ====================================== */
+  .hamburger {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 36px;
+    height: 26px;
+    margin-left: auto;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    z-index: 1200;
+    transition: transform 0.3s ease;
+  }
+
+  .hamburger span {
+    height: 3px;
+    width: 100%;
+    background: #1a1a1a;
+    border-radius: 3px;
+    transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* ======================================
+     🌫️ Backdrop Blur When Menu Open
+  ====================================== */
+  .navbar-wrapper.menu-is-open::after,
+  .navbar-wrapper.dropdown-is-open::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1040;
+    animation: fadeIn 0.4s ease forwards;
+    pointer-events: auto;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ======================================
+     📜 Mobile Menu (Glass Popup)
+  ====================================== */
+  .nav-links {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    width: 88%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.97);
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: 60px 25px 40px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.55s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+    z-index: 10500;
+    pointer-events: none;
+  }
+
+  .nav-links.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+  }
+
+  .nav-links li {
+    list-style: none;
+  }
+
+  .nav-links a,
+  .dropdown-toggle {
+    color: #000;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 6px 0;
+    transition: all 0.3s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .nav-links a:hover,
+  .dropdown-toggle:hover {
+    color: #fe9e2a;
+    transform: scale(1.05);
+  }
+
+  /* ======================================
+     🟠 CTA BUTTON (Inside Popup)
+  ====================================== */
+  .mobile-btn {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 25px;
+  }
+
+  .mobile-btn .btn-signup {
+    background: linear-gradient(135deg, #fe9e2a 0%, #ff7e5f 100%);
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 13px 40px;
+    border-radius: 14px;
+    transition: all 0.35s ease;
+    box-shadow: 0 8px 20px rgba(254, 158, 42, 0.35);
+  }
+
+  .mobile-btn .btn-signup:hover {
+    background: linear-gradient(135deg, #ffb347 0%, #ff7e5f 100%);
+    transform: scale(1.06);
+  }
+
+  /* ======================================
+     🔽 Dropdown (Submenu)
+  ====================================== */
+  .dropdown-menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 85%;
+    max-width: 340px;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 18px;
+    padding: 35px 25px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 10600;
+    transition: all 0.45s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    pointer-events: none;
+  }
+
+  .dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+  }
+
+  .dropdown-menu a {
+    color: #000;
+    font-size: 17px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .dropdown-menu a:hover {
+    color: #fe9e2a;
+    transform: scale(1.05);
+  }
+
+  /* ======================================
+     🧭 Logo + Spacing
+  ====================================== */
+  .logo {
+    font-size: 34px;
+    gap: 6px;
+  }
+
+  .logo-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .navbar {
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+
+
+.navbar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  z-index: 1000;
+
+  /* ✨ BOUNCY EFFECT: Changed ease-in-out to a bouncy cubic-bezier */
+  /* The duration is slightly longer to make the bounce more visible. */
+  transition: padding 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55);
+}
+
+.navbar-wrapper.scrolled {
+  padding: 15px 20px;
+  
+  /* ✨ BOUNCY EFFECT: Make sure the background also uses the same transition */
+  transition: padding 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55), 
+              background-color 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55);
+}
+
+
+.navbar {
+  background: white;
+  border-radius: 16px;
+  padding: 20px 40px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+  /* ✨ BOUNCY EFFECT: Replaced 'all' with the specific properties for better performance */
+  /* and applied the same bouncy cubic-bezier timing function. */
+  transition: max-width 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55), 
+              padding 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55), 
+              box-shadow 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55),
+              background 0.6s cubic-bezier(0.68, -0.55, 0.26, 1.55);
+}
+
+.navbar-wrapper.scrolled .navbar {
+ max-width: 1000px;
+  padding: 16px 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+/* ================================
+   🧱 LOGO
+================================== */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 44px;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-wrapper.scrolled .logo-icon {
+  width: 48px;
+  height: 48px;
+}
+
+/* ================================
+   🧭 NAVIGATION LINKS
+================================== */
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links>li {
+  position: relative;
+}
+
+.nav-links a {
+  color: #666;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #fe9e2a;
+}
+
+/* ================================
+   🔽 DROPDOWN MENU
+================================== */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  color: #666;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.3s ease;
+}
+
+.dropdown-toggle:hover {
+  color: #fe9e2a;
+}
+
+.dropdown-arrow {
+  transition: transform 0.3s ease;
+}
+
+.dropdown-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  min-width: 240px;
+  list-style: none;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(15px);
+}
+
+.dropdown-menu li {
+  margin: 0;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 12px 16px;
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+  background: linear-gradient(135deg, #fe9e2a 0%, #ff7e5f 100%);
+  color: white;
+  transform: translateX(4px);
+}
+
+/* ================================
+   🔘 BUTTONS
+================================== */
+
+.nav-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.mobile-btn {
+  display: none;
+}
+
+.btn {
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-login {
+  background: transparent;
+  color: #1a1a1a;
+  border: 2px solid transparent;
+}
+
+.btn-login:hover {
+  border-color: #e0e0e0;
+}
+
+.btn-signup {
+  background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-signup:hover {
+  background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-wrapper.scrolled .btn-signup {
+  background: linear-gradient(135deg, #fe9e2a 0%, #ff7e5f 100%);
+}
+
+.navbar-wrapper.scrolled .btn-signup:hover {
+  background: linear-gradient(135deg, #ff7e5f 0%, #fe9e2a 100%);
+}
+
+
+/* ================================
+   🧩 HERO SECTION
+================================== */
+
+
+.hero-section {
+  height: auto;
+  min-height: fit-content;
+  padding: 140px 0 60px 0;
+  /* ensures content is below fixed navbar */
+  text-align: center;
+}
+
+.hero-text {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #1a1a1a;
+  margin-bottom: 0;
+  transform: none;
+}
+
+/* ================================
+   🧰 CONTENT SECTION
+================================== */
+
+.content {
+  max-width: 800px;
+  margin: 100px auto;
+  padding: 40px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.content h1 {
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  font-size: 48px;
+}
+
+.content p {
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 22px;
+  cursor: pointer;
+  z-index: 1100;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.hamburger span {
+  width: 100%;
+  height: 3px;
+  background: #1a1a1a;
+  margin: 3px 0;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(9px);
+}
+
+
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-9px);
+}
+
+/* ===================== MOBILE GLASSMORPHIC NAVBAR (FIXED AFTER SCROLL) ===================== */
+/* ==========================================================
+   🌟 UNIVERSAL RESPONSIVE NAVBAR FIX
+   (Keeps same design — cleaner, smoother, one unified version)
+========================================================== */
+
+/* Mobile Navbar Optimized for All Small Screens */
+@media screen and (max-width: 768px) {
+
+  /* Prevent side-scroll issues */
+  html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Remove desktop shadows + blur interference */
+  .navbar-wrapper {
+    transform: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 14px 18px !important;
+  }
+
+  .navbar {
+    padding: 14px 20px;
+    border-radius: 14px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Hide desktop buttons */
+  .nav-buttons.desktop-only {
+    display: none !important;
+  }
+
+  /* ======================================
+     🍔 Hamburger
+  ====================================== */
+  .hamburger {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 36px;
+    height: 26px;
+    margin-left: auto;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    z-index: 1200;
+    transition: transform 0.3s ease;
+  }
+
+  .hamburger span {
+    height: 3px;
+    width: 100%;
+    background: #1a1a1a;
+    border-radius: 3px;
+    transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* ======================================
+     🌫️ Backdrop Blur When Menu Open
+  ====================================== */
+  .navbar-wrapper.menu-is-open::after,
+  .navbar-wrapper.dropdown-is-open::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1040;
+    animation: fadeIn 0.4s ease forwards;
+    pointer-events: auto;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ======================================
+     📜 Mobile Menu (Glass Popup)
+  ====================================== */
+  .nav-links {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    width: 88%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.97);
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: 60px 25px 40px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.55s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+    z-index: 10500;
+    pointer-events: none;
+  }
+
+  .nav-links.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+  }
+
+  .nav-links li {
+    list-style: none;
+  }
+
+  .nav-links a,
+  .dropdown-toggle {
+    color: #000;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 6px 0;
+    transition: all 0.3s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .nav-links a:hover,
+  .dropdown-toggle:hover {
+    color: #fe9e2a;
+    transform: scale(1.05);
+  }
+
+  /* ======================================
+     🟠 CTA BUTTON (Inside Popup)
+  ====================================== */
+  .mobile-btn {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 25px;
+  }
+
+  .mobile-btn .btn-signup {
+    background: linear-gradient(135deg, #fe9e2a 0%, #ff7e5f 100%);
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 13px 40px;
+    border-radius: 14px;
+    transition: all 0.35s ease;
+    box-shadow: 0 8px 20px rgba(254, 158, 42, 0.35);
+  }
+
+  .mobile-btn .btn-signup:hover {
+    background: linear-gradient(135deg, #ffb347 0%, #ff7e5f 100%);
+    transform: scale(1.06);
+  }
+
+  /* ======================================
+     🔽 Dropdown (Submenu)
+  ====================================== */
+  .dropdown-menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 85%;
+    max-width: 340px;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 18px;
+    padding: 35px 25px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 10600;
+    transition: all 0.45s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    pointer-events: none;
+  }
+
+  .dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+  }
+
+  .dropdown-menu a {
+    color: #000;
+    font-size: 17px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .dropdown-menu a:hover {
+    color: #fe9e2a;
+    transform: scale(1.05);
+  }
+
+  /* ======================================
+     🧭 Logo + Spacing
+  ====================================== */
+  .logo {
+    font-size: 34px;
+    gap: 6px;
+  }
+
+  .logo-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .navbar {
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+
+
+.btn {
+  border: none !important;
+}
