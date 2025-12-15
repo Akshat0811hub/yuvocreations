@@ -28,8 +28,8 @@ const About = () => {
   }, []);
 
   const stats = [
-    { number: '500+', label: 'Projects Completed', icon: '' },
-    { number: '200+', label: 'Happy Clients', icon: '' },
+    { number: '150+', label: 'Projects Completed', icon: '' },
+    { number: '100+', label: 'Happy Clients', icon: '' },
     { number: '5+', label: 'Years Experience', icon: '' },
     { number: '50+', label: 'Team Members', icon: '' }
   ];
@@ -55,16 +55,16 @@ const About = () => {
       title: 'SEO & Marketing',
       description: 'Digital marketing strategies to boost your online presence'
     },
-    {
-      icon: <Zap size={40} />,
-      title: 'Cloud Solutions',
-      description: 'Scalable cloud infrastructure and deployment solutions'
-    },
-    {
-      icon: <Zap size={40} />,
-      title: 'Cybersecurity',
-      description: 'Comprehensive security solutions to protect your digital assets'
-    }
+    // {
+    //   icon: <Zap size={40} />,
+    //   title: 'Cloud Solutions',
+    //   description: 'Scalable cloud infrastructure and deployment solutions'
+    // },
+    // {
+    //   icon: <Zap size={40} />,
+    //   title: 'Cybersecurity',
+    //   description: 'Comprehensive security solutions to protect your digital assets'
+    // }
   ];
 
   const values = [
@@ -223,7 +223,7 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="prm-cta-section">
+      {/* <section className="prm-cta-section">
         <div className="prm-cta-background">
           <div className="prm-cta-gradient"></div>
         </div>
@@ -240,7 +240,7 @@ const About = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

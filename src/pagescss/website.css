@@ -916,6 +916,7 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  margin-bottom: -97px;
 }
 
 .webdesign-cta-zone::before {

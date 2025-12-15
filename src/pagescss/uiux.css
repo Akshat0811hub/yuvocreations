@@ -302,6 +302,7 @@ body {
   padding: 100px 40px;
   background: var(--dmkt-dark);
   text-align: center;
+  margin-bottom: -97px;
 }
 
 .dmkt-cta-inner {

@@ -21,18 +21,18 @@ function Careers() {
       {/* HIGHLIGHTS */}
       
       {/* GALLERY (abstract placeholders) */}
-      <section className="careers__gallery container">
+      {/* <section className="careers__gallery container">
         <div className="gallery__cell" data-caption="Campaign War Room"></div>
         <div className="gallery__cell" data-caption="Weekly Show &amp; Tell"></div>
         <div className="gallery__cell" data-caption="Creative Jam"></div>
         <div className="gallery__cell" data-caption="Dashboards that sing"></div>
-      </section>
+      </section> */}
 
       {/* PERKS */}
       
 
       {/* HIRING PROCESS */}
-      <section className="careers__process container">
+      {/* <section className="careers__process container">
         <h2>How we hire</h2>
         <ol className="steps">
           <li><strong>Intro chat</strong> — 20 min to learn about each other.</li>
@@ -40,7 +40,7 @@ function Careers() {
           <li><strong>Team fit</strong> — meet your pod and future stakeholders.</li>
           <li><strong>Offer</strong> — clear comp, growth path, and start date.</li>
         </ol>
-      </section>
+      </section> */}
 
       {/* FAQ */}
       <section className="careers__faq container">

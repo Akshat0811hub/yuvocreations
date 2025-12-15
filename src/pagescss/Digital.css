@@ -63,7 +63,7 @@
 .hero-showcase-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 3rem;
+  padding: 12px 3rem;
   text-align: center;
   position: relative;
   z-index: 1;
@@ -747,6 +747,7 @@
   background: linear-gradient(135deg, #1a1a1a 0%, var(--deep-black) 100%);
   position: relative;
   overflow: hidden;
+  margin-bottom: -97px;
 }
 .contact-cta-section::before {
   content: '';
