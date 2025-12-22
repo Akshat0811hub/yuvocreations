@@ -8,6 +8,7 @@
   --radius-sm: 10px;
 }
 
+/* RESET */
 * { box-sizing: border-box; }
 html, body {
   margin: 0;
@@ -56,7 +57,6 @@ a {
 /* HERO */
 .careers__hero{
   padding: 130px 0 100px;
-  border-bottom: 2px solid var(--border);
 }
 .eyebrow{
   text-transform: uppercase;
@@ -87,11 +87,11 @@ a {
   grid-template-columns: repeat(4, 1fr);
 }
 .highlight{
-  border: 2px solid var(--border);
   background: #fff;
   border-radius: var(--radius);
   padding: 26px;
   text-align: center;
+  border: 2px solid var(--border);
   transition: .23s ease;
 }
 .highlight:hover{
@@ -132,11 +132,11 @@ a {
 }
 .panel__card{
   background: #fff;
-  border: 2px solid var(--border);
   border-radius: var(--radius);
   padding: 22px 14px;
   text-align: center;
   font-weight: 700;
+  border: 2px solid var(--border);
   transition: .22s ease;
 }
 .panel__card:hover{
@@ -189,9 +189,9 @@ a {
   gap: 16px;
 }
 .perk{
-  border: 2px solid var(--border);
   border-radius: var(--radius-sm);
   padding: 20px;
+  border: 2px solid var(--border);
   transition: .23s ease;
 }
 .perk:hover{
@@ -199,8 +199,15 @@ a {
   border-color: var(--accent);
   box-shadow: 0 8px 18px rgba(0,0,0,.06);
 }
-.perk h3{ margin: 0 0 6px; color: var(--accent); font-size: 20px; }
-.perk p{ margin: 0; color: var(--muted); }
+.perk h3{
+  margin: 0 0 6px;
+  color: var(--accent);
+  font-size: 20px;
+}
+.perk p{
+  margin: 0;
+  color: var(--muted);
+}
 
 /* PROCESS */
 .careers__process{ margin: 50px auto 95px; }
@@ -211,12 +218,13 @@ a {
   display: grid;
   gap: 16px;
   grid-template-columns: repeat(4,1fr);
+  padding: 0;
 }
 .steps li{
-  border: 2px solid var(--border);
   border-radius: var(--radius-sm);
   padding: 24px 20px 20px;
   position: relative;
+  border: 2px solid var(--border);
   transition: .23s ease;
 }
 .steps li:hover{
@@ -259,11 +267,10 @@ a {
   margin: 14px 0 0;
 }
 
-/* CTA */
+/* CTA (NO DIVIDER LINE) */
 .careers__cta{
   text-align: center;
   margin: 85px auto 120px;
-  border-top: 2px solid var(--border);
   padding-top: 42px;
 }
 .careers__cta p{
@@ -281,6 +288,9 @@ a {
 
 @media (max-width: 600px){
   .careers__highlights{ grid-template-columns: 1fr; }
-  .careers__gallery{ grid-template-columns: 1fr; grid-auto-rows: 160px; }
+  .careers__gallery{
+    grid-template-columns: 1fr;
+    grid-auto-rows: 160px;
+  }
   .perks__grid{ grid-template-columns: 1fr; }
 }

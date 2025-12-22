@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../css/footer.css';
 import logoImage from '../assets/logobg.png';
 
+
 // Functional Icons (using SVG inline for no external dependencies)
 const ArrowRightIcon = ({ color }) => (
   <svg xmlns="http://www.w3.org/2000/svg" className="icon" viewBox="0 0 20 20" fill={color || "currentColor"}>
@@ -34,15 +35,40 @@ const Footer = () => {
   const [isSubscribed, setIsSubscribed] = useState(false);
 
   const [showTop, setShowTop] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (email.trim()) {
+const handleSubscribe = async (e) => {
+  e.preventDefault();
+  if (!email.trim()) return;
+
+  setLoading(true);
+
+  try {
+    const response = await fetch('https://formspree.io/f/mojaepko', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        _subject: 'New Newsletter Subscriber - Yuvocreations',
+      }),
+    });
+
+    if (response.ok) {
       setIsSubscribed(true);
       setEmail('');
       setTimeout(() => setIsSubscribed(false), 3000);
     }
-  };
+  } catch (err) {
+    console.error('Formspree error:', err);
+  }
+
+  setLoading(false);
+};
+
+
 
 
 useEffect(() => {
@@ -154,6 +180,10 @@ useEffect(() => {
                 <span className="contact-label">Email:</span>
                 <a href="mailto:contact@yuvocreations.com" style={{ color: 'var(--color-text-light)', textDecoration: 'none' }}>contactus@yuvocreations.com</a>
               </div>
+              <div className="contact-item">
+                <span className="contact-label">Address:</span>
+                <a href="https://share.google/hwCyf4KZtecJ3cLOw" style={{ color: 'var(--color-text-light)', textDecoration: 'none' }}> Lane no.4, Khasra no. 258, Westend Marg, Saiyad Ul Ajaib Extension, Saket, New Delhi, Delhi-110030</a>
+              </div>
             </div>
           </div>
         </div>
@@ -185,9 +215,6 @@ useEffect(() => {
     ↑
   </button>
 )}
-
-
-
 
     </footer>
     

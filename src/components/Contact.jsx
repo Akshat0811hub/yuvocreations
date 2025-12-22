@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import { Shield, Eye, Headphones, ChevronDown } from 'lucide-react';
-import '../css/Contact.css'; // Make sure this path is correct
+import '../css/Contact.css';
+
+
+
+
+
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +16,20 @@ const Contact = () => {
     message: ''
   });
 
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState(null); // success | error
+
+  useEffect(() => {
+  if (status) {
+    const timer = setTimeout(() => {
+      setStatus(null);
+    }, 3000); // 3 seconds
+
+    return () => clearTimeout(timer);
+  }
+}, [status]);
+
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -19,11 +38,44 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Handle form submission logic here (e.g., send to an API)
+    setLoading(true);
+    setStatus(null);
+
+    try {
+      const response = await fetch('https://formspree.io/f/mykgebea', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          ...formData,
+          _subject: 'New Lead from YuvoCreations Website'
+        })
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: '',
+          message: ''
+        });
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      setStatus('error');
+    }
+
+    setLoading(false);
   };
+  
+  
 
   const services = [
     {
@@ -47,14 +99,14 @@ const Contact = () => {
     <div className="contact-section">
       <div className="contact-container">
 
-        {/* Left Side - Services / Info */}
+        {/* Left Side */}
         <div className="services-section">
           <div className="services-header">
             <h1 className="main-title">
               Let's Build Something <span className="highlight-text">Great</span> Together.
             </h1>
             <p className="main-description">
-              We're here to help you turn your ideas into reality. Reach out to us and see how we can help your business grow.
+              We're here to help you turn your ideas into reality.
             </p>
           </div>
 
@@ -76,15 +128,11 @@ const Contact = () => {
           </div>
         </div>
 
-
-        {/* Right Side - Contact Form */}
-        {/* ADD THIS WRAPPER DIV */}
-        <div className="form-card-wrapper"> 
+        {/* Right Side - Form */}
+        <div className="form-card-wrapper">
           <div className="form-section">
             <div className="form-header">
-              <h2 className="form-title">
-                Have a Project in Mind?
-              </h2>
+              <h2 className="form-title">Have a Project in Mind?</h2>
               <p className="form-subtitle">Fill out the form and we'll get back to you.</p>
             </div>
 
@@ -119,6 +167,7 @@ const Contact = () => {
                   onChange={handleInputChange}
                   className="form-input"
                 />
+
                 <div className="select-wrapper">
                   <select
                     name="service"
@@ -128,10 +177,12 @@ const Contact = () => {
                     required
                   >
                     <option value="" disabled>Select Service</option>
-                    <option value="web-design">Web Design</option>
-                    <option value="mobile-app">Mobile App</option>
-                    <option value="seo">SEO Services</option>
-                    <option value="consulting">Consulting</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Branding">Branding</option>
+                    <option value="SEO">SEO Services</option>
+                    <option value="Digital Marketing">Advance Digital Marketing</option>
+                    <option value="Performance Marketing">Performance Marketing</option>
+                    <option value="Other">Other</option>
                   </select>
                   <ChevronDown className="select-arrow" />
                 </div>
@@ -147,12 +198,22 @@ const Contact = () => {
                 required
               />
 
-              <button type="submit" className="submit-btn">
-                Send Message
+
+              <button type="submit" className="submit-btn" disabled={loading}>
+                {loading ? 'Sending...' : 'Send Message'}
               </button>
+
+              {status === 'success' && (
+                <p className="form-success">✅ Message sent successfully!</p>
+              )}
+
+              {status === 'error' && (
+                <p className="form-error">❌ Something went wrong. Please try again.</p>
+              )}
             </form>
           </div>
-        </div> {/* END OF NEW WRAPPER DIV */}
+        </div>
+
       </div>
     </div>
   );

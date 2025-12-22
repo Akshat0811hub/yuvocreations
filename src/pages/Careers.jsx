@@ -13,7 +13,7 @@ function Careers() {
             Join a digital marketing team where smart experiments, sharp craft, and real outcomes matter.
           </p>
           {/* ⬇️ jobs section removed, so CTA points to apply */}
-          <a href="#apply" className="btn btn--primary">Apply now</a>
+          <a href="mailto:contactus@yuvocreations.com" className="btn btn--primary">Apply now</a>
         </div>
         <div className="hero__bg" aria-hidden="true"></div>
       </section>
@@ -65,7 +65,7 @@ function Careers() {
         <p>Tell us how you'll raise the bar. We read every application.</p>
         <a
           className="btn btn--primary"
-          href="mailto:careers@youragency.com?subject=General%20Application"
+          href="mailto:contactus@yuvocreations.com"
         >
           Send your profile
         </a>
