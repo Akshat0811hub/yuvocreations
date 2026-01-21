@@ -51,7 +51,10 @@ const ImgCarousel = () => {
       <div className={styles.carouselSection}>
         {/* Header */}
         <div className={styles.carouselHeader}>
-          <h2 className={styles.carouselTitle}>Our Featured Projects</h2>
+          <h2 className={styles.carouselTitle}>
+  <span className={styles.carouselTitleText}>Our Featured</span>
+  <span className={styles.carouselTitleHighlight}>Projects</span>
+</h2>
           <p className={styles.carouselSubtitle}>
             Discover our amazing work portfolio
           </p>

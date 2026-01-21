@@ -51,8 +51,8 @@ export default function ModernWorkflow() {
       {/* Header */}
       <div className="workflow-header">
         <div className="title-container">
-          <span className="title-work">WORK</span>
-          <span className="title-flow">FLOW</span>
+          <span className="title-work">Work</span>
+          <span className="title-flow">Flow</span>
         </div>
         <div className="title-underline"></div>
         <p className="workflow-subtitle">

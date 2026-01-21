@@ -45,7 +45,7 @@
   margin-bottom: 2.5rem;
 }
 
-.main-title {
+.contact-title {
   font-size: 3rem;
   font-weight: 700;
   line-height: 1.2;
@@ -53,7 +53,7 @@
   color: var(--dark-text);
 }
 
-.main-title .highlight-text {
+.contact-title .highlight-text {
   color: var(--primary-orange);
 }
 
@@ -76,31 +76,88 @@
 }
 
 .service-icon {
+  /* 1. Perfect Centering */
+  padding: 0 !important; 
+  margin: 0;
+  line-height: 0;
+  font-size: 0;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  /* 2. Dimensions & Shape */
+  width: 45px;
+  height: 45px;
   flex-shrink: 0;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: rgba(249, 115, 22, 0.1); /* Light orange background */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
+  border-radius: 258px;
+
+  /* 3. Updated Background (40% Opacity Orange) */
+  background: rgba(239, 164, 111, 0.4); 
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  
+  /* 4. Transitions & Effects */
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
 }
 
 .service-icon .icon {
-  width: 1.5rem;
-  height: 1.5rem;
-  color: var(--primary-orange);
-  transition: all 0.3s ease;
+  width: 28px;
+  height: 28px;
+  display: block;
+  margin: 0;
+  
+  /* Use a slightly darker orange or white for contrast against the 40% background */
+  color: #ffffff; 
+  z-index: 2;
+  transition: all 0.4s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
+/* --- THE SHINE SWEEP --- */
+.service-icon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.4), 
+    transparent
+  );
+  transition: 0.6s ease;
+}
+
+/* --- HOVER TRANSACTIONS --- */
 .service-item:hover .service-icon {
+  /* Transitions to 100% Opacity on Hover */
   background-color: var(--primary-orange);
+  border-color: var(--primary-orange-dark);
+  transform: translateY(-8px) rotate(-4deg) scale(1.05);
+  box-shadow: 
+    0 15px 30px rgba(249, 115, 22, 0.3),
+    0 5px 10px rgba(249, 115, 22, 0.1);
 }
 
 .service-item:hover .icon {
-  color: white;
-  transform: scale(1.1);
+  color: #ffffff;
+  transform: scale(1.2) rotate(4deg);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.service-item:hover .service-icon::after {
+  left: 100%;
+}
+
+/* --- CLICK TRANSACTION --- */
+.service-item:active .service-icon {
+  transform: translateY(-2px) scale(0.95);
+  transition: 0.1s;
 }
 
 .service-content {
