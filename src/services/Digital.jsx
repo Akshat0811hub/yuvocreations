@@ -88,35 +88,33 @@ export default function DigitalMarketingPage() {
 
   return (
     <div className="marketing-wrapper">
-      {/* Hero */}
-      <section className="hero-showcase">
-        <div className="hero-showcase-content">
-          
-          <h1 className="hero-main-title">
-            Transform Your Brand
-            <br />
-            Into A <span className="hero-highlight">Digital Powerhouse</span>
-          </h1>
-          <p className="hero-description">
-            We craft data-driven strategies that don't just grow businesses—they
-            revolutionize entire industries. Ready to dominate your market?
-          </p>
-          <div className="hero-cta-group">
-            <button
-              className="cta-primary-btn"
-              onClick={() => console.log('Start Your Journey clicked')}
-            >
-              Start Your Journey
-            </button>
-            <button
-              className="cta-secondary-btn"
-              onClick={() => console.log('Explore Our Work clicked')}
-            >
-              Explore Our Work
-            </button>
-          </div>
-        </div>
-      </section>
+     {/* Hero */}
+<section className="hero-showcase">
+  <div className="hero-showcase-content">
+    <h1 className="hero-main-title">
+      Transform Your Brand
+      <br />
+      Into A <span className="hero-highlight">Digital Powerhouse</span>
+    </h1>
+
+    <p className="hero-description">
+      We craft data-driven strategies that don't just grow businesses—they
+      revolutionize entire industries. Ready to dominate your market?
+    </p>
+
+    <div className="hero-cta-group">
+      <button className="cta-primary-btn">
+        Start Your Journey
+      </button>
+      <button className="cta-secondary-btn">
+        Explore Our Work
+      </button>
+    </div>
+  </div>
+
+  {/* 🔥 REQUIRED FOR MERGE EFFECT */}
+  <div className="hero-fade-bottom" />
+</section>
 
       {/* Process */}
       <section className="process-timeline-section">
@@ -289,7 +287,7 @@ export default function DigitalMarketingPage() {
       <section className="faq-section">
         <div className="faq-container">
           <div className="faq-header">
-            <div className="faq-label">FAQ</div>
+  
             <h2 className="faq-title">Frequently Asked Questions</h2>
             <p className="faq-description">
               Got questions? We've got answers. Find everything you need to know

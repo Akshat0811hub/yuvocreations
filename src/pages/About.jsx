@@ -1,140 +1,136 @@
 import React, { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../pagescss/about.css';
 import { ArrowRight, Zap, Target, Lightbulb, Users, Award } from 'lucide-react';
 
 const About = () => {
+  const navigate = useNavigate();
+
   const statsRef = useRef(null);
-  const teamRef = useRef(null);
   const valuesRef = useRef(null);
 
   useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('prm-animate-in');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('prm-animate-in');
-        }
-      });
-    }, observerOptions);
-
-    const elements = document.querySelectorAll('.prm-animate-on-scroll');
-    elements.forEach(el => observer.observe(el));
+    document
+      .querySelectorAll('.prm-animate-on-scroll')
+      .forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, []);
 
   const stats = [
-    { number: '150+', label: 'Projects Completed', icon: '' },
-    { number: '100+', label: 'Happy Clients', icon: '' },
-    { number: '5+', label: 'Years Experience', icon: '' },
-    { number: '50+', label: 'Team Members', icon: '' }
+    { number: '150+', label: 'Projects Completed' },
+    { number: '100+', label: 'Happy Clients' },
+    { number: '5+', label: 'Years Experience' },
+    { number: '50+', label: 'Team Members' },
   ];
 
-  const services = [
+  // ❌ Mobile Apps REMOVED
+  const expertise = [
     {
       icon: <Zap size={40} />,
       title: 'Web Development',
-      description: 'Custom websites and web applications built with latest technologies'
-    },
-    {
-      icon: <Zap size={40} />,
-      title: 'Mobile Apps',
-      description: 'Native and cross-platform mobile applications for iOS and Android'
+      description: 'Modern, scalable, and high-performance web solutions',
     },
     {
       icon: <Zap size={40} />,
       title: 'UI/UX Design',
-      description: 'Beautiful and user-friendly designs that convert visitors to customers'
+      description: 'User-first design systems that improve engagement',
     },
     {
       icon: <Zap size={40} />,
       title: 'SEO & Marketing',
-      description: 'Digital marketing strategies to boost your online presence'
+      description: 'Data-driven strategies that increase reach and visibility',
     },
-    // {
-    //   icon: <Zap size={40} />,
-    //   title: 'Cloud Solutions',
-    //   description: 'Scalable cloud infrastructure and deployment solutions'
-    // },
-    // {
-    //   icon: <Zap size={40} />,
-    //   title: 'Cybersecurity',
-    //   description: 'Comprehensive security solutions to protect your digital assets'
-    // }
   ];
 
   const values = [
     {
       icon: <Lightbulb size={40} />,
       title: 'Innovation',
-      description: 'We stay ahead of technology trends and implement cutting-edge solutions'
+      description: 'We embrace new ideas and emerging technologies',
     },
     {
       icon: <Award size={40} />,
       title: 'Quality',
-      description: 'We deliver high-quality products that exceed client expectations'
+      description: 'Every project meets high standards of performance',
     },
     {
       icon: <Users size={40} />,
       title: 'Collaboration',
-      description: 'We work closely with clients to understand their unique requirements'
+      description: 'Transparent communication with every client',
     },
     {
       icon: <Target size={40} />,
       title: 'Efficiency',
-      description: 'We deliver projects on time without compromising on quality'
-    }
+      description: 'We respect time, budgets, and business goals',
+    },
   ];
 
   return (
     <div className="prm-about-container">
-      {/* Hero Section */}
+      {/* HERO */}
       <section className="prm-hero-section-about">
         <div className="prm-hero-background">
-          <div className="prm-gradient-blob prm-blob-1"></div>
-          <div className="prm-gradient-blob prm-blob-2"></div>
+          <div className="prm-gradient-blob prm-blob-1" />
+          <div className="prm-gradient-blob prm-blob-2" />
         </div>
+
         <div className="prm-hero-content">
           <div className="prm-hero-text prm-animate-on-scroll">
             <h1 className="prm-hero-title">
-              Transforming Ideas into 
+              Transforming Ideas into
               <span className="prm-highlight"> Digital Reality</span>
             </h1>
+
             <p className="prm-hero-description">
-              We are a passionate team of IT professionals dedicated to delivering 
-              innovative technology solutions that drive business growth and success. 
-              With years of expertise and a commitment to excellence, we turn your 
-              vision into powerful digital experiences.
+              We are a team of IT professionals building impactful digital
+              experiences that help brands grow and scale confidently.
             </p>
+
             <div className="prm-hero-buttons">
-              <button className="prm-btn-primary">
-                Our Services
-                <ArrowRight size={20} />
+              {/* <button
+                className="prm-btn-primary"
+                onClick={() => navigate('../src/components/Tabs.jsx')}
+              >
+                Our Services <ArrowRight size={20} />
+              </button> */}
+
+              <button
+              className="prm-btn-primary"
+                // className="prm-btn-secondary"
+                onClick={() => navigate('/contact')}
+              >
+                Contact Us
               </button>
-              <button className="prm-btn-secondary">Contact Us</button>
             </div>
           </div>
+
           <div className="prm-hero-image prm-animate-on-scroll">
             <div className="prm-floating-card">
-              <div className="prm-card-icon"></div>
               <h3>IT Excellence</h3>
-              <p>Delivering world-class technology solutions</p>
+              <p>Reliable digital solutions for modern businesses</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* STATS */}
       <section className="prm-stats-section" ref={statsRef}>
         <div className="prm-container">
           <div className="prm-stats-grid">
             {stats.map((stat, index) => (
               <div key={index} className="prm-stat-card prm-animate-on-scroll">
-                <div className="prm-stat-icon">{stat.icon}</div>
                 <div className="prm-stat-number">{stat.number}</div>
                 <div className="prm-stat-label">{stat.label}</div>
               </div>
@@ -143,35 +139,37 @@ const About = () => {
         </div>
       </section>
 
-      {/* Services Overview */}
+      {/* OUR EXPERTISE (NO SERVICES SECTION, NO MOBILE APPS) */}
       <section className="prm-services-overview">
         <div className="prm-container">
           <div className="prm-section-header prm-animate-on-scroll">
-            <h2>Our Expertise</h2>
-            <p>We offer comprehensive IT services to help your business thrive in the digital age</p>
+           <h2>Our <span>Expertise</span></h2>
+            <p>Focused digital capabilities that deliver real results</p>
           </div>
+
           <div className="prm-services-grid">
-            {services.map((service, index) => (
+            {expertise.map((item, index) => (
               <div key={index} className="prm-service-card prm-animate-on-scroll">
                 <div className="prm-service-icon-wrapper">
-                  {service.icon}
+                  {item.icon}
                 </div>
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
-                <div className="prm-service-hover-accent"></div>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Company Values */}
+      {/* VALUES */}
       <section className="prm-values-section" ref={valuesRef}>
         <div className="prm-container">
           <div className="prm-section-header prm-animate-on-scroll">
-            <h2>Our Values</h2>
-            <p>The principles that guide everything we do</p>
+            <h2>Our <span>Values</span></h2>
+
+            <p>The principles that guide how we work</p>
           </div>
+
           <div className="prm-values-grid">
             {values.map((value, index) => (
               <div key={index} className="prm-value-card prm-animate-on-scroll">
@@ -186,61 +184,36 @@ const About = () => {
         </div>
       </section>
 
-      {/* Mission Section */}
+      {/* ✅ MISSION — RESTORED */}
       <section className="prm-mission-section">
         <div className="prm-container">
           <div className="prm-mission-content prm-animate-on-scroll">
             <div className="prm-mission-text">
-              <h2>Our Mission</h2>
+              <h2>Our <span>Mission</span></h2>
+
               <p>
-                To empower businesses with innovative technology solutions that drive growth, 
-                efficiency, and success. We believe in the power of technology to transform 
-                ideas into reality and are committed to being your trusted partner in digital transformation.
+                Our mission is to empower businesses with reliable, scalable,
+                and innovative digital solutions. We aim to build long-term
+                partnerships by delivering technology that drives measurable
+                growth, efficiency, and brand value.
               </p>
+
               <div className="prm-mission-features">
-                <div className="prm-feature">
-                  <span className="prm-feature-icon"></span>
-                  <span>Customer-Centric Approach</span>
-                </div>
-                <div className="prm-feature">
-                  <span className="prm-feature-icon"></span>
-                  <span>Cutting-Edge Technology</span>
-                </div>
-                <div className="prm-feature">
-                  <span className="prm-feature-icon"></span>
-                  <span>100% Commitment</span>
-                </div>
+                <div className="prm-feature">Customer-Centric Approach</div>
+                <div className="prm-feature">Modern Technologies</div>
+                <div className="prm-feature">100% Commitment</div>
               </div>
             </div>
+
             <div className="prm-mission-visual">
               <div className="prm-visual-element">
-                <div className="prm-pulse-circle"></div>
-                <div className="prm-center-icon"></div>
+                <div className="prm-pulse-circle" />
+                <div className="prm-center-icon" />
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      {/* <section className="prm-cta-section">
-        <div className="prm-cta-background">
-          <div className="prm-cta-gradient"></div>
-        </div>
-        <div className="prm-container">
-          <div className="prm-cta-content prm-animate-on-scroll">
-            <h2>Ready to Transform Your Business?</h2>
-            <p>Let's discuss how we can help you achieve your digital goals</p>
-            <div className="prm-cta-buttons">
-              <button className="prm-btn-primary">
-                Get Started
-                <ArrowRight size={20} />
-              </button>
-              <button className="prm-btn-secondary">Schedule a Call</button>
-            </div>
-          </div>
-        </div>
-      </section> */}
     </div>
   );
 };

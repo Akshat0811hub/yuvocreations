@@ -52,7 +52,7 @@ const Banner = () => {
 
       {/* 4. CLICKABLE SOCIAL TILES */}
       <div className="icons-container">
-        <a href="https://www.facebook.com/yuvocreations" target="_blank" rel="noopener noreferrer" className="icon-tile fb-pos">
+        <a href="https://www.facebook.com/profile.php?id=61565786861921" target="_blank" rel="noopener noreferrer" className="icon-tile fb-pos">
           <Facebook size={18} fill="#1877F2" color="#1877F2" />
         </a>
         <a href="https://www.instagram.com/yuvocreations" target="_blank" rel="noopener noreferrer" className="icon-tile ig-pos">
@@ -65,7 +65,7 @@ const Banner = () => {
           <X size={16} color="#000" />
         </a>
         <a href="https://www.youtube.com/@yuvocreations" target="_blank" rel="noopener noreferrer" className="icon-tile yt-pos">
-          <Youtube size={18} fill="#FF0000" color="#FF0000" />
+          <Youtube size={18} fill="#FF0000" color="#ffffff" />
         </a>
       </div>
 

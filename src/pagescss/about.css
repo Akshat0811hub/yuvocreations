@@ -6,7 +6,7 @@
   --prm-light: #ffffff;
   --prm-gray-light: #f8f8f8;
   --prm-gray-medium: #f0f0f0;
-  --prm-gray-text: #666666;
+  --prm-gray-text: #000000d9;
   --prm-transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -228,6 +228,28 @@ body {
   50% { transform: translateY(-30px); }
 }
 
+/* ===== HERO → NEXT SECTION MERGE EFFECT ===== */
+.prm-hero-section-about::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 140px;
+
+  /* smooth merge into white section */
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.15) 35%,
+    rgba(255, 255, 255, 0.5) 65%,
+    rgba(255, 255, 255, 1) 100%
+  );
+
+  pointer-events: none;
+  z-index: 3;
+}
+
 /* ============= STATS SECTION ============= */
 .prm-stats-section {
   padding: 100px 0;
@@ -296,237 +318,364 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* ============= SERVICES SECTION ============= */
+/* ================= OUR EXPERTISE SECTION ================= */
 .prm-services-overview {
-  padding: 100px 0;
-  background: var(--prm-gray-light);
   position: relative;
+  padding: 110px 0;
+  background: #ffffff;
+  overflow: hidden;
 }
 
-.prm-section-header {
+/* ---- Dust / Grain effect (CSS-only) ---- */
+.prm-services-overview::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 18px 18px, 28px 28px;
+  background-position: 0 0, 10px 10px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ================= SECTION HEADER ================= */
+.prm-services-overview .prm-section-header {
+  position: relative;
   text-align: center;
-  margin-bottom: 80px;
   max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto 80px;
+  z-index: 2;
 }
 
-.prm-section-header h2 {
+.prm-services-overview .prm-section-header h2 {
   font-size: 48px;
-  color: var(--prm-dark);
-  margin-bottom: 20px;
   font-weight: 800;
+  color: #000000;
+  margin-bottom: 14px;
   letter-spacing: -1px;
 }
 
-.prm-section-header::after {
-  content: '';
-  display: block;
-  width: 60px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--prm-primary), #ff7b00);
-  margin: 25px auto 0;
-  border-radius: 2px;
+/* "Expertise" orange */
+.prm-services-overview .prm-section-header h2 span {
+  color: #ff9f29;
 }
 
-.prm-section-header p {
+.prm-services-overview .prm-section-header p {
   font-size: 18px;
-  color: var(--prm-gray-text);
+  color: #444444;
   line-height: 1.7;
 }
 
+.prm-services-overview .prm-section-header::after {
+  content: "";
+  width: 60px;
+  height: 4px;
+  background: #ff9f29;
+  display: block;
+  margin: 22px auto 0;
+  border-radius: 2px;
+}
+
+/* ================= GRID ================= */
 .prm-services-grid {
+  position: relative;
+  z-index: 2;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 35px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
+/* ================= CARD ================= */
 .prm-service-card {
-  background: var(--prm-light);
-  padding: 50px 40px;
-  border-radius: 20px;
+  background: #ffffff;
+  padding: 48px 40px;
+  border-radius: 22px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  transition: var(--prm-transition);
-  border: 1px solid rgba(255, 159, 41, 0.1);
+  border: 1px solid #eaeaea;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  animation: prm-card-fade-up 0.8s ease forwards;
+}
+
+/* Entry animation */
+@keyframes prm-card-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover animation */
+.prm-service-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.14);
+}
+
+/* ================= ICON ================= */
+.prm-service-icon-wrapper {
+  width: 82px;
+  height: 82px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 26px;
+  font-size: 34px;
+  transition: all 0.4s ease;
+}
+
+/* Different icon color per card */
+.prm-service-card:nth-child(1) .prm-service-icon-wrapper {
+  background: rgba(255,159,41,0.15);
+  color: #ff9f29;
+}
+
+.prm-service-card:nth-child(2) .prm-service-icon-wrapper {
+  background: rgba(46,134,222,0.15);
+  color: #2e86de;
+}
+
+.prm-service-card:nth-child(3) .prm-service-icon-wrapper {
+  background: rgba(40,180,99,0.15);
+  color: #28b463;
+}
+
+/* Icon hover */
+.prm-service-card:hover .prm-service-icon-wrapper {
+  transform: scale(1.15) rotate(8deg);
+}
+
+/* ================= TEXT ================= */
+.prm-service-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 14px;
+}
+
+.prm-service-card p {
+  font-size: 16px;
+  color: #555555;
+  line-height: 1.7;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1024px) {
+  .prm-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .prm-services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prm-services-overview .prm-section-header h2 {
+    font-size: 32px;
+  }
+
+  .prm-services-overview .prm-section-header p {
+    font-size: 16px;
+  }
+}
+
+
+
+
+
+
+
+
+/* ============= OUR VALUES SECTION (TRUE MERGE) ============= */
+.prm-values-section {
   position: relative;
+  padding: 200px 0;
+  background: #000000;
+  color: #ffffff;
   overflow: hidden;
 }
 
-.prm-service-card::before {
-  content: '';
+/* ---------- TOP MERGE (WHITE → BLACK) ---------- */
+.prm-values-section::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--prm-primary), #ff7b00);
-  transform: scaleX(0);
-  transition: transform 0.5s ease;
-  transform-origin: left;
+  height: 140px;
+  background: linear-gradient(
+    to bottom,
+    #ffffff 0%,
+    #f5f5f5 30%,
+    #2a2a2a 50%,
+    #000000 80%
+  );
+  pointer-events: none;
 }
 
-.prm-service-card:hover::before {
-  transform: scaleX(1);
-}
-
-.prm-service-card:hover {
-  transform: translateY(-15px);
-  box-shadow: 0 30px 60px rgba(255, 159, 41, 0.2);
-  border-color: var(--prm-primary);
-}
-
-.prm-service-icon-wrapper {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, rgba(255, 159, 41, 0.1), rgba(255, 159, 41, 0.05));
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 25px;
-  color: var(--prm-primary);
-  transition: var(--prm-transition);
-}
-
-.prm-service-card:hover .prm-service-icon-wrapper {
-  background: linear-gradient(135deg, var(--prm-primary), #ff7b00);
-  color: var(--prm-light);
-  transform: scale(1.1) rotate(5deg);
-}
-
-.prm-service-card h3 {
-  font-size: 22px;
-  color: var(--prm-dark);
-  margin-bottom: 15px;
-  font-weight: 700;
-}
-
-.prm-service-card p {
-  color: var(--prm-gray-text);
-  line-height: 1.7;
-  font-size: 16px;
-}
-
-.prm-service-hover-accent {
+/* ---------- BOTTOM MERGE (BLACK → WHITE) ---------- */
+.prm-values-section::after {
+  content: "";
   position: absolute;
   bottom: 0;
-  right: 0;
-  width: 120px;
-  height: 120px;
-  background: linear-gradient(135deg, rgba(255, 159, 41, 0.1), transparent);
-  border-radius: 50% 0 0 0;
+  left: 0;
+  width: 100%;
+  height: 140px;
+  background: linear-gradient(
+    to top,
+    #ffffff 0%,
+    #f5f5f5 30%,
+    #2a2a2a 50%,
+    #000000 80%
+  );
   pointer-events: none;
 }
 
-/* ============= VALUES SECTION ============= */
-.prm-values-section {
-  padding: 100px 0;
-  background: linear-gradient(135deg, var(--prm-dark), #1a1a1a);
-  color: var(--prm-light);
-  position: relative;
-  overflow: hidden;
-}
-
-.prm-values-section::before {
-  content: '';
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: linear-gradient(135deg, var(--prm-primary), transparent);
-  border-radius: 50%;
-  top: -10%;
-  right: -5%;
-  opacity: 0.1;
-  pointer-events: none;
-}
-
-.prm-values-section::after {
-  content: '';
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  background: linear-gradient(135deg, var(--prm-primary), transparent);
-  border-radius: 50%;
-  bottom: -5%;
-  left: -10%;
-  opacity: 0.08;
-  pointer-events: none;
-}
-
-.prm-section-header h2,
-.prm-section-header p {
+/* ================= SECTION HEADER ================= */
+.prm-values-section .prm-section-header {
   position: relative;
   z-index: 2;
-  color: var(--prm-light);
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 80px;
 }
 
-.prm-section-header p {
-  color: rgba(255, 255, 255, 0.7);
+/* Our = white */
+.prm-values-section .prm-section-header h2 {
+  font-size: 48px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -1px;
+  margin-bottom: 14px;
 }
 
-.prm-section-header::after {
-  background: var(--prm-primary);
+/* Values = orange */
+.prm-values-section .prm-section-header h2 span {
+  color: #ff9f29;
 }
 
+.prm-values-section .prm-section-header p {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.7;
+}
+
+.prm-values-section .prm-section-header::after {
+  content: "";
+  width: 60px;
+  height: 3px;
+  background: #ff9f29;
+  display: block;
+  margin: 22px auto 0;
+  border-radius: 2px;
+}
+
+/* ================= GRID ================= */
 .prm-values-grid {
+  position: relative;
+  z-index: 2;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 35px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 36px;
   max-width: 1200px;
   margin: 0 auto;
-  position: relative;
-  z-index: 2;
 }
 
+/* ================= CARD ================= */
 .prm-value-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  padding: 50px 40px;
-  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 48px 40px;
+  border-radius: 22px;
   text-align: center;
-  border: 1px solid rgba(255, 159, 41, 0.2);
-  transition: var(--prm-transition);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  /* popup base (scroll animation ready) */
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease,
+    border-color 0.3s ease;
 }
 
+/* popup on scroll */
+.prm-value-card.prm-animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* hover lift */
 .prm-value-card:hover {
-  transform: translateY(-15px);
-  background: rgba(255, 159, 41, 0.1);
-  border-color: var(--prm-primary);
-  box-shadow: 0 20px 50px rgba(255, 159, 41, 0.2);
+  transform: translateY(-10px);
+  border-color: rgba(255, 159, 41, 0.45);
 }
 
+/* ================= ICON ================= */
 .prm-value-icon-wrapper {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, var(--prm-primary), #ff7b00);
-  border-radius: 15px;
+  width: 78px;
+  height: 78px;
+  border-radius: 16px;
+  background: rgba(255, 159, 41, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 25px;
-  color: var(--prm-light);
-  transition: var(--prm-transition);
+  margin: 0 auto 24px;
+  color: #ff9f29;
+  font-size: 32px;
+  transition: transform 0.3s ease;
 }
 
 .prm-value-card:hover .prm-value-icon-wrapper {
-  transform: scale(1.15) rotateY(360deg);
+  transform: scale(1.1);
 }
 
+/* ================= TEXT ================= */
 .prm-value-card h3 {
   font-size: 22px;
-  margin-bottom: 15px;
   font-weight: 700;
-  color: var(--prm-light);
+  color: #ffffff;
+  margin-bottom: 12px;
 }
 
 .prm-value-card p {
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.7;
   font-size: 16px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.7;
 }
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1024px) {
+  .prm-values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .prm-values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prm-values-section .prm-section-header h2 {
+    font-size: 34px;
+  }
+
+  .prm-values-section .prm-section-header p {
+    font-size: 16px;
+  }
+}
+
+
+
+
 
 /* ============= MISSION SECTION ============= */
 .prm-mission-section {
@@ -549,6 +698,9 @@ body {
   margin-bottom: 30px;
   font-weight: 800;
   letter-spacing: -1px;
+}
+.prm-mission-text h2 span {
+  color: var(--prm-primary); /* orange */
 }
 
 .prm-mission-text p {

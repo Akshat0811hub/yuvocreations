@@ -47,7 +47,7 @@ function Careers() {
         <h2>FAQ</h2>
         <details>
           <summary>Do you support remote work?</summary>
-          <p>Yes — remote within India, with optional quarterly meetups in Mumbai or Bengaluru.</p>
+          <p>Yes — remote within India, with optional meeting in the Delhi Office</p>
         </details>
         <details>
           <summary>What does growth look like?</summary>

@@ -1,10 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import '../pagescss/website.css';
+import logo from '../assets/logobg.png';
+import car1 from "../assets/car1.png";
+import car2 from "../assets/car2.png";
+import car3 from "../assets/car3.png";
+import car4 from "../assets/car4.png";
+import car5 from "../assets/car5.png";
+import car6 from "../assets/car6.png";
+
+
 
 const WebsiteDesignPage = () => {
+  // --- 1. State Definitions ---
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [activeFaq, setActiveFaq] = useState(null);
+  // MISSING STATE FIXED: Added 'time' state
+  const [time, setTime] = useState(new Date());
 
+  // --- 2. Side Effects (Timers) ---
+  
   // Auto-rotate testimonials
   useEffect(() => {
     const interval = setInterval(() => {
@@ -13,65 +27,125 @@ const WebsiteDesignPage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const portfolioItems = [
-    {
-      title: "E-commerce Platform",
-      category: "E-commerce",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop",
-      description: "Modern online store with advanced features"
-    },
-    {
-      title: "Corporate Website",
-      category: "Business",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop",
-      description: "Professional business website design"
-    },
-    {
-      title: "Restaurant Website",
-      category: "Food & Beverage",
-      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&h=300&fit=crop",
-      description: "Elegant restaurant website with online ordering"
-    },
-    {
-      title: "Portfolio Website",
-      category: "Creative",
-      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=500&h=300&fit=crop",
-      description: "Creative portfolio for digital artists"
-    },
-    {
-      title: "Healthcare Platform",
-      category: "Healthcare",
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=500&h=300&fit=crop",
-      description: "Medical practice management system"
-    },
-    {
-      title: "Educational Portal",
-      category: "Education",
-      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=500&h=300&fit=crop",
-      description: "Online learning platform design"
-    }
-  ];
+  // Update clock every second
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
-  const testimonials = [
-    {
-      name: "Sarah Johnson",
-      role: "CEO, TechStart",
-      content: "Outstanding work! Our website conversion rate increased by 150% after the redesign.",
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b950?w=100&h=100&fit=crop&crop=face"
-    },
-    {
-      name: "Michael Chen",
-      role: "Marketing Director",
-      content: "Professional, creative, and delivered exactly what we needed. Highly recommended!",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
-    },
-    {
-      name: "Emily Rodriguez",
-      role: "Startup Founder",
-      content: "The team exceeded our expectations. The website is beautiful and performs amazingly.",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
-    }
-  ];
+  // --- 3. Helper Functions ---
+  
+  // Format Time: 08:24:09 PM
+const formatTime = (date) => {
+  let hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // 0 becomes 12
+
+  const hh = hours < 10 ? `0${hours}` : hours;
+  const mm = minutes < 10 ? `0${minutes}` : minutes;
+  const ss = seconds < 10 ? `0${seconds}` : seconds;
+
+  return `${hh}:${mm}:${ss} ${ampm}`;
+};
+
+
+  // Format Date: 23-01.26 (Day-Month.Year)
+  const formatDate = (date) => {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = String(date.getFullYear()).slice(-2);
+    return `${day}-${month}.${year}`;
+  };
+
+  // --- 4. Data Arrays ---
+ const portfolioItems = [
+  {
+    title: "Exponent Institute",
+    category: "Education Website",
+    image: car1,
+    description: "A structured educational platform designed to build trust, clarity, and student engagement.",
+    link: "https://exponentinstitute.com/"
+  },
+  {
+    title: "Shreeram Neuro Centre",
+    category: "Healthcare Website",
+    image: car2,
+    description: "A professional medical website focused on credibility, accessibility, and patient confidence.",
+    link: "https://shreeramneurocentre.com/"
+  },
+  {
+    title: "Manohar Hospital",
+    category: "Hospital Website",
+    image: car3,
+    description: "A clean, information-driven hospital website built for clarity, speed, and usability.",
+    link: "https://manoharhospital.com/"
+  },
+  {
+    title: "Meliorist",
+    category: "Corporate Website",
+    image: car4,
+    description: "A modern corporate presence designed to communicate expertise and digital capability.",
+    link: "https://www.meliorist.in/"
+  },
+  {
+    title: "Green Fungi",
+    category: "E-Commerce Website",
+    image: car5,
+    description: "A minimal e-commerce experience focused on product clarity and seamless navigation.",
+    link: "https://greenfungi.org/"
+  },
+  {
+    title: "Sakra World Hospital",
+    category: "Healthcare Reference",
+    image: car6,
+    description: "A large-scale healthcare website showcasing specialist profiles with structured navigation.",
+    link: "https://www.sakraworldhospital.com/"
+  }
+];
+
+
+const testimonials = [
+  {
+    content:
+      "We wanted a website that reflected the natural experience of our agritourism project without feeling over-designed. The team focused on simplicity, clarity, and smooth navigation. The final site represents our brand well and helps visitors understand what we offer before they even contact us.",
+    name: "Rahul Bagga",
+    role: "Founder, Green Fungi Agritourism",
+    avatar: "/images/testimonials/rahul-bagga.jpg"
+  },
+  {
+    content:
+      "Our requirement was a professional healthcare website that patients could easily understand and navigate. The team paid close attention to structure and content flow, which made the website both informative and accessible. The experience was smooth from start to finish.",
+    name: "Dr. Anil Sharma",
+    role: "Director, Shreeram Neuro Centre",
+    avatar: "/images/testimonials/doctor-anil.jpg"
+  },
+  // {
+  //   content:
+  //     "The goal was to modernize our website and make information clearer for patients and their families. The new design feels clean, responsive, and easy to use. We’ve noticed fewer basic queries since the launch, which shows the website is doing its job.",
+  //   name: "Administration Team",
+  //   role: "Manohar Hospital",
+  //   avatar: "/images/testimonials/manohar-admin.jpg"
+  // },
+  {
+    content:
+      "We needed a structured and easy-to-manage website for our institute. The team redesigned everything with clarity in mind, making it simpler for students to understand our courses and get in touch. Enquiry quality has improved since the update.",
+    name: "Rohit Verma",
+    role: "Founder, Exponent Institute",
+    avatar: "/images/testimonials/rohit-verma.jpg"
+  },
+  // {
+  //   content:
+  //     "Our focus was on usability and performance rather than heavy design. The website now loads faster, works well across devices, and presents our services clearly. Communication throughout the project was consistent and transparent.",
+  //   name: "Amit Gupta",
+  //   role: "Co-Founder, Meliorist",
+  //   avatar: "/images/testimonials/amit-gupta.jpg"
+  // }
+];
+
 
   const faqs = [
     {
@@ -101,61 +175,73 @@ const WebsiteDesignPage = () => {
   };
 
   return (
-    <div className="webdesign-page-container">
-      {/* Hero Section */}
-      <section className="webdesign-hero-zone">
-        <div className="webdesign-hero-content">
-          <div className="webdesign-hero-text-area">
-            <h1 className="webdesign-main-headline">
-              Professional Website Design
-              <span className="webdesign-highlight-text"> That Converts</span>
-            </h1>
-            <p className="webdesign-hero-description">
-              Transform your online presence with stunning, responsive websites that engage visitors 
-              and drive business growth. Our expert team creates custom solutions tailored to your brand.
-            </p>
-            <div className="webdesign-hero-buttons">
-              <button className="webdesign-primary-btn">
-                <span>Start Your Project</span>
-                <div className="webdesign-btn-ripple"></div>
-              </button>
-              <button className="webdesign-secondary-btn">
-                <span>View Portfolio</span>
-              </button>
-            </div>
-          </div>
-          <div className="webdesign-hero-visual">
-            <div className="webdesign-floating-card webdesign-card-1">
-              <div className="webdesign-mini-browser">
-                <div className="webdesign-browser-dots">
-                  <span></span><span></span><span></span>
-                </div>
-                <div className="webdesign-browser-content"></div>
-              </div>
-            </div>
-            <div className="webdesign-floating-card webdesign-card-2">
-              <div className="webdesign-mobile-mockup">
-                <div className="webdesign-mobile-screen"></div>
-              </div>
-            </div>
-            <div className="webdesign-floating-card webdesign-card-3">
-              <div className="webdesign-design-elements">
-                <div className="webdesign-color-palette">
-                  <span className="webdesign-color-1"></span>
-                  <span className="webdesign-color-2"></span>
-                  <span className="webdesign-color-3"></span>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div className="brut-banner-outer">
+      {/* Banner Section with Working Clock */}
+      <section className="brut-banner-container">
+        <div className="brut-grid-bg"></div>
+
+        <div className="brut-logo">
+        <img src={logo} alt="Yuvocreations Logo" className="brut-logo-img" />
+        <span>YUVOCREATIONS</span>
         </div>
+
+
+
+        <div className="brut-pixel-text brut-year">2026</div>
+
+        <div className="brut-cluster-left">
+          <div className="pixel-bg-main"></div>
+          <div className="pixel-addon p-1"></div>
+          <div className="pixel-addon p-2"></div>
+          <h1 className="brut-headline">Tomorrow's <br />tech, today</h1>
+        </div>
+
+        <div className="brut-cluster-right">
+          <div className="pixel-bg-small"></div>
+          <div className="pixel-addon p-3"></div>
+          <p className="brut-subtext">
+            Professional Website Design That Converts
+            {/* Experience <br /> cutting-edge <br /> innovation from <br /> your screen. */}
+          </p>
+        </div>
+
+        <div className="brut-pixel-text brut-arrows">&gt;&gt;</div>
+
+        <div className="brut-pixel-text brut-clock">
+          {formatTime(time)} <br />
+          {formatDate(time)}
+        </div>
+
+        <div className="brut-cta-wrapper">
+  <a
+    href="https://calendly.com/socialmedia-yuvocreations/30min"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <button className="brut-cta-btn">Build With Us</button>
+    <div className="brut-cta-shadow"></div>
+  </a>
+</div>
+
       </section>
 
+
+
+
+
+
+
+
+
       {/* Services Section */}
+      
       <section className="webdesign-services-zone">
         <div className="webdesign-container">
           <div className="webdesign-section-header">
-            <h2 className="webdesign-section-title">Our Website Design Services</h2>
+            <h2 className="webdesign-section-title">
+  Our <span>Website Design</span>  Services
+</h2>
+
             <p className="webdesign-section-subtitle">
               Comprehensive web solutions to elevate your digital presence
             </p>
@@ -243,181 +329,267 @@ const WebsiteDesignPage = () => {
         </div>
       </section>
 
-      {/* Portfolio Section */}
-      <section className="webdesign-portfolio-zone">
-        <div className="webdesign-container">
-          <div className="webdesign-section-header">
-            <h2 className="webdesign-section-title">Our Recent Work</h2>
-            <p className="webdesign-section-subtitle">
-              Explore our portfolio of successful website projects
-            </p>
-          </div>
 
-          <div className="webdesign-portfolio-grid">
-            {portfolioItems.map((item, index) => (
-              <div key={index} className="webdesign-portfolio-item">
-                <div className="webdesign-portfolio-image">
-                  <img src={item.image} alt={item.title} />
-                  <div className="webdesign-portfolio-overlay">
-                    <div className="webdesign-portfolio-content">
-                      <span className="webdesign-portfolio-category">{item.category}</span>
-                      <h3 className="webdesign-portfolio-title">{item.title}</h3>
-                      <p className="webdesign-portfolio-desc">{item.description}</p>
-                      <button className="webdesign-portfolio-btn">View Project</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Process Section */}
-      <section className="webdesign-process-zone">
-        <div className="webdesign-container">
-          <div className="webdesign-section-header">
-            <h2 className="webdesign-section-title">Our Design Process</h2>
-            <p className="webdesign-section-subtitle">
-              A structured approach to deliver exceptional results
-            </p>
-          </div>
 
-          <div className="webdesign-process-timeline">
-            <div className="webdesign-process-step">
-              <div className="webdesign-step-number">1</div>
-              <div className="webdesign-step-content">
-                <h3 className="webdesign-step-title">Discovery & Planning</h3>
-                <p className="webdesign-step-text">
-                  We analyze your business goals, target audience, and competitors to create a strategic foundation.
+
+
+
+
+
+
+     {/* Portfolio Section */}
+<section className="webdesign-portfolio-zone">
+  <div className="webdesign-container">
+    <div className="webdesign-section-header">
+      <h2 className="webdesign-section-title">
+        Our <span className="highlight-orange">Recent Work</span>
+      </h2>
+
+      <p className="webdesign-section-subtitle">
+        Explore our portfolio of successful website projects
+      </p>
+    </div>
+
+    <div className="webdesign-portfolio-grid">
+      {portfolioItems.map((item, index) => (
+        <div key={index} className="webdesign-portfolio-item">
+          <div className="webdesign-portfolio-image">
+            <img src={item.image} alt={item.title} />
+
+            <div className="webdesign-portfolio-overlay">
+              <div className="webdesign-portfolio-content">
+                <span className="webdesign-portfolio-category">
+                  {item.category}
+                </span>
+
+                <h3 className="webdesign-portfolio-title">
+                  {item.title}
+                </h3>
+
+                <p className="webdesign-portfolio-desc">
+                  {item.description}
                 </p>
-              </div>
-            </div>
 
-            <div className="webdesign-process-step">
-              <div className="webdesign-step-number">2</div>
-              <div className="webdesign-step-content">
-                <h3 className="webdesign-step-title">Design & Wireframing</h3>
-                <p className="webdesign-step-text">
-                  We create detailed wireframes and mockups to visualize the user experience and interface design.
-                </p>
-              </div>
-            </div>
-
-            <div className="webdesign-process-step">
-              <div className="webdesign-step-number">3</div>
-              <div className="webdesign-step-content">
-                <h3 className="webdesign-step-title">Development & Testing</h3>
-                <p className="webdesign-step-text">
-                  Our developers bring the designs to life with clean code, followed by thorough testing across devices.
-                </p>
-              </div>
-            </div>
-
-            <div className="webdesign-process-step">
-              <div className="webdesign-step-number">4</div>
-              <div className="webdesign-step-content">
-                <h3 className="webdesign-step-title">Launch & Support</h3>
-                <p className="webdesign-step-text">
-                  We launch your website and provide ongoing support to ensure optimal performance and growth.
-                </p>
+                {/* Show CTA only if link exists */}
+                {item.link && (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="webdesign-portfolio-btn"
+                  >
+                    View Live Website
+                  </a>
+                )}
               </div>
             </div>
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
-      {/* Testimonials Section */}
-      <section className="webdesign-testimonials-zone">
-        <div className="webdesign-container">
-          <div className="webdesign-section-header">
-            <h2 className="webdesign-section-title">What Our Clients Say</h2>
-            <p className="webdesign-section-subtitle">
-              Real feedback from satisfied customers
+
+
+
+     {/* Process Section */}
+<section className="webdesign-process-zone">
+  {/* Ambient dust element */}
+  <div className="dust-orb"></div>
+
+  <div className="webdesign-container">
+    <div className="webdesign-section-header">
+      <h2 className="webdesign-section-title">
+        Our <span className="highlight-orange-dust">Design Process</span>
+      </h2>
+
+      <p className="webdesign-section-subtitle">
+        A clear, structured approach focused on quality, performance, and results
+      </p>
+    </div>
+
+    <div className="webdesign-process-timeline">
+      <div className="webdesign-process-step">
+        <div className="webdesign-step-number">1</div>
+        <div className="webdesign-step-content">
+          <h3 className="webdesign-step-title">Discovery & Strategy</h3>
+          <p className="webdesign-step-text">
+            We understand your business objectives, audience, and competitive landscape to define a clear strategic direction.
+          </p>
+        </div>
+      </div>
+
+      <div className="webdesign-process-step">
+        <div className="webdesign-step-number">2</div>
+        <div className="webdesign-step-content">
+          <h3 className="webdesign-step-title">Design & Wireframing</h3>
+          <p className="webdesign-step-text">
+            We design intuitive wireframes and visual layouts that prioritize user experience and brand consistency.
+          </p>
+        </div>
+      </div>
+
+      <div className="webdesign-process-step">
+        <div className="webdesign-step-number">3</div>
+        <div className="webdesign-step-content">
+          <h3 className="webdesign-step-title">Development & Testing</h3>
+          <p className="webdesign-step-text">
+            We transform designs into high-performance websites with clean code, followed by thorough cross-device testing.
+          </p>
+        </div>
+      </div>
+
+      <div className="webdesign-process-step">
+        <div className="webdesign-step-number">4</div>
+        <div className="webdesign-step-content">
+          <h3 className="webdesign-step-title">Launch & Ongoing Support</h3>
+          <p className="webdesign-step-text">
+            We deploy your website smoothly and provide continuous support to ensure long-term stability and growth.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  {/* Testimonials Section */}
+<section className="webdesign-testimonials-zone">
+  <div className="webdesign-container">
+    <div className="webdesign-section-header">
+      <h2 className="webdesign-section-title">
+        What Our <span className="highlight-orange">Clients Say</span>
+      </h2>
+
+      <p className="webdesign-section-subtitle">
+        Real feedback from businesses we've worked with
+      </p>
+    </div>
+
+    <div className="webdesign-testimonials-slider">
+      {testimonials.map((testimonial, index) => (
+        <div
+          key={index}
+          className={`webdesign-testimonial-card ${
+            index === activeTestimonial ? "webdesign-active" : ""
+          }`}
+        >
+          <div className="webdesign-testimonial-content">
+            <p className="webdesign-testimonial-text">
+              “{testimonial.content}”
             </p>
-          </div>
 
-          <div className="webdesign-testimonials-slider">
-            {testimonials.map((testimonial, index) => (
-              <div 
-                key={index}
-                className={`webdesign-testimonial-card ${index === activeTestimonial ? 'webdesign-active' : ''}`}
-              >
-                <div className="webdesign-testimonial-content">
-                  <p className="webdesign-testimonial-text">"{testimonial.content}"</p>
-                  <div className="webdesign-testimonial-author">
-                    <img 
-                      src={testimonial.avatar} 
-                      alt={testimonial.name}
-                      className="webdesign-author-avatar"
-                    />
-                    <div className="webdesign-author-info">
-                      <h4 className="webdesign-author-name">{testimonial.name}</h4>
-                      <p className="webdesign-author-role">{testimonial.role}</p>
-                    </div>
-                  </div>
-                </div>
+            <div className="webdesign-testimonial-author">
+              <div className="webdesign-author-info">
+                <h4 className="webdesign-author-name">
+                  {testimonial.name}
+                </h4>
+                <p className="webdesign-author-role">
+                  {testimonial.role}
+                </p>
               </div>
-            ))}
-
-            <div className="webdesign-testimonial-dots">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  className={`webdesign-dot ${index === activeTestimonial ? 'webdesign-active' : ''}`}
-                  onClick={() => setActiveTestimonial(index)}
-                />
-              ))}
             </div>
           </div>
         </div>
-      </section>
+      ))}
+
+      {/* Navigation dots */}
+      <div className="webdesign-testimonial-dots">
+        {testimonials.map((_, index) => (
+          <button
+            key={index}
+            className={`webdesign-dot ${
+              index === activeTestimonial ? "webdesign-active" : ""
+            }`}
+            onClick={() => setActiveTestimonial(index)}
+            aria-label={`View testimonial ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* FAQ Section */}
-      <section className="webdesign-faq-zone">
-        <div className="webdesign-container">
-          <div className="webdesign-section-header">
-            <h2 className="webdesign-section-title">Frequently Asked Questions</h2>
-            <p className="webdesign-section-subtitle">
-              Get answers to common questions about our services
-            </p>
-          </div>
+<section className="webdesign-faq-zone">
+  <div className="webdesign-container">
+    <div className="webdesign-section-header">
+      <h2 className="webdesign-section-title">
+        Frequently Asked <span className="highlight-orange">Questions</span>
+      </h2>
+      <p className="webdesign-section-subtitle">
+        Clear answers to help you understand our process, pricing, and support
+      </p>
+    </div>
 
-          <div className="webdesign-faq-list">
-            {faqs.map((faq, index) => (
-              <div key={index} className="webdesign-faq-item">
-                <button 
-                  className={`webdesign-faq-question ${activeFaq === index ? 'webdesign-active' : ''}`}
-                  onClick={() => toggleFaq(index)}
-                >
-                  <span>{faq.question}</span>
-                  <span className="webdesign-faq-icon">+</span>
-                </button>
-                <div className={`webdesign-faq-answer ${activeFaq === index ? 'webdesign-open' : ''}`}>
-                  <p>{faq.answer}</p>
-                </div>
-              </div>
-            ))}
+    <div className="webdesign-faq-list">
+      {faqs.map((faq, index) => (
+        <div key={index} className="webdesign-faq-item">
+          <button
+            className={`webdesign-faq-question ${
+              activeFaq === index ? "webdesign-active" : ""
+            }`}
+            onClick={() => toggleFaq(index)}
+          >
+            <span>{faq.question}</span>
+            <span className="webdesign-faq-icon">+</span>
+          </button>
+
+          <div
+            className={`webdesign-faq-answer ${
+              activeFaq === index ? "webdesign-open" : ""
+            }`}
+          >
+            <p>{faq.answer}</p>
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
-      {/* CTA Section */}
-      <section className="webdesign-cta-zone">
-        <div className="webdesign-container">
-          <div className="webdesign-cta-content">
-            <h2 className="webdesign-cta-title">Ready to Transform Your Online Presence?</h2>
-            <p className="webdesign-cta-text">
-              Let's create a website that not only looks amazing but drives real business results. 
-              Get started with a free consultation today.
-            </p>
-            <div className="webdesign-cta-buttons">
-              <button className="webdesign-cta-primary">Get Free Quote</button>
-              <button className="webdesign-cta-secondary">Call Us Now</button>
-            </div>
-          </div>
-        </div>
-      </section>
+
+   {/* CTA Section */}
+<section className="webdesign-cta-zone">
+  <div className="webdesign-container">
+    <div className="webdesign-cta-content">
+      <h2 className="webdesign-cta-title">
+        Ready to <span className="highlight-orange">Transform</span> Your
+        <br /> Online <span className="highlight-orange">Presence</span>?
+      </h2>
+
+      <p className="webdesign-cta-text">
+        Let’s build a website that doesn’t just look good 
+        <br />
+        but <span className="highlight-orange">drives real business growth</span>.
+      </p>
+
+    <div className="webdesign-cta-buttons">
+  <a
+    href="mailto:contactus@yuvocreations.com"
+    className="webdesign-cta-primary"
+  >
+    Get Free Quote
+  </a>
+
+  <a
+    href="https://calendly.com/socialmedia-yuvocreations/30min"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="webdesign-cta-secondary"
+  >
+    Book a Call
+  </a>
+</div>
+
+    </div>
+  </div>
+</section>
+
     </div>
   );
 };
